@@ -34,3 +34,12 @@ npm install karma-cli --save-dev
 ## Resources
 
 [1] https://inviqa.com/blog/testing-javascript-get-started-jasmine-0
+[2] https://github.com/airbnb/javascript
+[3] http://yeoman.io/
+[4] https://karma-runner.github.io/1.0/index.html
+[5] https://jasmine.github.io/
+[6] https://mochajs.org/
+[7] https://github.com/jejacks0n/teaspoon
+[8] https://github.com/gruntjs/grunt
+[9] https://www.npmjs.com/
+[10] https://yarnpkg.com/en/
