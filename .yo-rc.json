@@ -1,6 +1,0 @@
-{
-  "generator-karma": {
-    "frameworks": "jasmine",
-    "browsers": "PhantomJS"
-  }
-}
