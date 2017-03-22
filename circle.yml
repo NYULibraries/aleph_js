@@ -1,0 +1,16 @@
+machine:
+  node:
+    version: 7.7.2
+general:
+  branches:
+    only:
+      - master
+      - /feature\/.+/
+      - /bug\/.+/
+      - /chore\/.+/
+dependencies:
+  override:
+    - npm install
+test:
+  override:
+    - npm test
