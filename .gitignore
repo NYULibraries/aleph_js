@@ -1,5 +1,4 @@
 node_modules/
-.node-version
 js/dist
 spec/js/dist
 npm-debug.log
