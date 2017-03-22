@@ -2,31 +2,52 @@
 
 Javascripts for manipulating display and request functionality of the Aleph search and holdings screens.
 
-Get the tests running:
+## Run the tests
 
 ```
 npm install
 npm test
 ```
 
-## Jasmine: https://jasmine.github.io/
+## Compile the Javascript
 
-Jasmine is a Javascript testing framework that let's you write rspec-like unit tests.
+### Transpile from ES2015 and minify:
 
-## Testem: https://github.com/testem/testem
+```
+grunt
+grunt watch
+```
+
+Creates an ES5 compatible minified file at `js/dist/global.min.js`
+
+### Just transpile from ES2015 to ES5:
+
+```
+grunt babel
+```
+
+Creates ES5 versions of `js/src/**/*.js` into `js/dist/es5/*.js`
+
+## Environment
+
+### Nodenv: https://github.com/nodenv/nodenv
+
+Node/npm environment manager.
+
+### Jasmine: https://jasmine.github.io/
+
+Jasmine is a Javascript testing framework that let's you write rspec-like tests.
+
+### Testem: https://github.com/testem/testem
 
 Javascript test runner.
 
-## Grunt: https://github.com/gruntjs/grunt
+### Grunt: https://github.com/gruntjs/grunt
 
 Javascript task runner to automate compilation:
 
-- Compile ES6 to ES5
-- Minify
-
-## Babel: http://babeljs.io
-
-Backwards compatibility for ES6.
+- Compile ES2015 to ES5 with [Babel](http://babeljs.io)
+- Minify with Uglify
 
 ## Resources
 
