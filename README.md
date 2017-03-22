@@ -1,45 +1,33 @@
-# Aleph Javascript
+# Aleph.JS
+
+Javascripts for manipulating display and request functionality of the Aleph search and holdings screens.
+
+Get the tests running:
 
 ```
+npm install
 npm test
 ```
 
-## Jasmine
+## Jasmine: https://jasmine.github.io/
 
 Jasmine is a Javascript testing framework that let's you write rspec-like unit tests.
 
-## Karma
+## Testem: https://github.com/testem/testem
 
-Karma is a tool that enables the running of JavaScript against real browsers via the CLI. It can allow us to run automated tests against a number of browsers.
+Javascript test runner.
 
-## Yeoman
+## Grunt: https://github.com/gruntjs/grunt
 
-Scaffolding tool for setting up various types of projects.
+Javascript task runner to automate compilation:
 
-## Setup
+- Compile ES6 to ES5
+- Minify
 
-```
-# Install karma
-npm install karma --save-dev
-# Install yeoman generator for karma
-npm install generator-karma --save-dev
-# Install the jquery plugin
-npm install karma-jasmine-jquery --save-dev
-# Scaffold a karma/jasmine project with Yeoman
-yo karma --test-framework=jasmine
-# Install Karma-cli
-npm install karma-cli --save-dev
-```
+## Babel: http://babeljs.io
+
+Backwards compatibility for ES6.
 
 ## Resources
 
-- https://inviqa.com/blog/testing-javascript-get-started-jasmine-0
-- https://github.com/airbnb/javascript
-- http://yeoman.io/
-- https://karma-runner.github.io/1.0/index.html
-- https://jasmine.github.io/
-- https://mochajs.org/
-- https://github.com/jejacks0n/teaspoon
-- https://github.com/gruntjs/grunt
-- https://www.npmjs.com/
-- https://yarnpkg.com/en/
+- Javascript style guide: https://github.com/airbnb/javascript
