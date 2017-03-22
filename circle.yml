@@ -13,4 +13,5 @@ dependencies:
     - npm install
 test:
   override:
-    - npm test
+    - npm run testem-launchers
+    - npm run testem-ci

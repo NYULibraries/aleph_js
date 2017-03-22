@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "testem"
+    "test": "testem",
+    "testem-launchers": "testem launchers",
+    "testem-ci": "testem ci"
   },
   "dependencies": {},
   "devDependencies": {
