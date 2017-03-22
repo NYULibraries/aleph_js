@@ -1,16 +1,18 @@
 {
   "framework": "jasmine2",
   "src_files": [
-    "js/src/**/*.js",
-    "spec/js/src/**/*.js"
+    "js/dist/global.min.js",
+    "spec/js/dist/*.js"
   ],
   "launch_in_ci": [
     "Chrome",
-    "Firefox"
+    "Firefox",
+    "PhantomJS"
   ],
   "launch_in_dev": [
     "Chrome",
     "Firefox",
-    "Safari"
+    "Safari",
+    "PhantomJS"
   ]
 }

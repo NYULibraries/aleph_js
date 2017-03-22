@@ -1,7 +1,7 @@
 describe('cookies', function(){
   const key = 'key';
 
-  beforeEach(deleteAllCookies = () => {
+  beforeEach(function deleteAllCookies() {
     const cookies = document.cookie.split(";");
     cookies.forEach((cookie) => {
       const eqPos = cookie.indexOf("=");

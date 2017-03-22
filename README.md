@@ -5,9 +5,17 @@ Javascripts for manipulating display and request functionality of the Aleph sear
 ## Run the tests
 
 ```
+# Install NPM dependencies
 npm install
+# Run in interactive CLI mode
 npm test
+# Run in CI mode
+npm run testem-ci
+# Run in Dev mode
+npm run testem-dev
 ```
+
+We've prepended `grunt &&` to these above tests so that they will always be running against a backwards compatible version and we don't have to manually worry about running `grunt`.
 
 ## Compile the Javascript
 
