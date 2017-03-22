@@ -3,11 +3,48 @@ var AlephInit = {};
 var ezProxyPrefix = {"BWEB": "https://ezproxy.library.nyu.edu/login?url=", "NWEB": "https://ezproxy.library.nyu.edu/login?url=", "CU": "http://proxy.library.cooper.edu:2048/login?url=", "TWEB": "https://login.libproxy.newschool.edu/login?url=", "WEB": "", "NYSID": "http://plibrary.nysid.edu/login?url="};
 var restrictedSublibraries = ["BWEB", "CU", "TWEB", "NWEB", "NYSID"];
 
+const cookies = {
+  set: (key, value = 1) => {
+    document.cookie = key + '=' + value ;
+  },
+  get: (key) => {
+    const keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+  }
+};
+
+/*
+ * Handle passive login to PDS
+ *
+ * Ex.
+ *  pdsLogin.passiveLogin();
+ */
+const pdsLogin = {
+  pdsUrl: () => {
+    const institute = 'NYU';
+    const url = '.library.nyu.edu/pds?func=load-login&calling_system=aleph&institute=' + institute + '&url=' + encodeURIComponent(window.location);
+    if (window.location.hostname.match("^alephstage")) return 'https://pdsdev' + url;
+    if (window.location.hostname.match("^aleph")) return 'https://pds' + url;
+    return window.location.hostname;
+  },
+  isLoggedIn: () => {
+    return cookies.get('_aleph_pds_passive_login');
+  },
+  redirectToPds: () => {
+    cookies.set('_aleph_pds_passive_login');
+    location.replace(pdsLogin.pdsUrl());
+  },
+  passiveLogin: () => {
+    if (pdsLogin.isLoggedIn()) return;
+    if (jQuery.query.get('func') == 'item-global') pdsLogin.redirectToPds();
+  }
+};
+
+pdsLogin.passiveLogin();
+
 //Initialize page after it has been loaded.
 function bs_init() {
 	jQuery(document).ready(function() {
-		//Force a passive login to pds, if the session exists
-		bs_pds_login();
 		//Handle full page styling
 		bs_set_full_format();
 		//Handle bib info when appropriate
@@ -19,50 +56,13 @@ function bs_init() {
 		//Handle patrons when appropriate
 		bs_process_patron_activites();
 		// Instatiate the shared modal dialog
-		var shared_modal_d = jQuery("<div></div>").dialog({autoOpen: false, modal: true, width: "40em", dialogClass: "shared_modal", open: function(event, ui) { jQuery("select").first().focus(); }}) ;
+	    var shared_modal_d = jQuery("<div></div>").dialog({autoOpen: false, modal: true, width: "40em", dialogClass: "shared_modal", open: function(event, ui) { jQuery("select").first().focus(); }}) ;
 		// Attach ajax modal window to request links
 		bs_ajax_window(shared_modal_d);
 		// Handle booking related events
 		bs_process_booking();
 	});
 }
-
-function setCookie(key, value = 1) {
-	document.cookie = key + '=' + value ;
-}
-
-function getCookie(key) {
-	const keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
-	return keyValue ? keyValue[2] : null;
-}
-
-function isLoggedIn() {
-	return getCookie('_aleph_pds_passive_login');
-}
-
-function pdsUrlRegex() {
-	return new RegExp(/var url = '([^\?]*\?func=load-login\&calling_system=aleph\&institute=[^\&]*\&url=)/);
-}
-
-function pdsUrl(url = '') {
-	const url = '.library.nyu.edu/pds?func=load-login&calling_system=aleph&institute=' + $.query.get('institute') + '&url=' + encodeURIComponent(window.location);
-	if (window.location.hostname.match("^alephstage")) return 'https://pdsdev' + url;
-	if (window.location.hostname.match("^aleph")) return 'https://pds' + url;
-	return window.location.hostname;
-}
-function redirectToPds() {
-	setCookie('_aleph_pds_passive_login');
-	location.replace(pdsUrl());
-}
-
-function passivePdsLogin() {
-	if (isLoggedIn()) return;
-	const $firstAnchorTag = $("#holdings table#items td.links a").first()
-	redirectToPds();
-}
-
-
-
 
 //Add IDsCalled on initialize
 function bs_process_patron_activites () {
@@ -103,20 +103,17 @@ function bs_request_ill(doc_library, doc_number) {
 }
 
 function bs_send_broken_link(anchor) {
-	// Grab the saved data
-	var aleph_id = jQuery(anchor).next("a").attr("id");
-	var aleph_url = encodeURIComponent(jQuery(anchor).next("a").attr("href"));
-	// Load text that says we're sending the broken link info
-	var wrapper = jQuery(anchor).closest("span");
-	wrapper.html('[<span class="sending"><em>Sending...</em></span>]');
-	// Make the ajax call
-	new jQuery.get(
-		"/cgi-bin/broken.pl",
-		"aleph_id=" + aleph_id + "&aleph_url=" + aleph_url,
-		function(data, text_status, xml_http_request) {
-			wrapper.html('['+ data +']');
-		}
-	);
+  // Grab the saved data
+  var aleph_id = jQuery(anchor).next("a").attr("id");
+  var aleph_url = encodeURIComponent(jQuery(anchor).next("a").attr("href"));
+  // Load text that says we're sending the broken link info
+  var wrapper = jQuery(anchor).closest("span");
+  wrapper.html('[<span class="sending"><em>Sending...</em></span>]');
+  // Make the ajax call
+  jQuery.get(
+    "/cgi-bin/broken.pl",
+    "aleph_id=" + aleph_id + "&aleph_url=" + aleph_url
+  ).done(() => { wrapper.html('[ <em>Submitted</em>  ]') });
 }
 
 function bs_process_booking() {
@@ -279,6 +276,10 @@ function bs_booking_location_hours() {
 //Clean whitespace from links table data element for prettier presentation
 function bs_format_items () {
 	jQuery("#holdings table#items td.links").each(function(index, td){jQuery(td).html(jQuery(td).html().replace("&nbsp;", ""))});
+	// Re-write item statuses for items that are 'selected for off-site'; they
+	// should all appear as "On Shelf" since they have not been removed from the
+	// stacks until they reach 'off-site prep' phase
+	jQuery("#holdings table#items td.due_date").each(function(index, td){jQuery(td).html(jQuery(td).html().replace(/^(Regular loan|Video|Library use only|Microform|Multi-Media|Periodicals|Reference|Recorded music|Juvenile|Leisure|Special|Spoken Word|In house loan|Special Collection|US documents|International documents|Reserve 2 hour loan|Reserve 4 hour loan|Reserve 6 hour loan|Reserve 24 hour loan|Reserve 3 day loan|Reserve 7 day loan|Reserve 14 day loan|Reserve 3 hour loan|Reserve 2 hour photocopy|Reserve 4 hour loan AFC|ILL|ILL library use only|BLCC Laptop|BLCC Peripherals|Hourly loan|EZ Borrow item|BTECH|BMICR|NYU GREY ART|REF6NYCENSUS|NYAA|NYACADART|INET1|BMEZZ|CD Rom|NO ITEM STATUS)$/gi, "On Shelf"))});
 }
 
 //Add dialog box to request queries
@@ -392,40 +393,40 @@ function bs_ill_item(doc_number, doc_library) {
 function bs_modal_dialog(shared_modal_d, target_url, current_url, input_data) {
 	jQuery.get(target_url, input_data, function(data, textStatus, xmlHttpRequest) {
 		// Check to see if we're logging into PDS.
-		const pds_login_regex = /LoginPds/;
+		var pds_login_regex = /LoginPds/;
 		if (pds_login_regex.test(data)) {
 			// Grab the pds url and redirect
-			const pds_url_regex = /var url = '([^\?]*\?func=load-login\&calling_system=aleph\&institute=[^\&]*\&url=)/;
-			const pds_url = pds_url_regex.exec(data)[1] + encodeURIComponent(current_url);
+			var pds_url_regex = /var url = '([^\?]*\?func=load-login\&calling_system=aleph\&institute=[^\&]*\&url=)/;
+			var pds_url = pds_url_regex.exec(data)[1] + encodeURIComponent(current_url);
 			location.replace(pds_url);
 		} else {
-			const feedback_text = jQuery.trim(jQuery(data).children("div#feedbackbar p").text());
-			const main = jQuery(data).children("div#content div#main").get(0);
-      const heading = jQuery(main).find("h3").eq(0).remove();
+			var feedback_text = jQuery.trim(jQuery(data).children("div#feedbackbar p").text());
+			var main = jQuery(data).children("div#content div#main").get(0);
+            var heading = jQuery(main).find("h3").eq(0).remove();
 			heading.find("span.subdue").remove();
 			shared_modal_d.html(main);
 			//Add title
-			const title = jQuery("#holdings table#bib td.fxxx").first().text();
+			var title = jQuery("#holdings table#bib td.fxxx").first().text();
 			jQuery(shared_modal_d).find("div#main").eq(0).prepend(jQuery("<h3>"+title+"</h3>"));
 			//Add feedback
 			if (feedback_text.length > 0) {
-				const feedback = jQuery("<div class=\"feedback\">"+feedback_text+"</div>");
+				var feedback = jQuery("<div class=\"feedback\">"+feedback_text+"</div>");
 				//shared_modal_d.prepend(feedback);
 				shared_modal_d.html(feedback);
 			}
-			const is_request_ill = jQuery.data(shared_modal_d, "is_request_ill");
+			var is_request_ill = jQuery.data(shared_modal_d, "is_request_ill");
 			if(is_request_ill) {
-				const doc_number = jQuery.data(shared_modal_d, "doc_number");
-				const doc_library = jQuery.data(shared_modal_d, "doc_library");
+				var doc_number = jQuery.data(shared_modal_d, "doc_number");
+				var doc_library = jQuery.data(shared_modal_d, "doc_library");
 				jQuery(shared_modal_d).find("div#main form ol#request_options").eq(0).append(jQuery(bs_ill_item(doc_number, doc_library)));
 			}
-			const is_available = jQuery.data(shared_modal_d, "is_available");
-			const is_offsite = jQuery.data(shared_modal_d, "is_offsite");
+			var is_available = jQuery.data(shared_modal_d, "is_available");
+			var is_offsite = jQuery.data(shared_modal_d, "is_offsite");
 			if(is_available || is_offsite) {
-			   	const sub_library = jQuery.data(shared_modal_d, "sub_library");
-					jQuery(shared_modal_d).find("div#main span#sub_library").eq(0).replaceWith(sub_library);
+			   	var sub_library = jQuery.data(shared_modal_d, "sub_library");
+				jQuery(shared_modal_d).find("div#main span#sub_library").eq(0).replaceWith(sub_library);
 			}
-      jQuery(shared_modal_d).dialog("option", "title", heading.text());
+            jQuery(shared_modal_d).dialog("option", "title", heading.text());
 			jQuery(shared_modal_d).dialog("open");
 		}
 	});
