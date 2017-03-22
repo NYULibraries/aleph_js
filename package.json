@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "testem": "testem"
+    "test": "testem"
   },
   "dependencies": {},
   "devDependencies": {
