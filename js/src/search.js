@@ -15,7 +15,7 @@ const search = {
     $("#nav_form").submit();
   },
   setFullFormat() {
-    const id = "f999";
+    let id = "f999";
     const fullFormat = $.query.get("format");
     if (fullFormat) {
       id = "f" + fullFormat;
