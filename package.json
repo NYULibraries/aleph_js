@@ -2,7 +2,8 @@
   "scripts": {
     "test": "testem",
     "testem-launchers": "testem launchers",
-    "testem-ci": "testem ci"
+    "testem-ci": "testem ci",
+    "testem-dev": "testem dev"
   },
   "dependencies": {},
   "devDependencies": {

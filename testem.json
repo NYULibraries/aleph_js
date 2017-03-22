@@ -3,5 +3,14 @@
   "src_files": [
     "js/src/**/*.js",
     "spec/js/src/**/*.js"
+  ],
+  "launch_in_ci": [
+    "Chrome",
+    "Firefox"
+  ],
+  "launch_in_dev": [
+    "Chrome",
+    "Firefox",
+    "Safari"
   ]
 }
