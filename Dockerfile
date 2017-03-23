@@ -7,4 +7,4 @@ WORKDIR /apps/aleph_js
 
 RUN rm -rf node_modules
 RUN npm install
-CMD npm run testem-launchers
+CMD npm test
