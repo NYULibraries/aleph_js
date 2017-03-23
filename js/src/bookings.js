@@ -1,3 +1,8 @@
+const bookings = {
+  init() {
+
+  }
+};
 // function bs_process_booking() {
 // 	// Enable datepicker
 // 	var dates = jQuery("#book #start_date, #book #end_date").datepicker({
