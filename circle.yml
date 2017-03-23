@@ -14,4 +14,4 @@ dependencies:
 test:
   override:
     - npm run testem-launchers
-    - npm run testem-ci
+    - npm test

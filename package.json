@@ -1,9 +1,9 @@
 {
   "scripts": {
-    "test": "grunt && testem",
+    "test": "testem ci",
+    "testem": "testem",
     "testem-launchers": "testem launchers",
-    "testem-ci": "grunt && testem ci",
-    "testem-dev": "grunt && testem dev"
+    "testem-dev": "testem dev"
   },
   "dependencies": {},
   "devDependencies": {
