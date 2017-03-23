@@ -1,4 +1,5 @@
 pdsLogin.passiveLogin();
+
 $(document).ready( () => {
   formatHoldings.init();
   search.init();
