@@ -9,15 +9,17 @@ Javascripts for manipulating display and request functionality of the Aleph sear
 ```
 # Install NPM dependencies
 npm install
-# Run in interactive CLI mode
+# Run in CI mode (default)
 npm test
-# Run in CI mode
-npm run testem-ci
+# Run in interactive CLI mode
+npm run testem
 # Run in Dev mode
 npm run testem-dev
+# See which launchers are available
+npm run testem-launchers
 ```
 
-We've prepended `grunt &&` to these above tests so that they will always be running against a backwards compatible version and we don't have to manually worry about running `grunt`.
+We've [prepended `grunt`](testem.json) to these above tests so that they will always be running against a backwards compatible version and we don't have to manually worry about running `grunt`.
 
 ## Compile the Javascript
 
@@ -61,4 +63,5 @@ Javascript task runner to automate compilation:
 
 ## Resources
 
-- Javascript style guide: https://github.com/airbnb/javascript
+- https://github.com/airbnb/javascript
+- https://github.com/getify/You-Dont-Know-JS

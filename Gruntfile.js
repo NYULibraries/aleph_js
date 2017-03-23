@@ -50,7 +50,7 @@ module.exports = function(grunt) {
   });
 
   // Load the plugins:
-  grunt.loadNpmTasks('grunt-babel'); // $ grunt uglify
+  grunt.loadNpmTasks('grunt-babel'); // $ grunt babel
   grunt.loadNpmTasks('grunt-contrib-uglify'); // $ grunt uglify
   grunt.loadNpmTasks('grunt-contrib-watch');  // $ grunt watch
 
