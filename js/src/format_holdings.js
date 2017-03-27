@@ -81,7 +81,7 @@ const formatHoldings = {
     const $element = $("#holdings table#items td.due_date:first");
     const $html = $element.html();
     $element.html($html.replace(new RegExp("^" + mapAvailabilityStatuses[mapToText].join("|") + "$", "gi"), mapToText));
-  }
+  },
   formatBibTable() {
     const emptyBibRowRegEx = /<span>\s*&nbsp;<br>\s*<\/span>/i;
     const bibRows = "#holdings table#bib td.fxxx";
