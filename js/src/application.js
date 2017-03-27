@@ -1,8 +1,16 @@
+// Log the user in before we do anything
 pdsLogin.passiveLogin();
-const initFunctions = [formatHoldings, search, libraryAccount, bookings];
+
+// Call the init() functions for these objects on document ready
+const initObjects = [
+  formatHoldings,
+  search,
+  libraryAccount,
+  bookings
+];
 
 $(document).ready( () => {
-  $.each(initFunctions, (index, value) => {
+  $.each(initObjects, (index, value) => {
     value.init();
   });
 });
