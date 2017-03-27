@@ -1,3 +1,10 @@
+/*
+ * Helpers for getting and setting cookies
+ *
+ * Ex.
+ *  cookies.set('myCookie', 'is this value');
+ *  cookies.get('myCookie'); ==> "is this value"
+ */
 const cookies = {
   set: (key, value = 1) => {
     document.cookie = key + '=' + value ;
