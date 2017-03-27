@@ -70,7 +70,18 @@ const formatHoldings = {
       $td = $(td);
       $td.html($td.html().replace("&nbsp;", ""))
     });
+    // Re-write item statuses for items that are 'selected for off-site'; they
+    // should all appear as "On Shelf" since they have not been removed from the
+    // stacks until they reach 'off-site prep' phase
+    const avalabilityColumn = "#holdings table#items td.due_date";
+    $(availabilityColumn).each( (index, value) => formatHoldings.replaceAvailabilityWithOnShelf(value) );
   },
+  replaceAvailabilityWithOnShelf(element) {
+    const mapToText = "On Shelf";
+    const $element = $("#holdings table#items td.due_date:first");
+    const $html = $element.html();
+    $element.html($html.replace(new RegExp("^" + mapAvailabilityStatuses[mapToText].join("|") + "$", "gi"), mapToText));
+  }
   formatBibTable() {
     const emptyBibRowRegEx = /<span>\s*&nbsp;<br>\s*<\/span>/i;
     const bibRows = "#holdings table#bib td.fxxx";
