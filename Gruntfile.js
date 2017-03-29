@@ -5,9 +5,10 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     babel: {
       options: {
-        sourceMap: true,
+        sourceMap: false,
         presets: ['es2015'],
-        minified: false
+        minified: false,
+        retainLines: true
       },
       dist: {
         files: [{
@@ -29,7 +30,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
-        sourceMap: true
+        sourceMap: false
       },
       global: {
         src: [
