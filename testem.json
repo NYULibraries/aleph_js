@@ -2,9 +2,10 @@
   "before_tests": "grunt",
   "framework": "jasmine2",
   "src_files": [
-    "js/dist/es5/*.js",
-    "spec/js/dist/*.js"
+    "js/dist/es5/**/*.js",
+    "spec/js/dist/**/*.js"
   ],
+  "src_files_ignore": "js/dist/es5/application.js",
   "launch_in_dev": [
     "Chrome",
     "Firefox",

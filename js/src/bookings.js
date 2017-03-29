@@ -1,0 +1,6 @@
+//INCOMPLETE
+const bookings = {
+  init() {
+
+  }
+};

@@ -27,6 +27,6 @@ const pdsLogin = {
   },
   passiveLogin: () => {
     if (pdsLogin.isLoggedIn()) return;
-    pdsLogin.redirectToPds();
+    if ($.query.get('func') == 'item-global') pdsLogin.redirectToPds();
   }
 };
