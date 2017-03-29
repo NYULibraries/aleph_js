@@ -1,15 +1,25 @@
 {
   "before_tests": "grunt",
-  "framework": "jasmine2",
-  "src_files": [
-    "js/dist/es5/**/*.js",
-    "spec/js/dist/**/*.js"
+  "framework": "jasmine-jquery",
+  "serve_files": [
+    "js/dist/es5/config/*.js",
+    "js/dist/es5/helpers/*.js",
+    "js/dist/es5/lib/*.js",
+    "js/dist/es5/application.js"
   ],
-  "src_files_ignore": "js/dist/es5/application.js",
-  "launch_in_dev": [
-    "Chrome",
-    "Firefox",
-    "Safari",
+  "launch_in_ci": [
     "PhantomJS"
-  ]
+  ],
+  "test_page": [
+    "multi_volume_journal.html",
+    "library_account.html",
+    "electronic_location.html",
+    "pds_login.html"
+  ],
+  "routes": {
+    "/multi_volume_journal.html": "spec/js/fixtures/multi_volume_journal.mustache",
+    "/library_account.html": "spec/js/fixtures/library_account.mustache",
+    "/electronic_location.html": "spec/js/fixtures/electronic_location.mustache",
+    "/pds_login.html": "spec/js/fixtures/pds_login.mustache"
+  }
 }

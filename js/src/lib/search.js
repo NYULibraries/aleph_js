@@ -16,7 +16,7 @@ const search = {
   },
   setFullFormat() {
     let id = "f999";
-    const fullFormat = $.query.get("format");
+    const fullFormat = querystring.get("format");
     if (fullFormat) {
       id = "f" + fullFormat;
     }

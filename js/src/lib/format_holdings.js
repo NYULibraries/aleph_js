@@ -30,15 +30,14 @@ const formatHoldings = {
 
     $(f99s).each( (index, tr) => {
       $tr = $(tr);
-      previousRow = holdingsTableRow;
-      holdingsTableRow = new HoldingsTableRow(tr);
+      holdingsTableRow = new HoldingsTableRow(tr, previousRow);
 
       // If location row shows that this is a restricted resource
       if (holdingsTableRow.isLocationRow() && holdingsTableRow.isRestrictedResource()) {
         // Hide restricted Internet locations
         $tr.hide();
         // If summary row
-      } else if (holdingsTableRow.isSummaryHolding()) {
+      } else if (holdingsTableRow.isSummaryHoldingRow()) {
         // Show only last summary holdings
         if ($tr == $("tr.f99").last()) {
           $tr.show();
@@ -49,31 +48,35 @@ const formatHoldings = {
       // If electronic location row
       } else if (holdingsTableRow.isElectronicLocation()) {
         // Add broken link functionality
-        brokenLink.init(holdingsTableRow);
+        //brokenLink.init(index, holdingsTableRow);
         // Add EZProxy prefix
-        if ($.inArray(restrictedSublibraries, holdingsTableRow.sublibrary())) {
-          const restrictedHref856 = ezProxyPrefix[holdingsTableRow.sublibrary()].concat(holdingsTableRow.href856());
-          holdingsTableRow.anchor856().attr("href", restrictedHref856);
-          holdingsTableRow.anchor856().html(restrictedHref856);
+        if ($.inArray(this.restrictedSublibraries, holdingsTableRow.sublibrary())) {
+          // console.log(holdingsTableRow.sublibrary());
+          // console.log(this.ezProxyPrefix[holdingsTableRow.sublibrary()]);
+          console.log(holdingsTableRow.td856().html());
+          console.log(holdingsTableRow.href856());
+
+          // const restrictedHref856 = this.ezProxyPrefix[holdingsTableRow.sublibrary()].concat(holdingsTableRow.href856());
+          // holdingsTableRow.anchor856().attr("href", restrictedHref856);
+          // holdingsTableRow.anchor856().html(restrictedHref856);
         }
         // Remove Sublibrary
-        holdingsTableRow.td856().html(holdingsTableRow.td856().html().replace(sublibrary, ""));
-      } else {
-        previousRow = null;
+        // holdingsTableRow.td856().html(holdingsTableRow.td856().html().replace(holdingsTableRow.sublibrary(), ""));
       }
+      previousRow = tr;
     });
   },
   formatHoldingsItems() {
     const holdingsLinks = "#holdings table#items td.links";
     // Clean whitespace from links table data element for prettier presentation
     $(holdingsLinks).each( (index, td) => {
-      $td = $(td);
+      let $td = $(td);
       $td.html($td.html().replace("&nbsp;", ""))
     });
     // Re-write item statuses for items that are 'selected for off-site'; they
     // should all appear as "On Shelf" since they have not been removed from the
     // stacks until they reach 'off-site prep' phase
-    const avalabilityColumn = "#holdings table#items td.due_date";
+    const availabilityColumn = "#holdings table#items td.due_date";
     $(availabilityColumn).each( (index, value) => formatHoldings.replaceAvailabilityWithOnShelf(value) );
   },
   replaceAvailabilityWithOnShelf(element) {
