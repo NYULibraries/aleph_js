@@ -48,20 +48,15 @@ const formatHoldings = {
       // If electronic location row
       } else if (holdingsTableRow.isElectronicLocation()) {
         // Add broken link functionality
-        //brokenLink.init(index, holdingsTableRow);
-        // Add EZProxy prefix
+        brokenLink.init(index, holdingsTableRow);
+        // Add proxy prefix
         if ($.inArray(this.restrictedSublibraries, holdingsTableRow.sublibrary())) {
-          // console.log(holdingsTableRow.sublibrary());
-          // console.log(this.ezProxyPrefix[holdingsTableRow.sublibrary()]);
-          console.log(holdingsTableRow.td856().html());
-          console.log(holdingsTableRow.href856());
-
-          // const restrictedHref856 = this.ezProxyPrefix[holdingsTableRow.sublibrary()].concat(holdingsTableRow.href856());
-          // holdingsTableRow.anchor856().attr("href", restrictedHref856);
-          // holdingsTableRow.anchor856().html(restrictedHref856);
+          const restrictedHref856 = this.ezProxyPrefix[holdingsTableRow.sublibrary()].concat(holdingsTableRow.href856());
+          holdingsTableRow.anchor856().attr("href", restrictedHref856);
+          holdingsTableRow.anchor856().html(restrictedHref856);
         }
         // Remove Sublibrary
-        // holdingsTableRow.td856().html(holdingsTableRow.td856().html().replace(holdingsTableRow.sublibrary(), ""));
+        holdingsTableRow.td856().html(holdingsTableRow.td856().html().replace(holdingsTableRow.sublibrary(), ""));
       }
       previousRow = tr;
     });

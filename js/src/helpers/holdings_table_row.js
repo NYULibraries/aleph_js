@@ -52,7 +52,7 @@ class HoldingsTableRow {
   }
 
   td856() {
-    return $(this.row).children("td").filter( function() { this.innerHTML.match(/(\sBWEB|\sCU|\sTWEB|\sNWEB|\sWEB|\sNYSID)\s*/) });
+    return $(this.row).children("td").filter( (index, element) => { return $(element).html().match(this.web856Matcher()) });
   }
 
   anchor856() {
