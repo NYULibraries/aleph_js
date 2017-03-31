@@ -11,15 +11,13 @@
     "PhantomJS"
   ],
   "test_page": [
-    "multi_volume_journal.html",
+    "holdings.html",
     "library_account.html",
-    "electronic_location.html",
     "pds_login.html"
   ],
   "routes": {
-    "/multi_volume_journal.html": "spec/js/fixtures/multi_volume_journal.mustache",
     "/library_account.html": "spec/js/fixtures/library_account.mustache",
-    "/electronic_location.html": "spec/js/fixtures/electronic_location.mustache",
+    "/holdings.html": "spec/js/fixtures/holdings.mustache",
     "/pds_login.html": "spec/js/fixtures/pds_login.mustache"
   }
 }

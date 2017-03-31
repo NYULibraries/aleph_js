@@ -1,24 +1,64 @@
 describe('formatHoldings', function() {
 
-  describe('ezProxyPrefix', () => {
-    it('should map sublibrary codes to proxy prefixes', () => {
-      expect(formatHoldings.ezProxyPrefix["BWEB"]).toEqual("https://ezproxy.library.nyu.edu/login?url=");
-      expect(formatHoldings.ezProxyPrefix["NWEB"]).toEqual("https://ezproxy.library.nyu.edu/login?url=");
-      expect(formatHoldings.ezProxyPrefix["CU"]).toEqual("http://proxy.library.cooper.edu:2048/login?url=");
-      expect(formatHoldings.ezProxyPrefix["TWEB"]).toEqual("https://login.libproxy.newschool.edu/login?url=");
-      expect(formatHoldings.ezProxyPrefix["WEB"]).toEqual("");
-      expect(formatHoldings.ezProxyPrefix["NYSID"]).toEqual("http://plibrary.nysid.edu/login?url=");
+  describe('restrictedSublibraries', () => {
+    it('should contain array of restricted sublibraries', () => {
+      expect(formatHoldings.restrictedSublibraries).toEqual(["BWEB", "CU", "TWEB", "NWEB", "NYSID"]);
     });
   });
 
-  describe('restrictedSublibraries', () => {
-    it('should be an array of restricted sublibrary codes', () => {
-      expect(formatHoldings.restrictedSublibraries).toContain("BWEB");
-      expect(formatHoldings.restrictedSublibraries).toContain("NWEB");
-      expect(formatHoldings.restrictedSublibraries).toContain("CU");
-      expect(formatHoldings.restrictedSublibraries).toContain("TWEB");
-      expect(formatHoldings.restrictedSublibraries).toContain("NYSID");
+  describe('replaceAvailabilityWithOnShelf', () => {
+
+  });
+
+  describe('formatHoldingsTable', () => {
+    let f99, getProxyPrefix, brokenLink;
+    beforeEach( () => {
+      f99 = "#holdings table#holdingsTable tr.f99";
+      getProxyPrefix = (sublibrary) => {
+        return new RegExp("^" + formatHoldings.ezProxyPrefix[sublibrary].replace("?","\\?"));
+      };
+      brokenLink = $(f99).find("td span.broken_link");
     });
+
+    it('should hide location row for restricted sublibraries', () => {
+      const $restrictedLocation = $(f99).find("td:contains('NYU Restricted')");
+      expect($restrictedLocation.is(":hidden")).toEqual(true);
+    });
+
+    it('should add report broken link functionality', () => {
+      expect($(brokenLink).length).toBeGreaterThan(0);
+      expect($(brokenLink).children("a").first().attr("href")).toEqual("/cgi-bin/broken.pl");
+    });
+
+    it('should add appropriate proxy prefixes to restricted resources', () => {
+      expect(getProxyPrefix("BWEB").test($('#bweb_link').attr('href'))).toEqual(true);
+      expect(getProxyPrefix("TWEB").test($('#tweb_link').attr('href'))).toEqual(true);
+      expect(getProxyPrefix("NWEB").test($('#nweb_link').attr('href'))).toEqual(true);
+      expect(getProxyPrefix("CU").test($('#cu_link').attr('href'))).toEqual(true);
+      expect(getProxyPrefix("NYSID").test($('#nysid_link').attr('href'))).toEqual(true);
+    });
+
+    it('should not add proxy prefixes to unrestricted resources', () => {
+      expect($('#web_link').attr('href')).toEqual("http://site.ebrary.com/lib/nyulibrary");
+    });
+
+    it('should remove sublibrary text from after electronic location line', () => {
+      expect($('#bweb_link').closest('td').html()).not.toContain('BWEB');
+      expect($('#tweb_link').closest('td').html()).not.toContain('TWEB');
+      expect($('#nweb_link').closest('td').html()).not.toContain('NWEB');
+      expect($('#cu_link').closest('td').html()).not.toContain('CU');
+      expect($('#nysid_link').closest('td').html()).not.toContain('NYSID');
+      expect($('#web_link').closest('td').html()).not.toContain('WEB');
+    });
+
+  });
+
+  describe('formatHoldingsItems', () => {
+
+  });
+
+  describe('formatBibTable', () => {
+
   });
 
 });
