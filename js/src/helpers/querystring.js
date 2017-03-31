@@ -1,3 +1,10 @@
+/*
+ * Get querystring values
+ *
+ * Ex.
+ *  http://example.com?func=item-global
+ *  querystring.get('func') ==> 'item-global'
+ */
 const querystring = {
   get(key) {
     // Escape square brackets
