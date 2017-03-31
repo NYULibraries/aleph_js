@@ -14,9 +14,7 @@ describe('formatHoldings', function() {
     let f99, getProxyPrefix, brokenLink;
     beforeEach( () => {
       f99 = "#holdings table#holdingsTable tr.f99";
-      getProxyPrefix = (sublibrary) => {
-        return new RegExp("^" + formatHoldings.ezProxyPrefix[sublibrary].replace("?","\\?"));
-      };
+      getProxyPrefix = (sublibrary) => new RegExp("^" + formatHoldings.ezProxyPrefix[sublibrary].replace("?","\\?"));
       brokenLink = $(f99).find("td span.broken_link");
     });
 
