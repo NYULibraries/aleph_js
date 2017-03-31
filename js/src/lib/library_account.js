@@ -30,9 +30,9 @@ const libraryAccount = {
     const confirmLogoutLink = "#nav1endsession > a";
     $(sublibraryHeaders).each( (index, element) => {
       if ($(element).html().match(libraryAccount.nyRegex)) {
-        $(element).html(htmlHelpers.render(libraryAccount.nyLabel));
+        $(element).html(html.render(libraryAccount.nyLabel));
       } else if ($(element).html().match(libraryAccount.adRegex)) {
-        $(element).html(htmlHelpers.render(libraryAccount.adLabel));
+        $(element).html(html.render(libraryAccount.adLabel));
       }
     });
     $(confirmLogoutLink).on("click", function() {

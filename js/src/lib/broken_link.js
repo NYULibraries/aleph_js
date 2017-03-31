@@ -17,9 +17,9 @@ const brokenLink = {
     const span = {
       tag: 'span',
       attrs: { id: "broken_link" + index, class: 'broken_link' },
-      value: "[" + htmlHelpers.render(anchor) + "]"
+      value: "[" + html.render(anchor) + "]"
     };
-    const $brokenLinkSpan = $(htmlHelpers.render(span));
+    const $brokenLinkSpan = $(html.render(span));
     const $brokenLinkAnchor = $brokenLinkSpan.find('a');
     // Store url and aleph id for processing later
     $brokenLinkAnchor.data("aleph_id", querystring.get("doc_number"));

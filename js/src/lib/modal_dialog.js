@@ -9,7 +9,7 @@ const modalDialog = {
       sharedModalDialog.html($main);
       // Add title
       const title = $("#holdings table#bib td.fxxx").first().text();
-      $(sharedModalDialog).find("div#main").eq(0).prepend($(htmlHelpers.render({ tag: "h3", value: title})));
+      $(sharedModalDialog).find("div#main").eq(0).prepend($(html.render({ tag: "h3", value: title})));
     });
   }
 };

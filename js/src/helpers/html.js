@@ -3,9 +3,9 @@
  *
  * Ex.
  *  const linkAsObject = { tag: 'a', attrs: { href: '...' }, value: 'A Link' };
- *  htmlHelpers.render(linkAsObject); ==> <a href="...">A Link</a>
+ *  html.render(linkAsObject); ==> <a href="...">A Link</a>
  */
-const htmlHelpers = {
+const html = {
   render(tag) {
     let html = "";
     html += "<" + tag.tag;

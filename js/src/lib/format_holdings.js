@@ -20,6 +20,12 @@ const formatHoldings = {
     "NYSID": "http://plibrary.nysid.edu/login?url="
   },
   restrictedSublibraries: ["BWEB", "CU", "TWEB", "NWEB", "NYSID"],
+  mapAvailabilityStatus(element) {
+    const mapToText = "On Shelf";
+    const $element = $("#holdings table#items td.due_date:first");
+    const $html = $element.html();
+    $element.html($html.replace(new RegExp("^" + availabilityStatusesMap[mapToText].join("|") + "$", "gi"), mapToText));
+  },
   formatHoldingsTable() {
     const f99s = "#holdings table#holdingsTable tr.f99";
 
@@ -39,7 +45,7 @@ const formatHoldings = {
         // If summary row
       } else if (holdingsTableRow.isSummaryHoldingRow()) {
         // Show only last summary holdings
-        if ($tr == $("tr.f99").last()) {
+        if ($tr.is($("tr.f99").last())) {
           $tr.show();
           // Hide all others
         } else {
@@ -55,8 +61,9 @@ const formatHoldings = {
           holdingsTableRow.anchor856().attr("href", restrictedHref856);
           holdingsTableRow.anchor856().html(restrictedHref856);
         }
-        // Remove Sublibrary
-        holdingsTableRow.td856().html(holdingsTableRow.td856().html().replace(holdingsTableRow.sublibrary(), ""));
+        // Remove sublibrary text from the end of the link
+        const tdWithoutSublibrary = holdingsTableRow.td856().html().replace(holdingsTableRow.sublibrary(), "");
+        holdingsTableRow.td856().html(tdWithoutSublibrary);
       }
       previousRow = tr;
     });
@@ -72,13 +79,7 @@ const formatHoldings = {
     // should all appear as "On Shelf" since they have not been removed from the
     // stacks until they reach 'off-site prep' phase
     const availabilityColumn = "#holdings table#items td.due_date";
-    $(availabilityColumn).each( (index, value) => formatHoldings.replaceAvailabilityWithOnShelf(value) );
-  },
-  replaceAvailabilityWithOnShelf(element) {
-    const mapToText = "On Shelf";
-    const $element = $("#holdings table#items td.due_date:first");
-    const $html = $element.html();
-    $element.html($html.replace(new RegExp("^" + mapAvailabilityStatuses[mapToText].join("|") + "$", "gi"), mapToText));
+    $(availabilityColumn).each( (index, value) => formatHoldings.mapAvailabilityStatus(value) );
   },
   formatBibTable() {
     const emptyBibRowRegEx = /<span>\s*&nbsp;<br>\s*<\/span>/i;
