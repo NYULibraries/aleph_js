@@ -20,11 +20,12 @@ const formatHoldings = {
     "NYSID": "http://plibrary.nysid.edu/login?url="
   },
   restrictedSublibraries: ["BWEB", "CU", "TWEB", "NWEB", "NYSID"],
-  mapAvailabilityStatus(element) {
-    const mapToText = "On Shelf";
-    const $element = $("#holdings table#items td.due_date:first");
-    const $html = $element.html();
-    $element.html($html.replace(new RegExp("^" + availabilityStatusesMap[mapToText].join("|") + "$", "gi"), mapToText));
+  mapAvailabilityStatus(element, mapTo) {
+    // const mapToText = "On Shelf";
+    // const $element = $("#holdings table#items td.due_date:first");
+    const $element = $(element);
+    const mappedStatus = $element.html().replace(new RegExp("^" + availabilityStatusesMap[mapTo].join("|") + "$", "gi"), mapTo);
+    $element.html(mappedStatus);
   },
   formatHoldingsTable() {
     const f99s = "#holdings table#holdingsTable tr.f99";
@@ -79,7 +80,7 @@ const formatHoldings = {
     // should all appear as "On Shelf" since they have not been removed from the
     // stacks until they reach 'off-site prep' phase
     const availabilityColumn = "#holdings table#items td.due_date";
-    $(availabilityColumn).each( (index, value) => formatHoldings.mapAvailabilityStatus(value) );
+    $(availabilityColumn).each( (index, value) => formatHoldings.mapAvailabilityStatus(value, "On Shelf") );
   },
   formatBibTable() {
     const emptyBibRowRegEx = /<span>\s*&nbsp;<br>\s*<\/span>/i;
