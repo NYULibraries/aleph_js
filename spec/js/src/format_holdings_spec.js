@@ -6,10 +6,6 @@ describe('formatHoldings', function() {
     });
   });
 
-  describe('replaceAvailabilityWithOnShelf', () => {
-
-  });
-
   describe('formatHoldingsTable', () => {
     let f99, getProxyPrefix, brokenLink;
     beforeEach( () => {
@@ -52,7 +48,9 @@ describe('formatHoldings', function() {
   });
 
   describe('formatHoldingsItems', () => {
-
+    it('should', () => {
+      expect($("#holdings table#items td.due_date:first").html()).toEqual("On Shelf");
+    });
   });
 
   describe('formatBibTable', () => {
