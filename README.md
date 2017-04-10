@@ -19,6 +19,13 @@ npm run testem-dev
 npm run testem-launchers
 ```
 
+or with Docker:
+
+```
+docker build . -t aleph_js
+docker run aleph_js
+```
+
 We've [prepended `grunt`](testem.json) to these above tests so that they will always be running against a backwards compatible version and we don't have to manually worry about running `grunt`.
 
 ## Compile the Javascript

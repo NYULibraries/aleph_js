@@ -1,10 +1,15 @@
 FROM node:7.7.2
 
-ADD . /apps/aleph_js
-USER root
+ENV INSTALL_PATH /apps/aleph_js
 
-WORKDIR /apps/aleph_js
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p $INSTALL_PATH && cp -a /tmp/node_modules $INSTALL_PATH
 
-RUN rm -rf node_modules
-RUN npm install
-CMD npm test
+ADD . $INSTALL_PATH
+
+WORKDIR $INSTALL_PATH
+
+ENTRYPOINT ["npm", "run"]
+
+CMD ["test"]

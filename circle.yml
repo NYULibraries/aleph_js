@@ -1,17 +1,13 @@
 machine:
-  node:
-    version: 7.7.2
-general:
-  branches:
-    only:
-      - master
-      - /feature\/.+/
-      - /bug\/.+/
-      - /chore\/.+/
+  services:
+    - docker
+
 dependencies:
   override:
-    - npm install
+    - docker info
+    - docker build --rm=false -t nyulibraries/aleph_js .
+
 test:
   override:
-    - npm run testem-launchers
-    - npm test
+    - docker run nyulibraries/aleph_js testem-launchers
+    - docker run nyulibraries/aleph_js
