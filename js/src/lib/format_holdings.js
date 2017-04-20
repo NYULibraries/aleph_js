@@ -1,7 +1,7 @@
 /*
  * Format display on holdings page
  * - If this is a restricted resource hide Location information
- * - If there are summary holdings, only show the last one
+ * - If there are summary holdings, hide em
  * - If resource has an electronic location:
  *    - Display "Report Broken Link" functionality
  *    - If sublibrary is restricted, prepend appropriate proxy link
@@ -39,21 +39,16 @@ const formatHoldings = {
       $tr = $(tr);
       holdingsTableRow = new HoldingsTableRow(tr, previousRow);
 
-      // If location row shows that this is a restricted resource
+      // Hide restricted Internet locations
       if (holdingsTableRow.isLocationRow() && holdingsTableRow.isRestrictedResource()) {
-        // Hide restricted Internet locations
         $tr.hide();
-        // If summary row
-      } else if (holdingsTableRow.isSummaryHoldingRow()) {
-        // Show only last summary holdings
-        if ($tr.is($("tr.f99").last())) {
-          $tr.show();
-          // Hide all others
-        } else {
-          $tr.hide();
-        }
+      }
+      // Hide summary holdings
+      else if (holdingsTableRow.isSummaryHoldingRow()) {
+        $tr.hide();
+      }
       // If electronic location row
-      } else if (holdingsTableRow.isElectronicLocation()) {
+      else if (holdingsTableRow.isElectronicLocation()) {
         // Add broken link functionality
         brokenLink.init(index, holdingsTableRow);
         // Add proxy prefix

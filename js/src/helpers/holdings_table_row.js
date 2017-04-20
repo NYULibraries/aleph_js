@@ -51,7 +51,7 @@ class HoldingsTableRow {
     const sublibrary = this.web856Matcher().exec(this.row.innerHTML);
     if (sublibrary != null) {
       return $.trim(this.web856Matcher().exec(this.row.innerHTML)[0]);
-    } 
+    }
   }
 
   td856() {
