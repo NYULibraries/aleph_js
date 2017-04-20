@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
       global: {
         src: [
-          "js/dist/es5/*.js"
+          "js/dist/es5/**/*.js"
         ],
         dest: 'js/dist/application.min.js'
       },

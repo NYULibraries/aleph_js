@@ -1,4 +1,4 @@
-const mapAvailabilityStatuses = {
+const availabilityStatusesMap = {
   "On Shelf": [
     "Offsite Available",
     "Regular loan",

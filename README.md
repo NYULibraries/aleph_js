@@ -47,6 +47,12 @@ grunt babel
 
 Creates ES5 versions of `js/src/**/*.js` into `js/dist/es5/*.js`
 
+## Writings tests
+
+### Creating test pages
+
+
+
 ## Environment
 
 ### Nodenv: https://github.com/nodenv/nodenv

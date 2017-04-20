@@ -3,9 +3,9 @@
  *
  * Ex.
  *  const linkAsObject = { tag: 'a', attrs: { href: '...' }, value: 'A Link' };
- *  htmlHelpers.render(linkAsObject); ==> <a href="...">A Link</a>
+ *  html.render(linkAsObject); ==> <a href="...">A Link</a>
  */
-const htmlHelpers = {
+const html = {
   render(tag) {
     let html = "";
     html += "<" + tag.tag;
@@ -16,5 +16,10 @@ const htmlHelpers = {
     html += tag.value;
     html += "</" + tag.tag + ">";
     return html;
+  },
+  cleanWhitespace(dirty) {
+    // Clean whitespace for prettier presentation
+    let $dirty = $(dirty);
+    $dirty.html($dirty.html().replace(/&nbsp;/g, ""))
   }
 };

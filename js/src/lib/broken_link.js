@@ -7,7 +7,7 @@
  *  brokenLink.init(); => <span><a href="/cgi-bin/broken.pl">[Report Broken Link]</a></span>
  */
 const brokenLink = {
-  init(holdingsTableRow) {
+  init(index, holdingsTableRow) {
     const brokenLinkScript = '/cgi-bin/broken.pl';
     const anchor = {
       tag: 'a',
@@ -17,13 +17,13 @@ const brokenLink = {
     const span = {
       tag: 'span',
       attrs: { id: "broken_link" + index, class: 'broken_link' },
-      value: "[" + htmlHelpers.render(anchor) + "]"
+      value: "[" + html.render(anchor) + "]"
     };
-    const $brokenLinkSpan = $(htmlHelpers.render(span));
+    const $brokenLinkSpan = $(html.render(span));
     const $brokenLinkAnchor = $brokenLinkSpan.find('a');
     // Store url and aleph id for processing later
-    $brokenLinkAnchor.data("aleph_id", $.query.get("doc_number"));
-    $brokenLinkAnchor.data("aleph_url", href);
+    $brokenLinkAnchor.data("aleph_id", querystring.get("doc_number"));
+    $brokenLinkAnchor.data("aleph_url", holdingsTableRow.href856());
     $brokenLinkAnchor.on('click', (e, data) => {
       this.send($brokenLinkSpan);
       return false;
