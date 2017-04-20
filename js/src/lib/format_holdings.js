@@ -66,11 +66,8 @@ const formatHoldings = {
   },
   formatHoldingsItems() {
     const holdingsLinks = "#holdings table#items td.links";
-    // Clean whitespace from links table data element for prettier presentation
-    $(holdingsLinks).each( (index, td) => {
-      let $td = $(td);
-      $td.html($td.html().replace("&nbsp;", ""))
-    });
+    $(holdingsLinks).each( (i, td) => { html.cleanWhitespace(td) });
+
     // Re-write item statuses for items that are 'selected for off-site'; they
     // should all appear as "On Shelf" since they have not been removed from the
     // stacks until they reach 'off-site prep' phase
@@ -81,7 +78,7 @@ const formatHoldings = {
     const emptyBibRowRegEx = /<span>\s*&nbsp;<br>\s*<\/span>/i;
     const bibRows = "#holdings table#bib td.fxxx";
     // Hide empty table data elements for prettier presentation
-    $(bibRows).filter(function() { return $(this).html().match(emptyBibRowRegEx); }).hide();
+    $(bibRows).filter((i, td) => $(td).html().match(emptyBibRowRegEx) ).hide();
   },
   init() {
     this.formatBibTable();

@@ -19,6 +19,11 @@ describe('formatHoldings', function() {
       expect($restrictedLocation.is(":hidden")).toEqual(true);
     });
 
+    it('should hide summary holdings', () => {
+      const $summaryHoldings = $(f99).filter(".summaryHoldings:visible");
+      expect($summaryHoldings.length).toEqual(0);
+    });
+
     it('should add report broken link functionality', () => {
       expect($(brokenLink).length).toBeGreaterThan(0);
       expect($(brokenLink).children("a").first().attr("href")).toEqual("/cgi-bin/broken.pl");
@@ -48,13 +53,20 @@ describe('formatHoldings', function() {
   });
 
   describe('formatHoldingsItems', () => {
-    it('should', () => {
-      expect($("#holdings table#items td.due_date:first").html()).toEqual("On Shelf");
+    it('should map availability statuses to On Shelf where appropriate', () => {
+      const statuses = "#holdings table#items td.due_date";
+      expect($(statuses).filter(".mapped_status").html()).toEqual("On Shelf");
+      expect($(statuses).filter(".unmapped_status").html()).toEqual("Unknown status");
+    });
+    it('should clean up whitespace in links text field', () => {
+      expect($("#holdings table#items td.links a").html()).toEqual("Request");
     });
   });
 
   describe('formatBibTable', () => {
-
+    it('should hide empty bib rows', () => {
+      expect($(".emptyBibRow .fxxx").is(":hidden")).toBe(true);
+    });
   });
 
 });

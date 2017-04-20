@@ -16,5 +16,10 @@ const html = {
     html += tag.value;
     html += "</" + tag.tag + ">";
     return html;
+  },
+  cleanWhitespace(dirty) {
+    // Clean whitespace for prettier presentation
+    let $dirty = $(dirty);
+    $dirty.html($dirty.html().replace(/&nbsp;/g, ""))
   }
 };
