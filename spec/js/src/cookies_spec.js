@@ -1,4 +1,4 @@
-describe('cookies', function(){
+describe('cookies', () => {
   const key = 'key';
 
   beforeEach(function deleteAllCookies() {

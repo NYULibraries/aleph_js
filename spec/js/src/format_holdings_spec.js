@@ -1,4 +1,4 @@
-describe('formatHoldings', function() {
+describe('formatHoldings', () => {
 
   describe('restrictedSublibraries', () => {
     it('should contain array of restricted sublibraries', () => {

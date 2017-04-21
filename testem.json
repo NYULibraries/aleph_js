@@ -16,8 +16,8 @@
     "pds_login.html"
   ],
   "routes": {
-    "/library_account.html": "spec/js/fixtures/library_account.mustache",
     "/holdings.html": "spec/js/fixtures/holdings.mustache",
+    "/library_account.html": "spec/js/fixtures/library_account.mustache",
     "/pds_login.html": "spec/js/fixtures/pds_login.mustache"
   }
 }
