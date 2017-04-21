@@ -1,0 +1,664 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Search</title>
+    <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+    <script src="/testem.js"></script>
+    {{#serve_files}}
+        <script src="{{src}}"></script>
+    {{/serve_files}}
+    <script src="spec/js/dist/search_spec.js"></script>
+</head>
+
+<body>
+    <div id="content">
+        <div id="main">
+
+            <!-- filename: find-b-head -->
+            <div id="keyword" class="section">
+                <form id="form1" name="form1" class="searchform" action="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-00146" method="get">
+                    <fieldset>
+                        <input type="hidden" name="func" value="find-b">
+                        <input type="hidden" name="adjacent" checked="" value="N">
+                        <h3>Search by Keyword(s)</h3>
+                        <!-- filename: base-list-include-nyu01 -->
+                        <input type="hidden" name="local_base" value="NYU01PUB">
+                        <div id="request-div">
+                            <input name="request" type="text" class="text" value=""> in
+                            <!-- filename: find-code-include-nyu01 -->
+                            <select name="find_code">
+    <option value="WRD">All Fields</option>
+    <option value="WTI">Title</option>
+    <option value="WAU">Author</option>
+    <option value="WSU">Subject</option>
+    <option value="WSRS1">Series</option>
+    <option value="ISBN">ISBN</option>
+    <option value="ISSN">ISSN</option>
+    <option value="SYS">BIB Doc Number</option>
+  </select>
+                            <input type="submit" class="submit" value="Search">
+                        </div>
+                    </fieldset>
+                    <!-- filename: find-include-filter-nyu01 -->
+                    <div id="limits-block">
+                        <div id="showlimits">
+                            <a href="" onclick="bs_toggle_limits(); return false;">Limit this <span id="keyword">Keyword</span> Search</a> by location, language, date or format such as video <em>(optional)</em>
+                        </div>
+                        <div id="hidelimits" style="display: none;">
+                            <a href="" onclick="bs_toggle_limits(); return false;">Hide Limits</a>
+                        </div>
+                        <fieldset id="limits" style="display: none;">
+                            <input type="hidden" name="filter_code_1" value="WLN">
+                            <input type="hidden" name="filter_code_2" value="WYR">
+                            <input type="hidden" name="filter_code_3" value="WYR">
+                            <input type="hidden" name="filter_code_4" value="WFM">
+                            <input type="hidden" name="filter_code_5" value="WLC">
+
+                            <div>
+                                <label>Location:</label>
+                                <select name="filter_request_5">
+          <option value="">All</option>
+          <option value="BOBST">NYU Bobst</option>
+          <option value="BAFC">NYU Bobst Avery Fisher</option>
+          <option value="BFALE">NYU Bobst Fales</option>
+          <!--option value="BREF6"                >NYU Bobst 6th Floor Reference</option-->
+          <option value="BTAM">NYU Bobst Tamiment</option>
+          <option value="NCOUR">NYU Courant</option>
+          <option value="NDIBN">NYU Dibner</option>
+          <option value="NIFA">NYU Institute Fine Arts</option>
+          <option value="NIFAC">NYU Inst Fine Arts Conserv</option>
+          <option value="NISAW">NYU Inst Study Ancient World</option>
+          <option value="NKEV">NYU Kevorkian</option>
+          <option value="NLAPI">NYU La Pietra (Italy)</option>
+          <option value="NREI">NYU Real Estate</option>
+          <option value="KBHS">Brooklyn Historical Society</option>
+          <option value="CU">Cooper Union Library</option>
+          <option value="TNSFO">New School List Center</option>
+          <option value="TNSGI">New School University Center</option>
+          <option value="TNSKE">New School Archives</option>
+          <option value="TNSSC">New School Performing Arts Library</option>
+          <option value="NYHS">New-York Historical Society</option>
+          <option value="NYSID">NY School Interior Design</option>
+        </select>
+                            </div>
+                            <div>
+                                <label>Language:</label>
+                                <select name="filter_request_1">
+          <option value="">All</option>
+          <option value="ENG">English</option>
+          <option value="ARA">Arabic</option>
+          <option value="BEN">Bengali</option>
+          <option value="CHI">Chinese</option>
+          <option value="CZE">Czech</option>
+          <option value="DUT">Dutch</option>
+          <option value="FRE">French</option>
+          <option value="GER">German</option>
+          <option value="GRC">Greek, Ancient</option>
+          <option value="GRE">Greek, Modern</option>
+          <option value="HEB">Hebrew</option>
+          <option value="HIN">Hindi</option>
+          <option value="HUN">Hungarian</option>
+          <option value="ITA">Italian</option>
+          <option value="JPN">Japanese</option>
+          <option value="KOR">Korean</option>
+          <option value="LAT">Latin</option>
+          <option value="PER">Persian</option>
+          <option value="POL">Polish</option>
+          <option value="POR">Portuguese</option>
+          <option value="RUS">Russian</option>
+          <option value="SPA">Spanish</option>
+          <option value="TUR">Turkish</option>
+        </select>
+                            </div>
+                            <div>
+                                <label>Date Range:</label>
+                                <span>From</span>
+                                <input id="dfrom" type="text" class="text" name="filter_request_2" value="">
+                                <span>To</span>
+                                <input id="dto" type="text" class="text" name="filter_request_3" value="">
+                            </div>
+                            <div>
+                                <label>Format:</label>
+                                <select name="filter_request_4">
+          <option value="">All</option>
+          <option value="BK">Books</option>
+          <option value="SE">Serials</option>
+          <option value="MU">Music</option>
+          <option value="MP">Maps</option>
+          <option value="CF">Computer Files</option>
+          <option value="VM">Visual Materials</option>
+          <option value="MX">Mixed Materials</option>
+        </select>
+                            </div>
+                        </fieldset>
+                    </div>
+
+                </form>
+            </div>
+            <!-- filename: scan-include-2-nyu01 -->
+            <div id="scan" class="section">
+                <form id="form2" name="form2" class="searchform" action="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-00147&quot;" method="get">
+                    <fieldset>
+                        <input type="hidden" name="func" value="scan">
+                        <h3>Browse an <strong>Alphabetical List</strong> of</h3>
+                        <div id="scan-div">
+                            <select name="scan_code">
+            <option value="TIT">Titles</option>
+            <option value="AUT">Authors (Last Name, First Name)</option>
+            <option value="SUB">Subjects</option>
+            <option value="ALL">Call Numbers</option>
+            <option value="SRS">Series</option>
+            <option value="PLA">Places of Publication</option>
+            <option value="PUB">Publishers</option>
+
+            <option value="REL">Related Names</option>
+            <option value="SYS">BIB Doc Numbers</option>
+          </select> beginning with
+                            <input name="scan_start" type="text" class="text" value="">
+                            <input type="submit" class="submit" value="Search">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+
+
+            <div class="section">
+                <h3>Previous Searches</h3>
+                <form id="nav_form" name="form1" method="get">
+                    <fieldset style="margin: 1em 0 0.5em;">
+                        <input type="submit" class="submit" onclick="javascript: bs_history_nav('action_view.x'); return false;" value="View Selected">
+                        <input type="submit" class="submit" onclick="javascript: bs_history_nav('action_cross.x'); return false;" value="Combine Selected">
+                        <input type="submit" class="submit" onclick="javascript: bs_history_nav('action_delete.x'); return false;" value="Delete Selected">
+                    </fieldset>
+                    <fieldset>
+                        <input id="nav_action" type="hidden" name="action_view.x" value="nyu">
+                        <input type="hidden" name="func" value="history-action">
+                        <input type="hidden" name="submit_action" value="">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>&nbsp;</th>
+                                    <th>Database</th>
+                                    <th>Search Request</th>
+                                    <th class="nowrap">No. of Records</th>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </fieldset>
+                </form>
+            </div>
+
+
+            <div class="section">
+                <h3>Record         1 out of      3307</h3>
+                <p><img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-prev-record-dim1.gif" alt="No Previous Record"> &nbsp;
+                    <a href="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01141?func=full-set-set&amp;set_number=006049&amp;set_entry=000002&amp;format=999"><img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-next-record.gif" alt="Next Record"></a>
+                </p>
+            </div>
+            <div class="section">
+                <form action="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01142" method="get" style="margin-bottom: .5em;">
+                    <fieldset>
+                        <input type="hidden" name="func" value="full-mail-0">
+                        <input type="hidden" name="doc_library" value="NYU01">
+                        <input type="hidden" name="doc_number" value="004858604">
+                        <input class="submit" value="Mail/Save Record" type="submit">
+                    </fieldset>
+                </form>
+                <div id="format">
+                    <div id="nav3">
+                        <ul>
+                            <li id="nav3fstandard"><a href="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01143?func=full-set-set&amp;set_number=006049&amp;set_entry=000001&amp;format=999">Standard View</a></li>
+                            <li id="nav3fname"><a href="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01144?func=full-set-set&amp;set_number=006049&amp;set_entry=000001&amp;format=002">Name Tags View</a></li>
+                            <li id="nav3fmarc"><a href="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01145?func=full-set-set&amp;set_number=006049&amp;set_entry=000001&amp;format=001">MARC Tags View</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <table class="fulltable">
+
+                    <!-- filename: full-999-body -->
+                    <!-- include>placeholders -->
+                    <tbody>
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Record Number
+                            </td>
+                            <td align="left">
+                                004858604
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Title
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01146?func=service&amp;doc_number=004858604&amp;line_number=0021&amp;service_type=TAG");'>Clinical gynecologic oncology /&nbsp;[edited by] Philip J. DiSaia, William T. Creasman, Robert S. Mannell, Scott McMeekin, David G. Mutch.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Edition
+                            </td>
+                            <td align="left">
+                                Ninth edition.
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Publisher/Date
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01147?func=service&amp;doc_number=004858604&amp;line_number=0023&amp;service_type=TAG");'>Philadelphia, PA :&nbsp;Elsevier,&nbsp;[2018]</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01148?func=service&amp;doc_number=004858604&amp;line_number=0024&amp;service_type=TAG");'>©2018</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Description
+                            </td>
+                            <td align="left">
+                                1 online resource : &nbsp;illustrations (chiefly color)
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Note
+                            </td>
+                            <td align="left">
+                                Revised edition of: Clinical gynecologic oncology / Philip J. Di Saia [and others]. 8th ed. ©2012.
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Note
+                            </td>
+                            <td align="left">
+                                Includes bibliographical references.
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Contents
+                            </td>
+                            <td align="left">
+                                Contents:&nbsp;Preinvasive disease of the cervix /&nbsp;L. Stewart Massad --&nbsp;Preinvasive disease of the vagina and vulva and related disorders /&nbsp;Cara A. Mathews and Joan L. Walker --&nbsp;Invasive cervical cancer /&nbsp;Krishnansu S. Tewari
+                                and Bradley J. <span class="highlight">Monk</span> --&nbsp;Endometrial hyperplasia, estrogen therapy, and the prevention of endometrial cancer /&nbsp;Lisa M. Landrum, Rosemary E. Zuna, and
+                                Joan L. Walker --&nbsp;Adenocarcinoma of the uterine corpus /&nbsp;William T. Creasman and David Scott Miller --&nbsp;Sarcoma of the uterus /&nbsp;D. Scott McMeekin and William T. Creasman --&nbsp;Gestational trophoblastic
+                                disease /&nbsp;Emma L. Barber and John T. Soper --&nbsp;Invasive cancer of the vulva /&nbsp;Thomas Herzog --&nbsp;Invasive cancer of the vagina /&nbsp;Marilyn Huang, Brian M. Slomovitz, and Robert L. Coleman --&nbsp;The
+                                adnexal mass /&nbsp;Camille C. Gunderson, Robert S. Mannel, and Philip J. Di Saia --&nbsp;Epithelial ovarian cancer /&nbsp;Eric L. Eisenhauer, Ritu Salani, and Larry J. Copeland --
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                Contents:&nbsp;Germ cell, stromal, and other ovarian tumors /&nbsp;Emily R. Penick, Chad Hamilton, G. Larry Maxwell, and Charlotte S. Marcus --&nbsp;Fallopian tube cancer /&nbsp;Erica R. Hope, G. Larry Maxwell, and Chad A. Hamilton --&nbsp;Breast diseases
+                                /&nbsp;Patricia A. Cronin and Mary L. Gemignani --&nbsp;Cancer in pregnancy /&nbsp;Krishnansu S. Tewari --&nbsp;Complications of disease and therapy /&nbsp;Kemi M. Doll, Daniel L. Clarke-Pearson --&nbsp;Basic principles
+                                of chemotherapy /&nbsp;Christina S. Chu and Stephen C. Rubin --&nbsp;Targeted therapy and molecular genetics /&nbsp;Shannon N. Westin, Anil K. Sood, and Robert L. Coleman --&nbsp;Genes and cancer : genetic counseling and
+                                clinical management /&nbsp;David G. Mutch, Sheri Babb, and Philip J. Di Saia --&nbsp;Palliative care and quality of life /&nbsp;Dana M Chase, Siu-Fun Wong, Lari Wenzel, and Bradley J.
+                                <span class="highlight">Monk</span> --&nbsp;Role of minimally invasive surgery in gynecologic malignancies /&nbsp;Floor J. Backes, David E. Cohn, Robert S. Mannel, and Jeffrey M. Fowler --
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                Contents:&nbsp;Epidemiology of commonly used statistical terms and analysis of clinical studies /&nbsp;Wendy R. Brewster --&nbsp;Basic principles in gynecologic radiotherapy /&nbsp;Catheryn M. Yashar --&nbsp;Appendices. Staging: staging of cancer at gynecologic
+                                sites --&nbsp;Modified from common terminology criteria for adverse events (common terminology criteria for adverse events) --&nbsp;Blood component therapy --&nbsp;Suggested recommendations for routine cancer screening
+                                --&nbsp;Nutritional therapy.
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Restrictions
+                            </td>
+                            <td align="left">
+                                Access is restricted to users affiliated with licensed institutions.
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Summary
+                            </td>
+                            <td align="left">
+                                The most readable, most comprehensive book in its field, Clinical Gynecologic Oncology, 9th Edition is the leading reference for diagnosis and treatment of gynecologic cancers - a must-have reference for improving outcomes and providing effective care.
+                                A "who’s who" list of contributing authors, under the editorial direction of Drs. Philip DiSaia and William Creasman, provides expert guidance on clinical presentations and management, now fully up to date with a brand-new
+                                design for faster, easier reference.
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Subject (LCSH)
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01149?func=service&amp;doc_number=004858604&amp;line_number=0038&amp;service_type=TAG");'>Generative organs, Female&nbsp;--&nbsp;Cancer.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Subject (MeSH)
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01150?func=service&amp;doc_number=004858604&amp;line_number=0039&amp;service_type=TAG");'>Genital Neoplasms, Female.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Genre/Form
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01151?func=service&amp;doc_number=004858604&amp;line_number=0040&amp;service_type=TAG");'>Electronic books.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Other author/title
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01152?func=service&amp;doc_number=004858604&amp;line_number=0041&amp;service_type=TAG");'>Di Saia, Philip J.,&nbsp;1937-&nbsp;editor.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01153?func=service&amp;doc_number=004858604&amp;line_number=0042&amp;service_type=TAG");'>Creasman, William T.,&nbsp;1934-&nbsp;editor.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01154?func=service&amp;doc_number=004858604&amp;line_number=0043&amp;service_type=TAG");'>Mannell, Robert S.,&nbsp;editor.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01155?func=service&amp;doc_number=004858604&amp;line_number=0044&amp;service_type=TAG");'>McMeekin, Scott,&nbsp;editor.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01156?func=service&amp;doc_number=004858604&amp;line_number=0045&amp;service_type=TAG");'>Mutch, David G.,&nbsp;editor.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Other title
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01157?func=service&amp;doc_number=004858604&amp;line_number=0046&amp;service_type=TAG");'>Preceded by:&nbsp;Clinical gynecologic oncology.&nbsp;8th ed.&nbsp;©2012.</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Other physical form
+                            </td>
+                            <td align="left">
+                                Print version:&nbsp;Clinical gynecologic oncology.&nbsp;Ninth edition.&nbsp;Philadelphia, PA : Elsevier, [2018]&nbsp;9780323400671&nbsp;(DLC) 2016049213&nbsp;(OCoLC)960844963
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                ISBN
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01158?func=service&amp;doc_number=004858604&amp;line_number=0008&amp;service_type=TAG");'>9780323443166&nbsp;eBook</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01159?func=service&amp;doc_number=004858604&amp;line_number=0009&amp;service_type=TAG");'>0323443168&nbsp;eBook</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01160?func=service&amp;doc_number=004858604&amp;line_number=0010&amp;service_type=TAG");'>9780323443173&nbsp;eBook</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-separator.gif" alt="Link"><a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01161?func=service&amp;doc_number=004858604&amp;line_number=0011&amp;service_type=TAG");'>0323443176&nbsp;eBook</a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+
+                            </td>
+                            <td align="left">
+                                <br>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-999-body -->
+                        <!-- include>placeholders -->
+                        <tr class="f99">
+                            <td class="nowrap f99label">
+                                Library Holdings:
+                            </td>
+                            <td align="left">
+                                <a href="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01162?func=item-global&amp;doc_library=NYU01&amp;doc_number=004858604&amp;year=&amp;volume=&amp;sub_library=BWEB">NYU Restricted&nbsp;/&nbsp;Internet Resources&nbsp;RC280.G5&nbsp;/&nbsp;Electronic access</a>
+                                <a href='javascript:open_window("https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01163?func=library&amp;sub_library=BWEB");'><img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-info.gif" alt="Library Info" class="info"></a>
+                            </td>
+                        </tr>
+
+
+
+
+                        <!-- filename: full-set-tail -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="section">
+                <p><img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-prev-record-dim1.gif" alt="No Previous Record"> &nbsp;
+                    <a href="https://aleph.library.nyu.edu:443/F/3TBLHSNDMLCX1J5KG1G369LJIX1S6TEMGUAGM5V9HGVGM8975L-01164?func=full-set-set&amp;set_number=006049&amp;set_entry=000002&amp;format=999"><img src="https://aleph.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-next-record.gif" alt="Next Record"></a>
+                </p>
+            </div>
+            <!-- tail-bar-include -->
+
+
+
+
+
+</body>
+
+</html>

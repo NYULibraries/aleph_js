@@ -9,34 +9,22 @@ const libraryAccount = {
   adRegex: /^NYU51$/i,
   nyLabel: {
     tag: "span",
-    attrs: { id: "nyu50-Label" },
+    attrs: { id: "nyu50-label" },
     value: "New York"
   },
   adLabel: {
     tag: "span",
-    attrs: { id: "nyu51-Label" },
+    attrs: { id: "nyu51-label" },
     value: "Abu Dhabi"
   },
-  confirmLogout(anchor) {
-    const confirmLogoutText = "Are you sure you want to logout of the patron module?";
-    if (confirm(logoutConfirmText)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
   init() {
-    const sublibraryHeaders = "#pindex #activities th.td1";
-    const confirmLogoutLink = "#nav1endsession > a";
+    const sublibraryHeaders = "#pindex #activities .td1";
     $(sublibraryHeaders).each( (index, element) => {
       if ($(element).html().match(libraryAccount.nyRegex)) {
         $(element).html(html.render(libraryAccount.nyLabel));
       } else if ($(element).html().match(libraryAccount.adRegex)) {
         $(element).html(html.render(libraryAccount.adLabel));
       }
-    });
-    $(confirmLogoutLink).on("click", function() {
-      libraryAccount.confirmLogout(this);
     });
   }
 }

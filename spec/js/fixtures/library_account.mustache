@@ -1,22 +1,177 @@
 <!doctype html>
 <html>
+
 <head>
-<title>Library Account</title>
-<link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
-<script src="node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
-<script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
-<script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
-<script src="/testem.js"></script>
-{{#serve_files}}
-<script src="{{src}}"></script>
-{{/serve_files}}
-<script src="spec/js/dist/library_account_spec.js"></script>
+    <title>Library Account</title>
+    <link rel="stylesheet" href="node_modules/jasmine-core/lib/jasmine-core/jasmine.css">
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
+    <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+    <script src="/testem.js"></script>
+    {{#serve_files}}
+        <script src="{{src}}"></script>
+    {{/serve_files}}
+    <script src="spec/js/dist/library_account_spec.js"></script>
 </head>
-<body>
-  <body>
-    <div></div>
-  </body>
+
+<body id="pindex" class="activities">
+    <!-- filename: head-replace-nyu50 -->
+    <div id="banner">
+        <h1><img src="https://alephstage.library.nyu.edu:443/bobcat/images/banner.jpg" alt="BobCat"></h1>
+    </div>
+    <div id="feedbackbar" class="feedbackbar">
+        <p> </p>
+    </div>
+    <div id="nav1">
+        <ul>
+            <li id="nav1activities"><a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00319?func=bor-info">My Activities</a></li>
+            <li id="nav1endsession"><a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00320?func=logout&amp;patron=true" onclick="javascript: if(!patron_logout(self)){return false};">Logout</a></li>
+        </ul>
+    </div>
+    <div id="content">
+        <!-- filename: bor-include-2-->
+        <div id="nav2">
+            <ul>
+                <li id="nav2pindex">
+                    <a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00321?func=bor-info" title="View My Activities">Account Summary</a>
+                </li>
+                <li id="nav2ploans">
+                    <a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00322?func=bor-loan" title="View Loans">Loans</a>
+                </li>
+                <li id="nav2pholds">
+                    <a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00323?func=bor-hold" title="View Hold Requests">Holds</a>
+                </li>
+                <li id="nav2pbookings">
+                    <a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00324?func=bor-booking-req-list" title="View Booking Requests">Bookings</a>
+                </li>
+                <li id="nav2pfines">
+                    <a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00325?func=bor-cash" title="View Fines &amp; Fees">Fines/Fees</a>
+                </li>
+            </ul>
+        </div>
+        <div id="main">
+            <div class="section">
+                <h3>Alter, Barnaby</h3>
+                <div id="avail-library" class="sub-section">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="td1" width="30%" id="bold" nowrap=""><a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00326?func=bor-info-library&amp;ADM_LIBRARY=NYU50">New York                                                                                            </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="activities" class="sub-section">
+                    <h4>Activities</h4>
+                    <p>(click the links below to view more info, renew, delete, etc.)</p>
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <th class="td1" id="nyu50-header">NYU50</th>
+                                <td class="td1" id="nyu51-header">NYU51</td>
+                            </tr>
+                            <tr>
+                                <td>Loans</td>
+                                <td class="td1"><a href="javascript:replacePage('https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00327?func=bor-loan&amp;adm_library=NYU50');">6    </a></td>
+                            </tr>
+                            <tr>
+                                <td>Hold Requests</td>
+                                <td class="td1"><a href="javascript:replacePage('https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00328?func=bor-hold&amp;adm_library=NYU50');">0    </a></td>
+                            </tr>
+                            <tr>
+                                <td>Booking Requests</td>
+                                <td class="td1"><a href="javascript:replacePage('https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00329?func=bor-booking-req-list&amp;adm_library=NYU50');">0    </a></td>
+                            </tr>
+                            <tr>
+                                <td>Fines/Fees</td>
+                                <td class="td1"><a href="javascript:replacePage('https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00330?func=bor-cash&amp;adm_library=NYU50');">0.00                </a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="sub-section">
+                    <a name="blocks"></a>
+                    <h4>Blocks</h4>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+                <div class="sub-section">
+                    <a name="contact"></a>
+                    <h4>Patron Contact Information</h4>
+                    <!--p>
+              <span class=tr1 id=bold><BR><a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00331?func=bor-update">Update addresses</a></span>
+            </p-->
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td class="nowrap">Address (1)</td>
+                                <td>Alter, Barnaby</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>70 WASHINGTON SQUARE SOUTH</td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>E-mail</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>From</td>
+                                <td>11/30/16</td>
+                            </tr>
+                            <tr>
+                                <td>To</td>
+                                <td>01/01/20</td>
+                            </tr>
+                            <tr>
+                                <td>Zip Code</td>
+                                <td>11104</td>
+                            </tr>
+                            <tr>
+                                <td>Telephone</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="nowrap"><a href="https://alephstage.library.nyu.edu:443/F/PB6GNH7PM6TE9GU3I236XTGBD74441NXHAMP4YT3SLV255NKJM-00332?func=bor-proxy">Proxies/Sponsor</a></td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- filename: copyrights -->
+    <div id="footer">
+        <p class="copyright">© 2008 Ex Libris</p>
+    </div>
+
 </body>
+
 </html>
