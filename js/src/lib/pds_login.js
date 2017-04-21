@@ -19,10 +19,12 @@ const pdsLogin = {
     return this.hostname();
   },
   isLoggedIn() {
-    return cookies.get('_aleph_pds_passive_login');
+    // Use the PDS_HANDLE cookie to try and determine if a user is already
+    // logged in to PDS. The worst that could happen with this approach
+    // is that an already logged in user would get redirected to login when clicking "Request"
+    return cookies.get('PDS_HANDLE') && cookies.get('PDS_HANDLE') != 'GUEST';
   },
   redirectToPds() {
-    cookies.set('_aleph_pds_passive_login');
     location.replace(this.pdsUrl());
   },
   passiveLogin() {
