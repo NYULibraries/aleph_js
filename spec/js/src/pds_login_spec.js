@@ -48,7 +48,7 @@ describe('pdsLogin', () => {
     });
 
     it('should redirect to the pds login url', () => {
-      expect(location.replace.calls.any()).toBe(true);
+      expect(location.replace).toHaveBeenCalled();
     });
   });
 
@@ -70,14 +70,14 @@ describe('pdsLogin', () => {
       isLoggedIn = false;
       querystringFunc = 'another-page';
       pdsLogin.passiveLogin();
-      expect(pdsLogin.redirectToPds.calls.any()).toBe(false);
+      expect(pdsLogin.redirectToPds).toHaveBeenCalledTimes(0);
     });
 
     it('should redirect to login if user is not logged in and the current page is the holdings page', () => {
       isLoggedIn = false;
       querystringFunc = 'item-global';
       pdsLogin.passiveLogin();
-      expect(pdsLogin.redirectToPds.calls.any()).toBe(true);
+      expect(pdsLogin.redirectToPds).toHaveBeenCalled();
     });
   });
 
