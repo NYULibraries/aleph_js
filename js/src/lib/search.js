@@ -25,7 +25,7 @@ const search = {
   init() {
     $("#limits-block").find("#showlimits a, #hidelimits a").on('click', (e) => {
       e.preventDefault();
-      search.toggleLimits();
+      this.toggleLimits();
       return false;
     });
     this.setFullFormat();
@@ -33,3 +33,5 @@ const search = {
 };
 // Alias for old bs_history_nav function
 const bs_history_nav = (action) => { search.submitSearchHistoryAction(action); };
+// Alias for old bs_toggle_limits function
+const bs_toggle_limits = () => { search.toggleLimits(); };
