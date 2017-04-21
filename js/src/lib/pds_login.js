@@ -5,28 +5,28 @@
  *  pdsLogin.passiveLogin();
  */
 const pdsLogin = {
-  location: () => {
+  location() {
     return window.location;
   },
-  hostname: () => {
-    return pdsLogin.location().hostname;
+  hostname() {
+    return this.location().hostname;
   },
-  pdsUrl: () => {
+  pdsUrl() {
     const institute = 'NYU';
-    const url = '.library.nyu.edu/pds?func=load-login&calling_system=aleph&institute=' + institute + '&url=' + encodeURIComponent(pdsLogin.location());
-    if (pdsLogin.hostname().match("^alephstage")) return 'https://pdsdev' + url;
-    if (pdsLogin.hostname().match("^aleph")) return 'https://pds' + url;
-    return pdsLogin.hostname();
+    const url = '.library.nyu.edu/pds?func=load-login&calling_system=aleph&institute=' + institute + '&url=' + encodeURIComponent(this.location());
+    if (this.hostname().match("^alephstage")) return 'https://pdsdev' + url;
+    if (this.hostname().match("^aleph")) return 'https://pds' + url;
+    return this.hostname();
   },
-  isLoggedIn: () => {
+  isLoggedIn() {
     return cookies.get('_aleph_pds_passive_login');
   },
-  redirectToPds: () => {
+  redirectToPds() {
     cookies.set('_aleph_pds_passive_login');
-    location.replace(pdsLogin.pdsUrl());
+    location.replace(this.pdsUrl());
   },
-  passiveLogin: () => {
-    if (pdsLogin.isLoggedIn()) return;
-    if (querystring.get('func') == 'item-global') pdsLogin.redirectToPds();
+  passiveLogin() {
+    if (this.isLoggedIn()) return;
+    if (querystring.get('func') == 'item-global') this.redirectToPds();
   }
 };
