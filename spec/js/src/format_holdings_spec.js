@@ -7,11 +7,10 @@ describe('formatHoldings', () => {
   });
 
   describe('formatHoldingsTable', () => {
-    let f99, getProxyPrefix, brokenLink;
+    let f99, getProxyPrefix;
     beforeEach( () => {
       f99 = "#holdings table#holdingsTable tr.f99";
       getProxyPrefix = (sublibrary) => new RegExp("^" + formatHoldings.ezProxyPrefix[sublibrary].replace("?","\\?"));
-      brokenLink = $(f99).find("td span.broken_link");
     });
 
     it('should hide location row for restricted sublibraries', () => {
@@ -25,8 +24,7 @@ describe('formatHoldings', () => {
     });
 
     it('should add report broken link functionality', () => {
-      expect($(brokenLink).length).toBeGreaterThan(0);
-      expect($(brokenLink).children("a").first().attr("href")).toEqual("/cgi-bin/broken.pl");
+      expect($(f99).find("td span.broken_link").length).toBeGreaterThan(0);
     });
 
     it('should add appropriate proxy prefixes to restricted resources', () => {

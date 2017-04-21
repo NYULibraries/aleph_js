@@ -31,12 +31,12 @@ const brokenLink = {
     holdingsTableRow.td856().append($brokenLinkSpan);
   },
   send($brokenLinkSpan) {
-    const sending_html = '<span>[<em>Sending...</em>]</span>';
-    const submitted_html = '[<em>Submitted</em>]';
+    const sendingHtml = html.render({ tag: 'span', value: '[' + html.render({tag: 'em', value: 'Sending...'}) + ']' });
+    const submittedHtml = '[' + html.render({tag: 'em', value: 'Submitted'}) + ']';
     const alephId = $brokenLinkSpan.data("aleph_id")
     const alephUrl = encodeURIComponent($brokenLinkSpan.data("aleph_url"));
     const brokenLinkData = "aleph_id=" + alephId + "&aleph_url=" + alephUrl;
-    $brokenLinkSpan.html(sending_html);
-    $.get($brokenLinkSpan.find('a').href, brokenLinkData).done(() => { $brokenLinkSpan.html("["+submitted_html+"]")});
+    $brokenLinkSpan.html(sendingHtml);
+    $.get($brokenLinkSpan.find('a').href, brokenLinkData).done(() => { $brokenLinkSpan.html("["+submittedHtml+"]")});
   }
 };
