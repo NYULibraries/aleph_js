@@ -6,20 +6,28 @@ Javascripts for manipulating display and request functionality of the Aleph sear
 
 ## Run the tests
 
+Install NPM dependencies:
 ```
-# Install NPM dependencies
 npm install
-# Run in CI mode (default)
+```
+Run in CI mode (default):
+```
 npm test
-# Run in interactive CLI mode
+```
+Run in interactive CLI mode, which outputs URL to run in browser:
+```
 npm run testem
-# Run in Dev mode
+```
+Run in Dev mode:
+```
 npm run testem-dev
-# See which launchers are available
+```
+See which launchers are available:
+```
 npm run testem-launchers
 ```
 
-or with Docker:
+### Run tests in Docker
 
 ```
 docker build . -t aleph_js
@@ -48,6 +56,12 @@ grunt babel
 Creates ES5 versions of `js/src/**/*.js` into `js/dist/es5/*.js`
 
 ## Writings tests
+
+For a new file, e.g. `example.js`, create a spec file in `spec/js/src/` directory, e.g. `example_spec.js`. To run these tests, you must include the automatically compiled spec file (found in `spec/js/dist`) in the desired fixture in `spec/js/fixtures`, e.g.:
+
+```
+<script src="spec/js/dist/example_spec.js"></script>
+```
 
 ### Creating test pages
 
