@@ -5,33 +5,42 @@ class Holding {
 
 		this.$element = $(element);
 		this.$sharedModalDialog = $(sharedModalDialog);
-
-		// this.subLibrary = this.$element.data("sub_library");
-		// this.itemType = this.$element.data("item_type");
-		// this.availability = this.$element.data("availability");
-    // this.collection = this.$element.data("collection");
 	}
 
 	extractData () {
+		this.subLibrary = this.columnData("Location");
+		this.collection = this.columnData("Collection");
+		this.itemType = this.columnData("Item Type");
+		this.availability = this.columnData("Availability");
+
+		this.docNumber = this.paramData('adm_doc_number');
+		this.docLibrary = this.paramData('doc_library');
+	}
+
+	paramData (paramKey) {
+		if (!this.href)
+			this.href = this.$element.attr('href');
+		var paramRegex = new RegExp('\\&' + paramKey + '=([^&]+)&')
+		return paramRegex.exec(this.href)[1];
+	}
+
+	columnData (columnTitle) {
+		var index = this.columnPositionIndex(columnTitle);
+		return this.$element.closest("tr").children().eq(index).text();
+	}
+
+	columnPositionIndex (columnTitle) {
+		return $.inArray(columnTitle, this.getItemColumnOrder());
+	}
+
+	getItemColumnOrder () {
+		if (this.itemColumnOrder)
+			return this.itemColumnOrder;
 		var itemColumnOrder = new Array();
 		$("#holdings table#items th").each(function(index, th) {
 			itemColumnOrder[index] = $.trim($(th).text());
 		});
-		var subLibraryIndex = $.inArray("Location", itemColumnOrder);
-		var collectionIndex = $.inArray("Collection", itemColumnOrder);
-		var itemTypeIndex = $.inArray("Item Type", itemColumnOrder);
-		var availabilityIndex = $.inArray("Availability", itemColumnOrder);
-
-		this.subLibrary = this.$element.closest("tr").children().eq(subLibraryIndex).text();
-		this.collection = this.$element.closest("tr").children().eq(collectionIndex).text();
-		this.itemType = this.$element.closest("tr").children().eq(itemTypeIndex).text();
-		this.availability = this.$element.closest("tr").children().eq(availabilityIndex).text();
-
-		this.href = this.$element.attr('href');
-		var docNumberRegex = /\&adm_doc_number=([^&]+)&/;
-		var docLibraryRegex = /\&doc_library=([^&]+)&/;
-		this.docNumber = docNumberRegex.exec(this.href)[1];
-		this.docLibrary = docLibraryRegex.exec(this.href)[1];
+		return this.itemColumnOrder = itemColumnOrder;
 	}
 
 	setData () {
