@@ -7,40 +7,19 @@ class Holding {
 		this.$sharedModalDialog = $(sharedModalDialog);
 	}
 
+	extractAndSetData () {
+		extractData();
+		setData();
+	}
+
 	extractData () {
-		this.subLibrary = this.columnData("Location");
-		this.collection = this.columnData("Collection");
-		this.itemType = this.columnData("Item Type");
-		this.availability = this.columnData("Availability");
+		this.subLibrary = this.tableData("Location");
+		this.collection = this.tableData("Collection");
+		this.itemType = this.tableData("Item Type");
+		this.availability = this.tableData("Availability");
 
-		this.docNumber = this.paramData('adm_doc_number');
-		this.docLibrary = this.paramData('doc_library');
-	}
-
-	paramData (paramKey) {
-		if (!this.href)
-			this.href = this.$element.attr('href');
-		var paramRegex = new RegExp('\\&' + paramKey + '=([^&]+)&')
-		return paramRegex.exec(this.href)[1];
-	}
-
-	columnData (columnTitle) {
-		var index = this.columnPositionIndex(columnTitle);
-		return this.$element.closest("tr").children().eq(index).text();
-	}
-
-	columnPositionIndex (columnTitle) {
-		return $.inArray(columnTitle, this.getItemColumnOrder());
-	}
-
-	getItemColumnOrder () {
-		if (this.itemColumnOrder)
-			return this.itemColumnOrder;
-		var itemColumnOrder = new Array();
-		$("#holdings table#items th").each(function(index, th) {
-			itemColumnOrder[index] = $.trim($(th).text());
-		});
-		return this.itemColumnOrder = itemColumnOrder;
+		this.docNumber = this.hrefParamData('adm_doc_number');
+		this.docLibrary = this.hrefParamData('doc_library');
 	}
 
 	setData () {
@@ -67,5 +46,33 @@ class Holding {
 	isRequestIll () {
     if (this.collection === "NYU Bobst Avery Fisher Center") { return false; }
     return this.itemType != "Offsite Available" && this.itemType != "Available" && this.availability != "On Shelf" && this.availability != "Reshelving";
+	}
+
+	// helpers
+
+	hrefParamData (paramKey) {
+		if (!this.href)
+			this.href = this.$element.attr('href');
+		var paramRegex = new RegExp('\\&' + paramKey + '=([^&]+)&')
+		return paramRegex.exec(this.href)[1];
+	}
+
+	tableData (columnTitle) {
+		var index = this.columnPositionIndex(columnTitle);
+		return this.$element.closest("tr").children().eq(index).text();
+	}
+
+	columnPositionIndex (columnTitle) {
+		return $.inArray(columnTitle, this.getItemColumnOrder());
+	}
+
+	getItemColumnOrder () {
+		if (this.itemColumnOrder)
+			return this.itemColumnOrder;
+		var itemColumnOrder = new Array();
+		$("#holdings table#items th").each(function(index, th) {
+			itemColumnOrder[index] = $.trim($(th).text());
+		});
+		return this.itemColumnOrder = itemColumnOrder;
 	}
 }
