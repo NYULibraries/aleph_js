@@ -48,5 +48,39 @@ const modalDialog = {
         this.launchDialog(data, sharedModalD);
       }
     });
+  },
+  init() {
+    var shared_modal_d = $("<div></div>").dialog({autoOpen: false, modal: true, width: "40em", dialogClass: "shared_modal", open: function(event, ui) { $("select").first().focus(); }}) ;
+    $("#holdings table#items td.links a").filter(function(){
+      return jQuery(this).text().match(/^Request$/);
+    }).addClass("ajax_window");
+  	$("#holdings table#items td.links a.ajax_window").live("click", function(event) {
+  		var target_url = this.href;
+  		var current_url = window.location;
+      var holding = new Holding(this, shared_modal_d);
+      holding.extractAndSetData();
+  		launchDialogOrRedirect(shared_modal_d, target_url, current_url);
+  		return false;
+  	});
+  	$("form.modal_dialog_form input[type=submit]").live("click", function(event) {
+  		var target_url = jQuery(event.target).closest("form").attr("action");
+  		var input_data = jQuery(event.target).closest("form").serialize();
+  		var current_url = window.location;
+      var holding = new Holding(this, shared_modal_d);
+      holding.extractAndSetData();
+  		jQuery(shared_modal_d).dialog({close: function(event, ui) {location.reload();}});
+  		launchDialogOrRedirect(shared_modal_d, target_url, current_url, input_data);
+  		return false;
+  	});
+  	$("form.modal_dialog_form").live( "submit", function(event) {
+  		var target_url = jQuery(event.target).closest("form").attr("action");
+  		var input_data = jQuery(event.target).closest("form").serialize();
+  		var current_url = window.location;
+      var holding = new Holding(this, shared_modal_d);
+      holding.extractAndSetData();
+  		$(shared_modal_d).dialog({close: function(event, ui) {location.reload();}});
+  		launchDialogOrRedirect(shared_modal_d, target_url, current_url, input_data);
+  		return false;
+  	});
   }
 };

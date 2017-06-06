@@ -6,7 +6,8 @@ const initObjects = [
   formatHoldings,
   search,
   libraryAccount,
-  bookings
+  bookings,
+  modalDialog
 ];
 
 $(document).ready( () => {
