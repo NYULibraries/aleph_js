@@ -8,8 +8,8 @@ class Holding {
 	}
 
 	extractAndSetData () {
-		extractData();
-		setData();
+		this.extractData();
+		this.setData();
 	}
 
 	extractData () {

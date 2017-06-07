@@ -16,6 +16,23 @@ describe('Holding', function() {
     holding = new Holding(element, sharedModalDialog);
   });
 
+  describe('extractAndSetData', () => {
+    var spyOrder;
+
+    beforeEach(() => {
+      spyOrder = [];
+      spyOn(holding, 'extractData').and.callFake(() => { spyOrder.push('extractData'); });
+      spyOn(holding, 'setData').and.callFake(() => { spyOrder.push('setData'); });
+    });
+
+    it("should call in correct order", () => {
+      holding.extractAndSetData();
+      expect(holding.extractData).toHaveBeenCalled();
+      expect(holding.setData).toHaveBeenCalled();
+      expect(spyOrder).toEqual(['extractData', 'setData']);
+    });
+  });
+
   describe('extractData', () => {
     it('should initialize subLibrary correctly', () => {
       holding.extractData();
