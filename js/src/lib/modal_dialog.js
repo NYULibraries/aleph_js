@@ -7,6 +7,29 @@ const modalDialog = {
   pdsLoginUrl(data, currentUrl) {
     return this.pdsUrlRegex.exec(data)[1] + encodeURIComponent(currentUrl);
   },
+  getSharedModalD() {
+    return $("<div></div>").dialog({
+      autoOpen: false,
+      modal: true,
+      width: "40em",
+      dialogClass: "shared_modal",
+      open: function(event, ui) {
+        $("select").first().focus();
+      }
+    });
+  },
+  getTitleText() {
+    $("#holdings table#bib td.fxxx").first().text();
+  },
+  getIllItem(doc_number, doc_library) {
+    var html = "\n";
+  	html += "<li>\n";
+  	html += "\t<a href=\"/F/?func=item-sfx&doc_library="+doc_library+"&doc_number="+doc_number+"&local_base=PRIMOCOMMON\">Request this item from another library via Interlibrary Loan</a><br />\n";
+  	html += "\tMost requests arrive within two weeks. Due dates and renewals are determined by the lending library.\n";
+  	html += "\tArticle/chapter requests are typically delivered electronically in 3-5 days.\n";
+  	html += "</li>\n";
+  	return $(html);
+  },
   launchDialog(data, sharedModalD) {
     var $sharedModalD = $(sharedModalD);
     var feedbackText = $.trim($(data).children("div#feedbackbar p").text());
@@ -15,8 +38,8 @@ const modalDialog = {
     heading.find("span.subdue").remove();
     $sharedModalD.html(main);
     //Add title
-    var title = jQuery("#holdings table#bib td.fxxx").first().text();
-    $(sharedModalD).find("div#main").eq(0).prepend(jQuery("<h3>"+title+"</h3>"));
+    var $title = $("<h3>" + getTitleText() + "</h3>");
+    $sharedModalD.find("div#main").eq(0).prepend($title);
     //Add feedback
     if (feedbackText.length > 0) {
       var feedback = $("<div class=\"feedback\">"+feedbackText+"</div>");
@@ -27,7 +50,8 @@ const modalDialog = {
     if(is_request_ill) {
       var doc_number = $sharedModalD.data("doc_number");
       var doc_library = $sharedModalD.data("doc_library");
-      $(sharedModalD).find("div#main form ol#request_options").eq(0).append(jQuery(bs_ill_item(doc_number, doc_library)));
+      var $illItem = $(this.getIllItem(doc_number, doc_library));
+      $(sharedModalD).find("div#main form ol#request_options").eq(0).append($illItem);
     }
     var is_available = $sharedModalD.data("is_available");
     var is_offsite = $sharedModalD.data("is_offsite");
@@ -51,9 +75,9 @@ const modalDialog = {
   },
   init() {
     var obj = this;
-    var shared_modal_d = $("<div></div>").dialog({autoOpen: false, modal: true, width: "40em", dialogClass: "shared_modal", open: function(event, ui) { $("select").first().focus(); }}) ;
+    var shared_modal_d = this.getSharedModalD();
     $("#holdings table#items td.links a").filter(function(){
-      return jQuery(this).text().match(/^Request$/);
+      return $(this).text().match(/^Request$/);
     }).addClass("ajax_window");
   	$("#holdings table#items td.links a.ajax_window").live("click", function(event) {
   		var target_url = this.href;
