@@ -50,6 +50,7 @@ const modalDialog = {
     });
   },
   init() {
+    var obj = this;
     var shared_modal_d = $("<div></div>").dialog({autoOpen: false, modal: true, width: "40em", dialogClass: "shared_modal", open: function(event, ui) { $("select").first().focus(); }}) ;
     $("#holdings table#items td.links a").filter(function(){
       return jQuery(this).text().match(/^Request$/);
@@ -59,7 +60,7 @@ const modalDialog = {
   		var current_url = window.location;
       var holding = new Holding(this, shared_modal_d);
       holding.extractAndSetData();
-  		launchDialogOrRedirect(shared_modal_d, target_url, current_url);
+  		obj.launchDialogOrRedirect(shared_modal_d, target_url, current_url);
   		return false;
   	});
   	$("form.modal_dialog_form input[type=submit]").live("click", function(event) {
@@ -69,7 +70,7 @@ const modalDialog = {
       var holding = new Holding(this, shared_modal_d);
       holding.extractAndSetData();
   		jQuery(shared_modal_d).dialog({close: function(event, ui) {location.reload();}});
-  		launchDialogOrRedirect(shared_modal_d, target_url, current_url, input_data);
+  		obj.launchDialogOrRedirect(shared_modal_d, target_url, current_url, input_data);
   		return false;
   	});
   	$("form.modal_dialog_form").live( "submit", function(event) {
@@ -79,7 +80,7 @@ const modalDialog = {
       var holding = new Holding(this, shared_modal_d);
       holding.extractAndSetData();
   		$(shared_modal_d).dialog({close: function(event, ui) {location.reload();}});
-  		launchDialogOrRedirect(shared_modal_d, target_url, current_url, input_data);
+  		obj.launchDialogOrRedirect(shared_modal_d, target_url, current_url, input_data);
   		return false;
   	});
   }
