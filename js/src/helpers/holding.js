@@ -54,6 +54,8 @@ class Holding {
 		if (!this.href)
 			this.href = this.$element.attr('href');
 		var paramRegex = new RegExp('\\&' + paramKey + '=([^&]+)&')
+		var matchObj = paramRegex.exec(this.href);
+		if (!matchObj){ return; }
 		return paramRegex.exec(this.href)[1];
 	}
 
