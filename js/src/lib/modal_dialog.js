@@ -7,8 +7,9 @@ const modalDialog = {
   pdsLoginUrl(data, currentUrl) {
     return this.pdsUrlRegex.exec(data)[1] + encodeURIComponent(currentUrl);
   },
-  getSharedModalD() {
-    return $("<div></div>").dialog({
+  getSharedModalDialog() {
+    var $dialog = $("<div></div>")
+    $dialog.dialog({
       autoOpen: false,
       modal: true,
       width: "40em",
@@ -17,6 +18,7 @@ const modalDialog = {
         $("select").first().focus();
       }
     });
+    return $dialog;
   },
   getTitleText() {
     $("#holdings table#bib td.fxxx").first().text();
@@ -75,7 +77,7 @@ const modalDialog = {
   },
   init() {
     var obj = this;
-    var shared_modal_d = this.getSharedModalD();
+    var shared_modal_d = this.getSharedModalDialog();
     $("#holdings table#items td.links a").filter(function(){
       return $(this).text().match(/^Request$/);
     }).addClass("ajax_window");

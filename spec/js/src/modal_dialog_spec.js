@@ -33,6 +33,33 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('getSharedModalDialog', () => {
+    var $mockDialog, originalDollar;
+
+    beforeEach(() => {
+      $mockDialog = $('<div></div>');
+      originalDollar = $
+      $ = jasmine.createSpy("dollar").and.returnValue($mockDialog);
+      spyOn($mockDialog, 'dialog');
+    });
+
+    afterEach(() => {
+      $ = originalDollar;
+    })
+
+    it('should initialize jquery object correctly', () => {
+      expect(modalDialog.getSharedModalDialog()).toEqual($mockDialog);
+      expect($).toHaveBeenCalledWith("<div></div>");
+      expect($mockDialog.dialog).toHaveBeenCalledWith(({
+        autoOpen: false,
+        modal: true,
+        width: "40em",
+        dialogClass: "shared_modal",
+        open: jasmine.any(Function)
+      }));
+    });
+  });
+
   describe('init', () => {
     beforeEach( () => {
       spyOn(modalDialog, 'launchDialogOrRedirect')
