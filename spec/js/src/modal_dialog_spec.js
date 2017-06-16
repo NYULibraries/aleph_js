@@ -68,6 +68,7 @@ describe('modalDialog', () => {
 
   describe('getIllItem', () => {
     var docNumber, docLibrary, originalDollar;
+    const illRegexp = /^\s*<li>\s+<a href="\/F\/\?func=item-sfx&doc_library=Bobst&doc_number=123456&local_base=PRIMOCOMMON">Request this item from another library via Interlibrary Loan<\/a><br\s*\/>\s*Most requests arrive within two weeks. Due dates and renewals are determined by the lending library\.\s*Article\/chapter requests are typically delivered electronically in 3-5 days\.\s*<\/li>\s*$/;
 
     beforeEach(() => {
       docNumber = '123456';
@@ -75,7 +76,7 @@ describe('modalDialog', () => {
     })
 
     it('should generate HTML string correctly', () => {
-      expect(modalDialog.getIllItem(docNumber, docLibrary)).toMatch(/^\s*<li>\s+<a href="\/F\/\?func=item-sfx&doc_library=Bobst&doc_number=123456&local_base=PRIMOCOMMON">Request this item from another library via Interlibrary Loan<\/a><br\s*\/>\s*Most requests arrive within two weeks. Due dates and renewals are determined by the lending library\.\s*Article\/chapter requests are typically delivered electronically in 3-5 days\.\s*<\/li>\s*$/);
+      expect(modalDialog.getIllItem(docNumber, docLibrary)).toMatch(illRegexp);
     });
   });
 
