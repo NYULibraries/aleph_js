@@ -21,7 +21,7 @@ const modalDialog = {
     return $dialog;
   },
   getTitleText() {
-    $("#holdings table#bib td.fxxx").first().text();
+    return $("#holdings table#bib td.fxxx").first().text();
   },
   getIllItem(doc_number, doc_library) {
     var html = "\n";
@@ -30,7 +30,7 @@ const modalDialog = {
   	html += "\tMost requests arrive within two weeks. Due dates and renewals are determined by the lending library.\n";
   	html += "\tArticle/chapter requests are typically delivered electronically in 3-5 days.\n";
   	html += "</li>\n";
-  	return $(html);
+  	return html;
   },
   launchDialog(data, sharedModalD) {
     var $sharedModalD = $(sharedModalD);

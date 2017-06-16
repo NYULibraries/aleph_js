@@ -38,9 +38,9 @@ describe('modalDialog', () => {
 
     beforeEach(() => {
       $mockDialog = $('<div></div>');
+      spyOn($mockDialog, 'dialog');
       originalDollar = $
       $ = jasmine.createSpy("dollar").and.returnValue($mockDialog);
-      spyOn($mockDialog, 'dialog');
     });
 
     afterEach(() => {
@@ -57,6 +57,25 @@ describe('modalDialog', () => {
         dialogClass: "shared_modal",
         open: jasmine.any(Function)
       }));
+    });
+  });
+
+  describe('getTitleText', () => {
+    it('should return correct value from DOM', () => {
+      expect(modalDialog.getTitleText()).toEqual(' Husihui.:          ');
+    })
+  });
+
+  describe('getIllItem', () => {
+    var docNumber, docLibrary, originalDollar;
+
+    beforeEach(() => {
+      docNumber = '123456';
+      docLibrary = 'Bobst';
+    })
+
+    it('should generate HTML string correctly', () => {
+      expect(modalDialog.getIllItem(docNumber, docLibrary)).toMatch(/<li>\s+<a href="\/F\/\?func=item-sfx&doc_library=Bobst&doc_number=123456&local_base=PRIMOCOMMON">Request this item from another library via Interlibrary Loan<\/a><br\s*\/>\s*Most requests arrive within two weeks. Due dates and renewals are determined by the lending library\.\s*Article\/chapter requests are typically delivered electronically in 3-5 days\.\s*<\/li>/);
     });
   });
 
