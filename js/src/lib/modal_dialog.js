@@ -23,10 +23,10 @@ const modalDialog = {
   getTitleText() {
     return $("#holdings table#bib td.fxxx").first().text();
   },
-  getIllItem(doc_number, doc_library) {
+  getIllItem(docNumber, docLibrary) {
     var html = "\n";
   	html += "<li>\n";
-  	html += "\t<a href=\"/F/?func=item-sfx&doc_library="+doc_library+"&doc_number="+doc_number+"&local_base=PRIMOCOMMON\">Request this item from another library via Interlibrary Loan</a><br />\n";
+  	html += "\t<a href=\"/F/?func=item-sfx&doc_library="+docLibrary+"&doc_number="+docNumber+"&local_base=PRIMOCOMMON\">Request this item from another library via Interlibrary Loan</a><br />\n";
   	html += "\tMost requests arrive within two weeks. Due dates and renewals are determined by the lending library.\n";
   	html += "\tArticle/chapter requests are typically delivered electronically in 3-5 days.\n";
   	html += "</li>\n";
