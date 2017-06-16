@@ -40,7 +40,7 @@ const modalDialog = {
     heading.find("span.subdue").remove();
     $sharedModalD.html(main);
     //Add title
-    var $title = $("<h3>" + getTitleText() + "</h3>");
+    var $title = $("<h3>" + this.getTitleText() + "</h3>");
     $sharedModalD.find("div#main").eq(0).prepend($title);
     //Add feedback
     if (feedbackText.length > 0) {
@@ -65,13 +65,14 @@ const modalDialog = {
     $sharedModalD.dialog("open");
   },
   launchDialogOrRedirect(sharedModalDialog, targetUrl, currentUrl, inputData) {
+    var obj = this;
     $.get(targetUrl, inputData, function(data, textStatus, xmlHttpRequest) {
       // Check to see if we're logging into PDS.
-      if (this.isPdsLogin(data)) {
+      if (obj.isPdsLogin(data)) {
         // Grab the pds url and redirect
-        location.replace(this.pdsLoginUrl(data, currentUrl));
+        location.replace(obj.pdsLoginUrl(data, currentUrl));
       } else {
-        this.launchDialog(data, sharedModalD);
+        obj.launchDialog(data, sharedModalDialog);
       }
     });
   },
