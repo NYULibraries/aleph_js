@@ -75,18 +75,47 @@ describe('modalDialog', () => {
     })
 
     it('should generate HTML string correctly', () => {
-      expect(modalDialog.getIllItem(docNumber, docLibrary)).toMatch(/<li>\s+<a href="\/F\/\?func=item-sfx&doc_library=Bobst&doc_number=123456&local_base=PRIMOCOMMON">Request this item from another library via Interlibrary Loan<\/a><br\s*\/>\s*Most requests arrive within two weeks. Due dates and renewals are determined by the lending library\.\s*Article\/chapter requests are typically delivered electronically in 3-5 days\.\s*<\/li>/);
+      expect(modalDialog.getIllItem(docNumber, docLibrary)).toMatch(/^\s*<li>\s+<a href="\/F\/\?func=item-sfx&doc_library=Bobst&doc_number=123456&local_base=PRIMOCOMMON">Request this item from another library via Interlibrary Loan<\/a><br\s*\/>\s*Most requests arrive within two weeks. Due dates and renewals are determined by the lending library\.\s*Article\/chapter requests are typically delivered electronically in 3-5 days\.\s*<\/li>\s*$/);
     });
   });
 
   describe('init', () => {
-    beforeEach( () => {
-      spyOn(modalDialog, 'launchDialogOrRedirect')
+    describe('when response requires redirect', () => {
+      var url;
+
+      beforeEach(() => {
+        url = "https://pdsdev.library.nyu.edu:443/pds?func=load-login&calling_system=aleph&institute=NYU&url=http%3A%2F%2Fexample.com"
+        spyOn(modalDialog, 'isPdsLogin').and.returnValue(true);
+        spyOn(modalDialog, 'pdsLoginUrl').and.returnValue(url);
+        spyOn(location, 'replace')
+      })
+
+      it('should send to login instead', (done) => {
+        $('.request-to-click').click();
+        // wait for GET
+        setTimeout(function(){
+          expect(modalDialog.isPdsLogin).toHaveBeenCalled();
+          expect(modalDialog.pdsLoginUrl).toHaveBeenCalled();
+          expect(location.replace).toHaveBeenCalledWith(url);
+          done();
+        }, 100);
+      });
     });
 
-    it('should open modal when clicked', () => {
-      $('.request-to-click').click();
-      expect(modalDialog.launchDialogOrRedirect).toHaveBeenCalled();
-    });
+    describe('when no redirect required', () => {
+      beforeEach(() => {
+        spyOn(modalDialog, 'isPdsLogin').and.returnValue(false);
+      })
+
+      it('should open modal when clicked', (done) => {
+        $('.request-to-click').click();
+        // wait for GET
+        setTimeout(function(){
+          expect($('.ui-dialog').is(":visible")).toEqual(true);
+          expect($('.ui-dialog .ui-dialog-title').text()).toMatch(/^Request this item for Alter, Barnaby\s+$/);
+          done();
+        }, 100);
+      });
+    })
   });
 });
