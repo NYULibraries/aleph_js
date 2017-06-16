@@ -82,31 +82,31 @@ const modalDialog = {
       return $(this).text().match(/^Request$/);
     }).addClass("ajax_window");
   	$("#holdings table#items td.links a.ajax_window").live("click", function(event) {
-  		var target_url = this.href;
-  		var current_url = window.location;
+  		var targetUrl = this.href;
+  		var currentUrl = window.location;
       var holding = new Holding(this, obj.$sharedModalDialog);
       holding.extractAndSetData();
-  		obj.launchDialogOrRedirect(target_url, current_url);
+  		obj.launchDialogOrRedirect(targetUrl, currentUrl);
   		return false;
   	});
   	$("form.modal_dialog_form input[type=submit]").live("click", function(event) {
-  		var target_url = jQuery(event.target).closest("form").attr("action");
-  		var input_data = jQuery(event.target).closest("form").serialize();
-  		var current_url = window.location;
+  		var targetUrl = $(event.target).closest("form").attr("action");
+  		var inputData = $(event.target).closest("form").serialize();
+  		var currentUrl = window.location;
       var holding = new Holding(this, obj.$sharedModalDialog);
       holding.extractAndSetData();
-  		jQuery(shared_modal_d).dialog({close: function(event, ui) {location.reload();}});
-  		obj.launchDialogOrRedirect(target_url, current_url, input_data);
+  		obj.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
+  		obj.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
   		return false;
   	});
   	$("form.modal_dialog_form").live( "submit", function(event) {
-  		var target_url = jQuery(event.target).closest("form").attr("action");
-  		var input_data = jQuery(event.target).closest("form").serialize();
-  		var current_url = window.location;
+  		var targetUrl = $(event.target).closest("form").attr("action");
+  		var inputData = $(event.target).closest("form").serialize();
+  		var currentUrl = window.location;
       var holding = new Holding(this, obj.$sharedModalDialog);
       holding.extractAndSetData();
-  		$(shared_modal_d).dialog({close: function(event, ui) {location.reload();}});
-  		obj.launchDialogOrRedirect(target_url, current_url, input_data);
+  		obj.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
+  		obj.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
   		return false;
   	});
   }
