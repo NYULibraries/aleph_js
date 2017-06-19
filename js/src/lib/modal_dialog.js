@@ -75,6 +75,15 @@ const modalDialog = {
       }
     });
   },
+  submitDialogForm(event) {
+    var targetUrl = $(event.target).closest("form").attr("action");
+    var inputData = $(event.target).closest("form").serialize();
+    var currentUrl = window.location;
+    var holding = new Holding(this, this.$sharedModalDialog);
+    holding.extractAndSetData();
+    this.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
+    this.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
+  },
   init() {
     var obj = this;
     this.$sharedModalDialog = this.getSharedModalDialog();
@@ -90,13 +99,7 @@ const modalDialog = {
   		return false;
   	});
     var submitForm = function(event) {
-      var targetUrl = $(event.target).closest("form").attr("action");
-      var inputData = $(event.target).closest("form").serialize();
-      var currentUrl = window.location;
-      var holding = new Holding(this, obj.$sharedModalDialog);
-      holding.extractAndSetData();
-      obj.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
-      obj.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
+      obj.submitDialogForm(event);
       return false;
     }
   	$("form.modal_dialog_form input[type=submit]").live("click", submitForm);
