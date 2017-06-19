@@ -111,10 +111,22 @@ describe('modalDialog', () => {
       it('should open modal when clicked', (done) => {
         $('.request-to-click').click();
         // wait for GET
-        setTimeout(function(){
+        setTimeout(() => {
           expect($('.ui-dialog').is(":visible")).toEqual(true);
           expect($('.ui-dialog .ui-dialog-title').text()).toMatch(/^Request this item for Alter, Barnaby\s+$/);
-          done();
+          // submit form to test handling
+          $("form.modal_dialog_form input[type=submit]").click();
+          setTimeout(() => {
+            expect($('.ui-dialog').is(":visible")).toEqual(true);
+            expect($(".comfirm-request-to-click").val()).toMatch(/^Confirm request$/);
+            // submit confirmation
+            $(".comfirm-request-to-click").click();
+            setTimeout(() => {
+              expect($('.ui-dialog').is(":visible")).toEqual(true);
+              expect($('.ui-dialog').text()).toMatch(/Item has been requested for pickup at NYU Bobst/)
+              done();
+            }, 50)
+          }, 50)
         }, 50);
       });
     })
