@@ -99,7 +99,7 @@ describe('modalDialog', () => {
           expect(modalDialog.pdsLoginUrl).toHaveBeenCalled();
           expect(location.replace).toHaveBeenCalledWith(url);
           done();
-        }, 1000);
+        }, 50);
       });
     });
 
@@ -115,7 +115,7 @@ describe('modalDialog', () => {
           expect($('.ui-dialog').is(":visible")).toEqual(true);
           expect($('.ui-dialog .ui-dialog-title').text()).toMatch(/^Request this item for Alter, Barnaby\s+$/);
           done();
-        }, 1000);
+        }, 50);
       });
     })
   });
