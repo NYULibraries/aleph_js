@@ -45,7 +45,7 @@ const modalDialog = {
     if (feedbackText.length > 0) {
       var feedback = $("<div class=\"feedback\">"+feedbackText+"</div>");
       //shared_modal_d.prepend(feedback);
-      $sharedModalDialog.html(feedback);
+      this.$sharedModalDialog.html(feedback);
     }
     var is_request_ill = this.$sharedModalDialog.data("is_request_ill");
     if(is_request_ill) {
