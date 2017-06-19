@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- filename: direct-head  -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>Full View of Record</title>
+<!-- filename: meta-tags -->
+
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="Sun, 06 Nov 1994 08:49:37 GMT" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://alephstage.library.nyu.edu:443/bobcat/css/primo.css" type="text/css" />
+<link rel="stylesheet" href="https://alephstage.library.nyu.edu:443/bobcat/css/jquery-ui.css" type="text/css" />
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+<script src="https://alephstage.library.nyu.edu:443/bobcat/scripts/jquery.query.min.js" type="text/javascript"></script>
+<script src="https://alephstage.library.nyu.edu:443/bobcat/scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="https://alephstage.library.nyu.edu:443/bobcat/scripts/common.js" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+  function open_window (loc)
+  {
+    self.name="main";
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+   var w = window.open ("","win1","height=500,width=700,scrollbars,resizable");
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,"win1","height=500,width=700,scrollbars,resizable");
+    }
+    w.focus();
+  }
+
+
+  function open_window2 (loc)
+  {
+    self.name="main";
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+
+    var w = window.open ("",
+                         "win1",
+                         "height=100,width=500,scrollbars,resizable"
+                         );
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,
+                         "win1",
+                         "height=100,width=500,scrollbars,resizable"
+                         );
+    }
+     w.focus();
+  }
+
+
+  function open_window3 (loc)
+  {
+    self.name="main";
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+
+    var w = window.open ("",
+                         "win1",
+                         "height=400,width=450,scrollbars,resizable,top=200"
+                         );
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,
+                         "win1",
+                         "height=400,width=450,scrollbars,resizable,top=200"
+                         );
+    }
+     w.focus();
+  }
+
+
+  function open_window4 (loc)
+  {
+    self.name="main";
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+
+    var w = window.open ("",
+                         "win1",
+                         "height=150,width=450,scrollbars,resizable,top=200"
+                         );
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,
+                         "win1",
+                         "height=150,width=450,scrollbars,resizable,top=200"
+                         );
+    }
+     w.focus();
+  }
+
+
+  function open_window_ext (loc)
+  {
+    self.name="main";
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+    var w = window.open ("","win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar");
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,"win2","height=500,width=500,scrollbars,resizable,toolbar,status,menubar");
+
+    }
+    w.focus();
+  }
+
+  function set_iframe_location(url,id){
+    eval('document.all.' + id).src = url;
+  }
+
+  function open_window_confirm (loc,frame)
+  {
+    self.name=frame;
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+   var w = window.open ("","win1","height=220,width=450,scrollbars,resizable");
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,"win1","height=220,width=450,scrollbars,resizable");
+    }
+    w.focus();
+  }
+
+  function delete_win1 ()
+  {
+    var w = window.open ("","win1","height=220,width=450,scrollbars,resizable");
+    w.close();
+  }
+
+  function open_window_ill (loc)
+  {
+    if ((navigator.appVersion.indexOf("MSIE 5.0") != -1) && (navigator.appName.indexOf("Explorer") != -1)){
+  var w = window.open ("","win1","height=500,width=500,scrollbars,resizable");
+     w.document.write("<html>\n");
+     w.document.write('<body onLoad="window.location.href=');
+     w.document.write("'" + loc + "';\n");
+     w.document.write('"');
+     w.document.write("</body>\n");
+     w.document.write("</html>\n");
+     w.document.close();
+    } else {
+    var w = window.open (loc,"win1","height=500,width=500,scrollbars,resizable");
+    }
+    w.focus();
+  }
+
+// -->
+</script>
+
+  </head>
+  <body id="findex" class="full">
+<!-- filename: head-1-bor -->
+<div id="feedbackbar" class="feedbackbar">
+  <p><img src=https://alephstage.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-alert.gif alt='System Message' />&nbsp;Item has been requested for pickup at NYU Bobst.</p>
+</div>
+    <div id="content">
+      <div id="nav2">
+        <ul>
+          <li id="nav2findex">
+            <a href="#">Full Record</a>
+          </li>
+        </ul>
+      </div>
+      <div id="main">
+        <div class="section">
+          <div id="format">
+            <div id="nav3">
+              <ul>
+                <li id="nav3fstandard"><a href="https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00841?func=direct&doc_number=001816252&format=999">Standard View</a></li>
+                <li id="nav3fname"><a href="https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00842?func=direct&doc_number=001816252&format=002">Name Tags View</a></li>
+                <li id="nav3fmarc"><a href="https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00843?func=direct&doc_number=001816252&format=001">MARC Tags View</a></li>
+              </ul>
+            </div>
+          </div>
+          <table class="fulltable">
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Title
+  </td>
+  <td align=left >
+    Revue des études islamiques.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Publisher/Date
+  </td>
+  <td align=left >
+    Paris,&nbsp;P. Geuthner.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Description
+  </td>
+  <td align=left >
+    62 v. &nbsp;ill., plates, ports. &nbsp;24 cm.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Frequency
+  </td>
+  <td align=left >
+    Semiannual,&nbsp;&lt;1963/65&gt;-1993/1994
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Published
+  </td>
+  <td align=left >
+    t. 1-61/62; 1927-1993/1994.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Note
+  </td>
+  <td align=left >
+    Volumes for &lt;1938-1950&gt; numbered also: Année &lt;1938-1950&gt;.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    Some issues combined.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Relationship
+  </td>
+  <td align=left >
+    Some vols. include separately paged supplement: Abstracta Islamica.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Subject (LCSH)
+  </td>
+  <td align=left >
+    Islam&nbsp;--&nbsp;Periodicals.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Other title
+  </td>
+  <td align=left >
+    Abstracta Islamica.
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Has supplement
+  </td>
+  <td align=left >
+    Abstracta islamica&nbsp;(DLC) 86648099&nbsp;(OCoLC)1773719
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Other physical form
+  </td>
+  <td align=left >
+    Online version:&nbsp;Revue des études islamiques&nbsp;(OCoLC)561949764
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    Online version:&nbsp;Revue des études islamiques&nbsp;(OCoLC)590694737
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    Online version:&nbsp;Revue des études islamiques&nbsp;(OCoLC)592540006
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    Online version:&nbsp;Revue des études islamiques&nbsp;(OCoLC)592771555
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    Online version:&nbsp;Revue des études islamiques&nbsp;(OCoLC)592919702
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    Online version:&nbsp;Revue des études islamiques&nbsp;(OCoLC)608087020
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Former title
+  </td>
+  <td align=left >
+    Revue du monde musulman&nbsp;(DLC)sn 77010352&nbsp;(OCoLC)1681243
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    ISSN
+  </td>
+  <td align=left >
+    0336-156X&nbsp;0336-156X&nbsp;z
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Summary Holding
+  </td>
+  <td align=left >
+    Bobst&nbsp;(BP1 .R39)&nbsp;VOLUMES:1-61/62&nbsp;YEARS:1927-1993/94&nbsp;
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    IFA&nbsp;(Offsite)&nbsp;VOLUMES:50-53, 59-60&nbsp;YEARS:1982-1985, 1991-1992&nbsp;
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+
+  </td>
+  <td align=left >
+    <br>
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Library Holdings:
+  </td>
+  <td align=left >
+    <A HREF=https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00844?func=item-global&doc_library=NYU01&doc_number=001816252&year=&volume=&sub_library=BOBST>NYU Bobst&nbsp;/&nbsp;Main Collection&nbsp;BP1&nbsp;.R39</A><A HREF='javascript:open_window("https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00845?func=library&sub_library=BOBST");'><img src=https://alephstage.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-info.gif alt='Library Info' class='info' /></A>
+  </td>
+</tr>
+
+
+
+
+<!-- filename: full-999-body -->
+<!-- include>placeholders -->
+<tr class="f99">
+  <td class="nowrap f99label">
+    Library Holdings:
+  </td>
+  <td align=left >
+    <A HREF=https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00846?func=item-global&doc_library=NYU01&doc_number=001816252&year=&volume=&sub_library=NIFA>NYU Institute of Fine Arts&nbsp;/&nbsp;Main Collection&nbsp;/&nbsp;Non-circulating</A><A HREF='javascript:open_window("https://alephstage.library.nyu.edu:443/F/8JKSPKSDPMSVI7R193XYXDJ1BVIYI4HGH5CKA2PUBAIFUC4YC7-00847?func=library&sub_library=NIFA");'><img src=https://alephstage.library.nyu.edu:443/exlibris/aleph/u22_2/alephe/www_f_eng/icon/f-info.gif alt='Library Info' class='info' /></A>
+  </td>
+</tr>
+
+
+
+
+<!-- filename: direct-tail  -->
+          </table>
+        </div>
+      </div>
+    </div>
+<!-- filename: copyrights -->
+<div id="footer">
+  <p class="copyright">&copy; 2008 Ex Libris</p>
+</div>
+  </body>
+</html>
+
+ 

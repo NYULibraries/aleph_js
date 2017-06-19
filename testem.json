@@ -23,6 +23,9 @@
     "/pds_login.html": "spec/js/fixtures/pds_login.mustache",
     "/search.html": "spec/js/fixtures/search.mustache",
     "/ill.html": "spec/js/fixtures/ill.mustache",
-    "/includes/holdings_request.html": "spec/js/fixtures/includes/holdings_request.mustache"
+    "/includes/holdings_request.html": "spec/js/fixtures/includes/holdings_request.mustache",
+    "/includes/confirm_request.html": "spec/js/fixtures/includes/confirm_request.mustache",
+    "/includes/request_confirmation.html": "spec/js/fixtures/includes/request_confirmation.mustache",
+    "/includes/pds_login.html": "spec/js/fixtures/includes/pds_login.mustache"
   }
 }
