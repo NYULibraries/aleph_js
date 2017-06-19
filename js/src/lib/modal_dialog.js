@@ -65,7 +65,7 @@ const modalDialog = {
   },
   launchDialogOrRedirect(targetUrl, currentUrl, inputData) {
     var obj = this;
-    $.get(targetUrl, inputData, function(data, textStatus, xmlHttpRequest) {
+    $.get(targetUrl, inputData).done((data) => {
       // Check to see if we're logging into PDS.
       if (obj.isPdsLogin(data)) {
         // Grab the pds url and redirect
