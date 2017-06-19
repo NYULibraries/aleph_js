@@ -82,22 +82,19 @@ describe('modalDialog', () => {
 
   describe('init', () => {
     describe('when response requires redirect', () => {
-      var url;
+      var redirectUrlRegex;
 
       beforeEach(() => {
-        url = "https://pdsdev.library.nyu.edu:443/pds?func=load-login&calling_system=aleph&institute=NYU&url=http%3A%2F%2Fexample.com"
-        spyOn(modalDialog, 'isPdsLogin').and.returnValue(true);
-        spyOn(modalDialog, 'pdsLoginUrl').and.returnValue(url);
+        redirectUrlRegex = /^https:\/\/pdsdev\.library\.nyu\.edu:443\/pds\?func=load-login&calling_system=aleph&institute=NYU&url=http%3A%2F%2Flocalhost%3A\d{4}%2F\d{4}%2Fholdings.html$/;
         spyOn(location, 'replace')
       })
 
       it('should send to login instead', (done) => {
-        $('.request-to-click').click();
+        $('.redirect-request-to-click').click();
         // wait for GET
         setTimeout(function(){
-          expect(modalDialog.isPdsLogin).toHaveBeenCalled();
-          expect(modalDialog.pdsLoginUrl).toHaveBeenCalled();
-          expect(location.replace).toHaveBeenCalledWith(url);
+          expect(location.replace).toHaveBeenCalled();
+          expect(location.replace.calls.mostRecent().args[0]).toMatch(redirectUrlRegex);
           done();
         }, 50);
       });
