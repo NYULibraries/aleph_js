@@ -89,25 +89,17 @@ const modalDialog = {
   		obj.launchDialogOrRedirect(targetUrl, currentUrl);
   		return false;
   	});
-  	$("form.modal_dialog_form input[type=submit]").live("click", function(event) {
-  		var targetUrl = $(event.target).closest("form").attr("action");
-  		var inputData = $(event.target).closest("form").serialize();
-  		var currentUrl = window.location;
+    var submitForm = function(event) {
+      var targetUrl = $(event.target).closest("form").attr("action");
+      var inputData = $(event.target).closest("form").serialize();
+      var currentUrl = window.location;
       var holding = new Holding(this, obj.$sharedModalDialog);
       holding.extractAndSetData();
-  		obj.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
-  		obj.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
-  		return false;
-  	});
-  	$("form.modal_dialog_form").live( "submit", function(event) {
-  		var targetUrl = $(event.target).closest("form").attr("action");
-  		var inputData = $(event.target).closest("form").serialize();
-  		var currentUrl = window.location;
-      var holding = new Holding(this, obj.$sharedModalDialog);
-      holding.extractAndSetData();
-  		obj.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
-  		obj.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
-  		return false;
-  	});
+      obj.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
+      obj.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
+      return false;
+    }
+  	$("form.modal_dialog_form input[type=submit]").live("click", submitForm);
+  	$("form.modal_dialog_form").live( "submit", submitForm);
   }
 };
