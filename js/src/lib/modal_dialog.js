@@ -84,6 +84,13 @@ const modalDialog = {
     this.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
     this.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
   },
+  loadDialogForm(event) {
+    var targetUrl = event.target.href;
+    var currentUrl = window.location;
+    var holding = new Holding(this, this.$sharedModalDialog);
+    holding.extractAndSetData();
+    this.launchDialogOrRedirect(targetUrl, currentUrl);
+  },
   init() {
     var obj = this;
     this.$sharedModalDialog = this.getSharedModalDialog();
@@ -91,11 +98,7 @@ const modalDialog = {
       return $(this).text().match(/^Request$/);
     }).addClass("ajax_window");
   	$("#holdings table#items td.links a.ajax_window").live("click", function(event) {
-  		var targetUrl = this.href;
-  		var currentUrl = window.location;
-      var holding = new Holding(this, obj.$sharedModalDialog);
-      holding.extractAndSetData();
-  		obj.launchDialogOrRedirect(targetUrl, currentUrl);
+      obj.loadDialogForm(event);
   		return false;
   	});
     var submitForm = function(event) {
