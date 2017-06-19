@@ -1,0 +1,164 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- filename: item-hold-request-head-availablenyu-nyu01 -->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+<script language="Javascript">
+<!--
+function my_reset()
+{
+for (var i = 0; i< document.form1.elements.length;
+i++) {
+if (document.form1.elements[i].name == "author"
+||
+document.form1.elements[i].name == "title" ||
+document.form1.elements[i].name == "pages" ||
+document.form1.elements[i].name == "note1" ||
+document.form1.elements[i].name == "note2") {
+document.form1.elements[i].value = "";
+}
+if (document.form1.elements[i].name ==
+"rush_request")
+document.form1.elements[i].checked = false ;
+}
+}
+// -->
+</script>
+    <title>Common Primo View - Create Hold Request</title>
+<!-- filename: meta-tags -->
+
+<meta http-equiv="Cache-Control" content="no-cache" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="Sun, 06 Nov 1994 08:49:37 GMT" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="https://alephstage.library.nyu.edu:443/bobcat/css/primo.css" type="text/css" />
+<link rel="stylesheet" href="https://alephstage.library.nyu.edu:443/bobcat/css/jquery-ui.css" type="text/css" />
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+<script src="https://alephstage.library.nyu.edu:443/bobcat/scripts/jquery.query.min.js" type="text/javascript"></script>
+<script src="https://alephstage.library.nyu.edu:443/bobcat/scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="https://alephstage.library.nyu.edu:443/bobcat/scripts/common.js" type="text/javascript"></script>
+  </head>
+  <body id="holdings" class="results">
+<!-- filename: head-1-bor -->
+<div id="feedbackbar" class="feedbackbar">
+  <p>&nbsp;</p>
+</div>
+    <div id="content">
+      <div id="main">
+        <div class="section">
+          <h3>Request this item for Alter, Barnaby <span class="subdue"><em>(<a href="https://alephstage.library.nyu.edu:443/F/IV7THLD2TSS5PN2FS6H9CPPS157HM96TE4S5FQJNQK7GLMV19Y-01159?func=item-global&amp;doc_library=NYU01&amp;doc_number=001816252&amp;year=&amp;volume=&amp;sub_library=BOBST&amp;type=&amp;no_loaned=N&amp;start_rec_key=&amp;end_rec_key=">&laquo; Back to Holdings</a>)</em></span></h3>
+          <p style="margin-top: 1em; margin-bottom: 1em;">
+            <div><strong>This item is available at <span id="sub_library">the NYU Library</span>.</strong></div>
+            <div id="i1000"></div>
+            <div id="i1100">Item status: Periodicals<br /> Call number: BP1&nbsp;.R39<br /></div>
+            <div id="i1200"></div>
+            <div id="i1300"></div>
+            <div id="i1400"></div>
+          </p>
+          <form name="form1" method="post" action="https://alephstage.library.nyu.edu:443/F/IV7THLD2TSS5PN2FS6H9CPPS157HM96TE4S5FQJNQK7GLMV19Y-01160" class="modal_dialog_form">
+            <fieldset>
+              <input type="hidden" name="func" value="item-hold-request-b" />
+              <input type="hidden" name="doc_library" value="NYU50" />
+              <input type="hidden" name="adm_doc_number" value="001816252" />
+              <input type="hidden" name="item_sequence" value="000570" />
+              <input type="hidden" name="bib_request" value=N />
+              <input type="hidden" name="year" value="" />
+              <input type="hidden" name="volume" value="" />
+              <input type="hidden" name="sub_library" value="BOBST" />
+              <input type="hidden" name="type" value="" />
+              <input type="hidden" name="no_loaned" value="N" />
+              <input type="hidden" name="start_rec_key" value="" />
+              <input type="hidden" name="end_rec_key" value="" />
+            </fieldset>
+            <p style="margin-top: 1em;">You may:</p>
+            <ol id="request_options">
+              <li>
+                <div class="section">
+
+                  <input checked="checked" id="entire_yes" name="note2" type="radio" value="entire_yes" />
+                  Request this item to be delivered to an NYU Library of your choice.
+                </div>
+                <fieldset>
+                  <label for="pickup" class="inline">Select pickup location:</label>
+                  <span id="pickup_location_span">
+                    <select id="pickup" name=PICKUP>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="BOBST">NYU Bobst</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NCOUR">NYU Courant</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NHMED">NYU Lapidus Health Sci Library</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NHHJD">NYU Hospital Joint Diseases</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NIFA">NYU Institute of Fine Arts</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NISAW">NYU Inst Study Ancient World</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NREI">NYU Jack Brause</option>
+
+<!-- filename: item-hold-request-body-availablenyu -->
+      <option value="NDIBN">NYU Dibner Library</option>
+
+<!-- filename: item-hold-request-tail-availablenyu-nyu01 -->
+                    </select>
+                  </span>
+                  (<a href="https://library.nyu.edu/services/borrowing/delivered/#delivery-time" target="_blank">See delivery times</a>)
+                  <input id="from" name="from" type="hidden" value="20170607" />
+                  <input id="to" name="to" type="hidden" value="20170905" />
+                </fieldset>
+              </li>
+              <li>
+                <div class="section">
+                  <input id="entire_no" name="note2" type="radio" value="entire_no" />
+                  Request that a portion of the item be scanned and delivered electronically.
+                  (Requests must be within <a href="http://guides.nyu.edu/copyright" target="_blank">fair use guidelines</a>.)
+                </div>
+                <fieldset>
+                  <div>
+                    <label for="author">Author of part:</label>
+                    <input id="author" name="author" type="text" class="text" maxlength="50" value="" />
+                  </div>
+                  <div>
+                    <label for="author">Title of part:</label>
+                    <input id="title" name="title" type="text" class="text" maxlength="100" value="" />
+                  </div>
+                  <div>
+                    <label for="pages">Pages (e.g., 7-12; 5, 6-8, 10-15):</label>
+                    <input id="pages" name="pages" type="text" class="text" maxlength="30" value="" />
+                  </div>
+                  <div>
+                    <label for="note1">Notes</label>
+                    <input id="note1" name="note1" type="text note" class="text" maxlength="50" value="" />
+                  </div>
+                </fieldset>
+              </li>
+            </ol>
+            <fieldset style="margin: 1em 0;">
+              <div><input type="submit" class="submit" value="Submit" /></div>
+            </fieldset>
+            <p><strong>You will be notified by email when your item is ready or en route.</strong></p>
+          </form>
+        </div>
+      </div>
+    </div>
+<!-- filename: copyrights -->
+<div id="footer">
+  <p class="copyright">&copy; 2008 Ex Libris</p>
+</div>
+  </body>
+</html>
+
+<!-- if you want the system to default from-date to today's
+date, without the user being able to change this date, use the
+the following line:
+<td class=field>Period of interest: <br> (Date format: yyyymmdd)
+-->
