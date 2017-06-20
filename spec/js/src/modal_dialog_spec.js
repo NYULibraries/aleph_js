@@ -85,7 +85,7 @@ describe('modalDialog', () => {
       var redirectUrlRegex;
 
       beforeEach(() => {
-        redirectUrlRegex = /^https:\/\/pdsdev\.library\.nyu\.edu:443\/pds\?func=load-login&calling_system=aleph&institute=NYU&url=http%3A%2F%2Flocalhost%3A\d{4}%2F\d{4}%2Fholdings.html$/;
+        redirectUrlRegex = /^https:\/\/pdsdev\.library\.nyu\.edu:443\/pds\?func=load-login&calling_system=aleph&institute=NYU&url=http%3A%2F%2Flocalhost%3A\d+%2F\d+%2Fholdings.html$/;
         spyOn(location, 'replace')
       })
 
