@@ -97,7 +97,7 @@ const modalDialog = {
     $("#holdings table#items td.links a").filter(function(){
       return $(this).text().match(/^Request$/);
     }).addClass("ajax_window");
-  	$("#holdings table#items td.links a.ajax_window").live("click", function(event) {
+  	$("#holdings table#items td.links a.ajax_window").click((event) => {
       obj.loadDialogForm(event);
   		return false;
   	});
@@ -105,7 +105,7 @@ const modalDialog = {
       obj.submitDialogForm(event);
       return false;
     }
-  	$("form.modal_dialog_form input[type=submit]").live("click", submitForm);
-  	$("form.modal_dialog_form").live( "submit", submitForm);
+  	$("form.modal_dialog_form input[type=submit]").on("click", submitForm);
+  	$("form.modal_dialog_form").on('submit', submitForm);
   }
 };
