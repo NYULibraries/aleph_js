@@ -105,7 +105,7 @@ const modalDialog = {
       obj.submitDialogForm(event);
       return false;
     }
-  	$("form.modal_dialog_form input[type=submit]").on("click", submitForm);
+  	$("form.modal_dialog_form input[type=submit]").live("click", submitForm);
   	$("form.modal_dialog_form").on('submit', submitForm);
   }
 };
