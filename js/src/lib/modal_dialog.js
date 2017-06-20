@@ -32,35 +32,47 @@ const modalDialog = {
   	html += "</li>\n";
   	return html;
   },
-  launchDialog(data, sharedModalD) {
-    var feedbackText = $.trim($(data).children("div#feedbackbar p").text());
+  populateMain(data) {
     var main = $(data).children("div#content div#main").get(0);
     var heading = $(main).find("h3").eq(0).remove();
     heading.find("span.subdue").remove();
     this.$sharedModalDialog.html(main);
-    //Add title
+    this.$sharedModalDialog.dialog("option", "title", heading.text());
+  },
+  addTitle() {
     var $title = $("<h3>" + this.getTitleText() + "</h3>");
     this.$sharedModalDialog.find("div#main").eq(0).prepend($title);
-    //Add feedback
+  },
+  displayFeedback(data) {
+    var feedbackText = $.trim($(data).children("div#feedbackbar p").text());
     if (feedbackText.length > 0) {
       var feedback = $("<div class=\"feedback\">"+feedbackText+"</div>");
-      //shared_modal_d.prepend(feedback);
       this.$sharedModalDialog.html(feedback);
     }
+  },
+  addIllItem(data) {
     var is_request_ill = this.$sharedModalDialog.data("is_request_ill");
-    if(is_request_ill) {
+    if (is_request_ill) {
       var doc_number = this.$sharedModalDialog.data("doc_number");
       var doc_library = this.$sharedModalDialog.data("doc_library");
       var $illItem = $(this.getIllItem(doc_number, doc_library));
-      $(sharedModalD).find("div#main form ol#request_options").eq(0).append($illItem);
+      this.$sharedModalDialog.find("div#main form ol#request_options").eq(0).append($illItem);
     }
+  },
+  addSublibrary(data) {
     var is_available = this.$sharedModalDialog.data("is_available");
     var is_offsite = this.$sharedModalDialog.data("is_offsite");
     if(is_available || is_offsite) {
       var sub_library = this.$sharedModalDialog.data("sub_library");
       this.$sharedModalDialog.find("div#main span#sub_library").eq(0).replaceWith(sub_library);
     }
-    this.$sharedModalDialog.dialog("option", "title", heading.text());
+  },
+  launchDialog(data) {
+    this.populateMain(data);
+    this.addTitle();
+    this.displayFeedback(data);
+    this.addIllItem(data);
+    this.addSublibrary(data);
     this.$sharedModalDialog.dialog("open");
   },
   launchDialogOrRedirect(targetUrl, currentUrl, inputData) {
