@@ -112,7 +112,7 @@ describe('modalDialog', () => {
           expect($('.ui-dialog').is(":visible")).toEqual(true);
           expect($('.ui-dialog .ui-dialog-title').text()).toMatch(/^Request this item for Alter, Barnaby\s+$/);
           // submit form to test handling
-          $("form.modal_dialog_form input[type=submit]").click();
+          $(".submit-to-click").click();
           setTimeout(() => {
             expect($('.ui-dialog').is(":visible")).toEqual(true);
             expect($(".comfirm-request-to-click").val()).toMatch(/^Confirm request$/);
