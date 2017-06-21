@@ -103,14 +103,14 @@ const modalDialog = {
     this.launchDialogOrRedirect(targetUrl, currentUrl);
   },
   bindClick() {
-    $("#holdings table#items td.links a").filter(function(){
-      return $(this).text().match(/^Request$/);
-    }).addClass("ajax_window");
     var obj = this;
-  	$("#holdings table#items td.links a.ajax_window").click((event) => {
-      obj.loadDialogForm(event);
-  		return false;
-  	});
+    $("#holdings table#items td.links a").each(function() {
+      if (!$(this).text().match(/^Request$/)) { return; }
+      $(this).click((event) => {
+        obj.loadDialogForm(event);
+        return false;
+      });
+    });
   },
   bindSubmit() {
     var obj = this;
