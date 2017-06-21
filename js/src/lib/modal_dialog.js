@@ -14,7 +14,7 @@ const modalDialog = {
       modal: true,
       width: "40em",
       dialogClass: "shared_modal",
-      open: function(event, ui) {
+      open: (event, ui) => {
         $("select").first().focus();
       }
     });
@@ -77,12 +77,11 @@ const modalDialog = {
     this.$sharedModalDialog.dialog("open");
   },
   launchDialogOrRedirect(targetUrl, currentUrl, inputData) {
-    var obj = this;
     $.get(targetUrl, inputData).done((data) => {
-      if (obj.isPdsLogin(data)) {
-        location.replace(obj.pdsLoginUrl(data, currentUrl));
+      if (this.isPdsLogin(data)) {
+        location.replace(this.pdsLoginUrl(data, currentUrl));
       } else {
-        obj.launchDialog(data);
+        this.launchDialog(data);
       }
     });
   },
@@ -92,7 +91,9 @@ const modalDialog = {
     var currentUrl = window.location;
     var holding = new Holding(this, this.$sharedModalDialog);
     holding.extractAndSetData();
-    this.$sharedModalDialog.dialog({close: function(event, ui) {location.reload();}});
+    this.$sharedModalDialog.dialog({
+      close: (event, ui) => { location.reload(); }
+    });
     this.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
   },
   loadDialogForm(event) {
@@ -113,9 +114,8 @@ const modalDialog = {
     });
   },
   bindSubmit() {
-    var obj = this;
-    $("form.modal_dialog_form").on('submit', (event) => {
-      obj.submitDialogForm(event);
+    $("form.modal_dialog_form").submit((event) => {
+      this.submitDialogForm(event);
       return false;
     });
   },
