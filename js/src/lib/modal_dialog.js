@@ -73,7 +73,7 @@ const modalDialog = {
     this.displayFeedback(data);
     this.addIllItem(data);
     this.addSublibrary(data);
-    this.bindSubmit();
+    this.bindSubmitToAjax();
     this.$sharedModalDialog.dialog("open");
   },
   launchDialogOrRedirect(targetUrl, currentUrl, inputData) {
@@ -103,7 +103,7 @@ const modalDialog = {
     holding.extractAndSetData();
     this.launchDialogOrRedirect(targetUrl, currentUrl);
   },
-  bindClick() {
+  bindClickToLaunch() {
     var obj = this;
     $("#holdings table#items td.links a").each(function() {
       if (!$(this).text().match(/^Request$/)) { return; }
@@ -113,7 +113,7 @@ const modalDialog = {
       });
     });
   },
-  bindSubmit() {
+  bindSubmitToAjax() {
     $("form.modal_dialog_form").submit((event) => {
       this.submitDialogForm(event);
       return false;
@@ -121,6 +121,6 @@ const modalDialog = {
   },
   init() {
     this.$sharedModalDialog = this.getSharedModalDialog();
-    this.bindClick();
+    this.bindClickToLaunch();
   }
 };
