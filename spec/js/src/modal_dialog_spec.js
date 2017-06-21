@@ -80,6 +80,23 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('populateMain', () => {
+    var data, htmlSpy;
+
+    beforeEach(() => {
+      data = "<body><div id=\"content\"><div id=\"main\"><h3>My Header<span class=\"subdue\">Remove Me</span></h3><p>My Content</p></div></div></body>"
+      htmlSpy = spyOn(modalDialog.$sharedModalDialog, 'html');
+      spyOn(modalDialog.$sharedModalDialog, 'dialog');
+    });
+
+    it('should populate modal with #main', () => {
+      modalDialog.populateMain(data);
+      expect(modalDialog.$sharedModalDialog.html).toHaveBeenCalled();
+      expect($(htmlSpy.calls.mostRecent().args[0]).html()).toEqual("<p>My Content</p>")
+      expect(modalDialog.$sharedModalDialog.dialog).toHaveBeenCalledWith("option", "title", "My Header");
+    });
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
