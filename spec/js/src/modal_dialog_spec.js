@@ -116,6 +116,33 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('displayFeedback', () => {
+    var data;
+
+    describe('when data includes feedback', () => {
+      beforeEach(() => {
+        data = '<body><div id="feedbackbar"><p>  Some feedback    </p></div></body>';
+      });
+
+      it('should replace shared modal with feedback', () => {
+        modalDialog.displayFeedback(data);
+        expect(modalDialog.$sharedModalDialog.html()).toEqual('<div class="feedback">Some feedback</div>');
+      });
+    });
+
+    describe("when data doesn't include feedback", () => {
+      beforeEach(() => {
+        data = '<body>Something else</body>';
+      });
+
+      it('should replace shared modal with feedback', () => {
+        var origSharedModalHtml = modalDialog.$sharedModalDialog.html();
+        modalDialog.displayFeedback(data);
+        expect(modalDialog.$sharedModalDialog.html()).toEqual(origSharedModalHtml);
+      });
+    });
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
