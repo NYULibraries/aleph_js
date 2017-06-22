@@ -86,10 +86,10 @@ const modalDialog = {
     });
   },
   submitDialogForm(event) {
-    var targetUrl = $(event.target).closest("form").attr("action");
-    var inputData = $(event.target).closest("form").serialize();
+    var targetUrl = $(event.currentTarget).attr("action");
+    var inputData = $(event.currentTarget).serialize();
     var currentUrl = window.location;
-    var holding = new Holding(this, this.$sharedModalDialog);
+    var holding = new Holding(event.currentTarget, this.$sharedModalDialog);
     holding.extractAndSetData();
     this.$sharedModalDialog.dialog({
       close: (event, ui) => { location.reload(); }
@@ -97,9 +97,9 @@ const modalDialog = {
     this.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
   },
   loadDialogForm(event) {
-    var targetUrl = event.target.href;
+    var targetUrl = event.currentTarget.href;
     var currentUrl = window.location;
-    var holding = new Holding(this, this.$sharedModalDialog);
+    var holding = new Holding(event.currentTarget, this.$sharedModalDialog);
     holding.extractAndSetData();
     this.launchDialogOrRedirect(targetUrl, currentUrl);
   },
