@@ -309,6 +309,30 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('submitDialogForm', () => {
+    var submitEvent, form, mockHolding;
+
+    beforeEach(() => {
+      form = $('#form-submit-test').get(0);
+      submitEvent = {};
+      submitEvent.currentTarget = form;
+      mockHolding = new Holding();
+      spyOn(window, 'Holding').and.returnValue(mockHolding);
+      spyOn(mockHolding, 'extractAndSetData');
+      spyOn(modalDialog, 'launchDialogOrRedirect').and.returnValue(true);
+      spyOn(modalDialog.$sharedModalDialog, 'dialog');
+    });
+
+    it("should launchDialogOrRedirect", () => {
+      modalDialog.submitDialogForm(submitEvent);
+      expect(modalDialog.launchDialogOrRedirect).toHaveBeenCalledWith('/some/path', jasmine.anything(), $(form).serialize());
+      expect(modalDialog.launchDialogOrRedirect.calls.mostRecent().args[1]).toMatch(/^http:\/\/localhost:\d+\/\d+\/holdings\.html$/)
+      expect(Holding).toHaveBeenCalledWith(form, modalDialog.$sharedModalDialog);
+      expect(mockHolding.extractAndSetData).toHaveBeenCalledWith();
+      expect(modalDialog.$sharedModalDialog.dialog).toHaveBeenCalledWith({close: jasmine.any(Function)});
+    })
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
