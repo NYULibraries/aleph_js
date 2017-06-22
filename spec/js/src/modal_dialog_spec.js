@@ -361,19 +361,37 @@ describe('modalDialog', () => {
       spyOn(modalDialog, 'loadDialogForm').and.returnValue(true);
     });
 
-    it("should trigger loadDialogForm on click", () => {
+    it("should trigger loadDialogForm on click with 'Request' text", () => {
       modalDialog.bindClickToLaunch();
       expect(modalDialog.loadDialogForm).not.toHaveBeenCalled();
       $('.request-to-click').click();
       expect(modalDialog.loadDialogForm).toHaveBeenCalled();
     });
 
-    it("should not trigger loadDialogForm on click of wrong link", () => {
+    it("should not trigger loadDialogForm on click of link without 'Request' text", () => {
       modalDialog.bindClickToLaunch();
       $('#bweb_link').click();
       expect(modalDialog.loadDialogForm).not.toHaveBeenCalled();
     });
-  })
+  });
+
+  describe('bindSubmitToAjax', () => {
+    beforeEach(() => {
+      spyOn(modalDialog, 'submitDialogForm').and.returnValue(true);
+      $('#form-submit-test').addClass('modal_dialog_form');
+    });
+
+    afterEach(() => {
+      $('#form-submit-test').removeClass('modal_dialog_form');
+    });
+
+    it("should trigger submitDialogForm on submit", () => {
+      modalDialog.bindSubmitToAjax();
+      expect(modalDialog.submitDialogForm).not.toHaveBeenCalled();
+      $('#form-submit-test').submit();
+      expect(modalDialog.submitDialogForm).toHaveBeenCalled();
+    });
+  });
 
   describe('init', () => {
     describe('when response requires redirect', () => {
