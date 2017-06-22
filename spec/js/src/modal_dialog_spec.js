@@ -356,6 +356,25 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('bindClickToLaunch', () => {
+    beforeEach(() => {
+      spyOn(modalDialog, 'loadDialogForm').and.returnValue(true);
+    });
+
+    it("should trigger loadDialogForm on click", () => {
+      modalDialog.bindClickToLaunch();
+      expect(modalDialog.loadDialogForm).not.toHaveBeenCalled();
+      $('.request-to-click').click();
+      expect(modalDialog.loadDialogForm).toHaveBeenCalled();
+    });
+
+    it("should not trigger loadDialogForm on click of wrong link", () => {
+      modalDialog.bindClickToLaunch();
+      $('#bweb_link').click();
+      expect(modalDialog.loadDialogForm).not.toHaveBeenCalled();
+    });
+  })
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
