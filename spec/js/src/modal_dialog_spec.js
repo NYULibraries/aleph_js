@@ -1,4 +1,14 @@
 describe('modalDialog', () => {
+  var origSharedModalDialog;
+
+  beforeEach(() => {
+    origSharedModalDialog = modalDialog.$sharedModalDialog;
+  });
+
+  afterEach(() => {
+    modalDialog.$sharedModalDialog = origSharedModalDialog;
+  })
+
   describe('pdsLoginRegex', () => {
     it('should work', () => {
       expect(modalDialog.pdsLoginRegex).toEqual(/LoginPds/);
@@ -98,17 +108,10 @@ describe('modalDialog', () => {
   });
 
   describe('addTitle', () => {
-    var origSharedModalDialog;
-
     beforeEach(() => {
       spyOn(modalDialog, 'getTitleText').and.returnValue("My Title");
-      origSharedModalDialog = modalDialog.$sharedModalDialog;
       modalDialog.$sharedModalDialog = $('<div class="modal"><div id="main"><p>Hello</p></div></div>');
     });
-
-    afterEach(() => {
-      modalDialog.$sharedModalDialog = origSharedModalDialog;
-    })
 
     it('should add title to modal dialog', () => {
       modalDialog.addTitle();
@@ -138,6 +141,35 @@ describe('modalDialog', () => {
       it('should replace shared modal with feedback', () => {
         var origSharedModalHtml = modalDialog.$sharedModalDialog.html();
         modalDialog.displayFeedback(data);
+        expect(modalDialog.$sharedModalDialog.html()).toEqual(origSharedModalHtml);
+      });
+    });
+  });
+
+  describe('addIllItem', () => {
+    describe('if shared modal has ILL data', () => {
+      beforeEach(() => {
+        modalDialog.$sharedModalDialog = $('<div class="modal" data-is_request_ill="true" data-doc_number="123" data-doc_library="abc"><div id="main"><form><ol id="request_options"><li>Existing item</li></ol></form></div></div>');
+        spyOn(modalDialog, 'getIllItem').and.returnValue('<li>New item</li>');
+      });
+
+      it('should append ILL item', () => {
+        modalDialog.addIllItem();
+        expect(modalDialog.getIllItem).toHaveBeenCalledWith(123, 'abc');
+        expect(modalDialog.$sharedModalDialog.html()).toEqual('<div id="main"><form><ol id="request_options"><li>Existing item</li><li>New item</li></ol></form></div>')
+      });
+    });
+
+    describe("if shared modal doesn't have ILL data", () => {
+      beforeEach(() => {
+        modalDialog.$sharedModalDialog = $('<div class="modal"><div id="main"><form><ol id="request_options"><li>Existing item</li></ol></form></div></div>');
+        spyOn(modalDialog, 'getIllItem').and.returnValue('<li>New item</li>');
+      });
+
+      it('should append ILL item', () => {
+        var origSharedModalHtml = modalDialog.$sharedModalDialog.html();
+        modalDialog.addIllItem();
+        expect(modalDialog.getIllItem).not.toHaveBeenCalled();
         expect(modalDialog.$sharedModalDialog.html()).toEqual(origSharedModalHtml);
       });
     });

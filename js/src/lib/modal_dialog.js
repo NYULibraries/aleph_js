@@ -50,7 +50,7 @@ const modalDialog = {
       this.$sharedModalDialog.html(feedback);
     }
   },
-  addIllItem(data) {
+  addIllItem() {
     var is_request_ill = this.$sharedModalDialog.data("is_request_ill");
     if (is_request_ill) {
       var doc_number = this.$sharedModalDialog.data("doc_number");
@@ -71,7 +71,7 @@ const modalDialog = {
     this.populateMain(data);
     this.addTitle();
     this.displayFeedback(data);
-    this.addIllItem(data);
+    this.addIllItem();
     this.addSublibrary(data);
     this.bindSubmitToAjax();
     this.$sharedModalDialog.dialog("open");
