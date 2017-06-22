@@ -223,6 +223,32 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('launchDialog', () => {
+    var data;
+
+    beforeEach(() => {
+      data = "Some data";
+      spyOn(modalDialog, 'populateMain');
+      spyOn(modalDialog, 'addTitle');
+      spyOn(modalDialog, 'displayFeedback');
+      spyOn(modalDialog, 'addIllItem');
+      spyOn(modalDialog, 'addSublibrary');
+      spyOn(modalDialog, 'bindSubmitToAjax');
+      spyOn(modalDialog.$sharedModalDialog, 'dialog');
+    });
+
+    it("should call all correct methods", () => {
+      modalDialog.launchDialog(data);
+      expect(modalDialog.populateMain).toHaveBeenCalledWith(data);
+      expect(modalDialog.addTitle).toHaveBeenCalledWith();
+      expect(modalDialog.displayFeedback).toHaveBeenCalledWith(data);
+      expect(modalDialog.addIllItem).toHaveBeenCalledWith();
+      expect(modalDialog.addSublibrary).toHaveBeenCalledWith();
+      expect(modalDialog.bindSubmitToAjax).toHaveBeenCalledWith();
+      expect(modalDialog.$sharedModalDialog.dialog).toHaveBeenCalledWith("open");
+    });
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
