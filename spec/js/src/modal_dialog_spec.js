@@ -330,7 +330,30 @@ describe('modalDialog', () => {
       expect(Holding).toHaveBeenCalledWith(form, modalDialog.$sharedModalDialog);
       expect(mockHolding.extractAndSetData).toHaveBeenCalledWith();
       expect(modalDialog.$sharedModalDialog.dialog).toHaveBeenCalledWith({close: jasmine.any(Function)});
-    })
+    });
+  });
+
+  describe('loadDialogForm', () => {
+    var clickEvent, link, mockHolding;
+
+    beforeEach(() => {
+      link = $('.request-to-click').get(0);
+      clickEvent = {};
+      clickEvent.currentTarget = link;
+      mockHolding = new Holding();
+      spyOn(window, 'Holding').and.returnValue(mockHolding);
+      spyOn(mockHolding, 'extractAndSetData');
+      spyOn(modalDialog, 'launchDialogOrRedirect').and.returnValue(true);
+    });
+
+    it("should launchDialogOrRedirect", () => {
+      modalDialog.loadDialogForm(clickEvent);
+      expect(modalDialog.launchDialogOrRedirect).toHaveBeenCalledWith(jasmine.anything(), jasmine.anything());
+      expect(modalDialog.launchDialogOrRedirect.calls.mostRecent().args[0]).toMatch(/http:\/\/localhost:7357\/includes\/holdings_request\.html/)
+      expect(modalDialog.launchDialogOrRedirect.calls.mostRecent().args[1]).toMatch(/^http:\/\/localhost:\d+\/\d+\/holdings\.html$/)
+      expect(Holding).toHaveBeenCalledWith(link, modalDialog.$sharedModalDialog);
+      expect(mockHolding.extractAndSetData).toHaveBeenCalledWith();
+    });
   });
 
   describe('init', () => {
