@@ -59,7 +59,7 @@ const modalDialog = {
       this.$sharedModalDialog.find("div#main form ol#request_options").eq(0).append($illItem);
     }
   },
-  addSublibrary(data) {
+  addSublibrary() {
     var is_available = this.$sharedModalDialog.data("is_available");
     var is_offsite = this.$sharedModalDialog.data("is_offsite");
     if(is_available || is_offsite) {
@@ -72,7 +72,7 @@ const modalDialog = {
     this.addTitle();
     this.displayFeedback(data);
     this.addIllItem();
-    this.addSublibrary(data);
+    this.addSublibrary();
     this.bindSubmitToAjax();
     this.$sharedModalDialog.dialog("open");
   },

@@ -175,6 +175,54 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('addSublibrary', () => {
+    describe("if shared modal has truthy available data", () => {
+      beforeEach(() => {
+        modalDialog.$sharedModalDialog = $('<div class="modal" data-is_available="true" data-is_offsite="false" data-sub_library="ISAW"><div id="main"><span>Ignore me</span><span id="sub_library">Bobst</span></div></div>');
+      });
+
+      it("should add to correct span", () => {
+        modalDialog.addSublibrary();
+        expect(modalDialog.$sharedModalDialog.html()).toEqual('<div id="main"><span>Ignore me</span>ISAW</div>')
+      });
+    });
+
+    describe("if shared modal has truthy offsite data", () => {
+      beforeEach(() => {
+        modalDialog.$sharedModalDialog = $('<div class="modal" data-is_available="false" data-is_offsite="true" data-sub_library="ISAW"><div id="main"><span>Ignore me</span><span id="sub_library">Bobst</span></div></div>');
+      });
+
+      it("should add to correct span", () => {
+        modalDialog.addSublibrary();
+        expect(modalDialog.$sharedModalDialog.html()).toEqual('<div id="main"><span>Ignore me</span>ISAW</div>')
+      });
+    });
+
+    describe("if shared modal has falsy available offsite data", () => {
+      beforeEach(() => {
+        modalDialog.$sharedModalDialog = $('<div class="modal" data-is_available="false" data-is_offsite="false"><div id="main"><span>Ignore me</span><span id="sub_library">Bobst</span></div></div>');
+      });
+
+      it("should add to correct span", () => {
+        var origSharedModalHtml = modalDialog.$sharedModalDialog.html();
+        modalDialog.addSublibrary();
+        expect(modalDialog.$sharedModalDialog.html()).toEqual(origSharedModalHtml)
+      });
+    });
+
+    describe("if shared modal doesn't have available offsite data", () => {
+      beforeEach(() => {
+        modalDialog.$sharedModalDialog = $('<div class="modal"><div id="main"><span>Ignore me</span><span id="sub_library">Bobst</span></div></div>');
+      });
+
+      it("should add to correct span", () => {
+        var origSharedModalHtml = modalDialog.$sharedModalDialog.html();
+        modalDialog.addSublibrary();
+        expect(modalDialog.$sharedModalDialog.html()).toEqual(origSharedModalHtml)
+      });
+    });
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
