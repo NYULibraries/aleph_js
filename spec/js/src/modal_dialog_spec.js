@@ -249,6 +249,66 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('launchDialogOrRedirect', () => {
+    var targetUrl, currentUrl, inputData, data, getPromise;
+
+    beforeEach(() => {
+      targetUrl = "alephstage.library.nyu.edu/endpoint";
+      currentUrl = "alephstage.library.nyu.edu/home";
+      inputData = "Inputted data";
+      data = "Some data";
+    });
+
+    describe('if GET is successful', () => {
+      beforeEach(() => {
+        getPromise = {
+          done: (callback) => { callback(data); }
+        };
+        spyOn($, 'get').and.returnValue(getPromise);
+      });
+
+      describe('and response is PDS redirect', () => {
+        var redirectUrl;
+
+        beforeEach(() => {
+          redirectUrl = "http://example.com";
+          spyOn(modalDialog, 'isPdsLogin').and.returnValue(true);
+          spyOn(modalDialog, 'pdsLoginUrl').and.returnValue(redirectUrl);
+          spyOn(location, 'replace');
+        })
+
+        it("should redirect via location.replace", () => {
+          modalDialog.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
+          expect($.get).toHaveBeenCalledWith(targetUrl, inputData)
+          expect(modalDialog.isPdsLogin).toHaveBeenCalledWith(data);
+          expect(modalDialog.pdsLoginUrl).toHaveBeenCalledWith(data, currentUrl);
+          expect(location.replace).toHaveBeenCalledWith(redirectUrl);
+        });
+      });
+
+      describe('and response is not redirect', () => {
+        beforeEach(() => {
+          spyOn(modalDialog, 'launchDialog');
+        })
+
+        it("should launch dialog with data", () => {
+          modalDialog.launchDialogOrRedirect(targetUrl, currentUrl, inputData);
+          expect(modalDialog.launchDialog).toHaveBeenCalledWith(data);
+        });
+      });
+    });
+
+    describe('if GET is unsuccessful', () => {
+      beforeEach(() => {
+        getPromise = {
+          done: (callback) => { return; }
+        };
+      });
+
+      pending();
+    });
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
