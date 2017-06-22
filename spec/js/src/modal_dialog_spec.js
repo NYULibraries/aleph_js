@@ -97,6 +97,25 @@ describe('modalDialog', () => {
     });
   });
 
+  describe('addTitle', () => {
+    var origSharedModalDialog;
+
+    beforeEach(() => {
+      spyOn(modalDialog, 'getTitleText').and.returnValue("My Title");
+      origSharedModalDialog = modalDialog.$sharedModalDialog;
+      modalDialog.$sharedModalDialog = $('<div class="modal"><div id="main"><p>Hello</p></div></div>');
+    });
+
+    afterEach(() => {
+      modalDialog.$sharedModalDialog = origSharedModalDialog;
+    })
+
+    it('should add title to modal dialog', () => {
+      modalDialog.addTitle();
+      expect(modalDialog.$sharedModalDialog.html()).toEqual(('<div id="main"><h3>My Title</h3><p>Hello</p></div>'));
+    });
+  });
+
   describe('init', () => {
     describe('when response requires redirect', () => {
       var redirectUrlRegex;
