@@ -28,11 +28,11 @@ class Holding {
 		if (this.isAvailable() || this.isOffsite()) {
 			this.$sharedModalDialog.data("sub_library", this.subLibrary);
 		}
-    this.$sharedModalDialog.data("is_request_ill", this.isRequestIll());
-    if (this.isRequestIll()) {
-      this.$sharedModalDialog.data("doc_number", this.docNumber);
-      this.$sharedModalDialog.data("doc_library", this.docLibrary);
-    }
+		this.$sharedModalDialog.data("is_request_ill", this.isRequestIll());
+		if (this.isRequestIll()) {
+			this.$sharedModalDialog.data("doc_number", this.docNumber);
+			this.$sharedModalDialog.data("doc_library", this.docLibrary);
+		}
 	}
 
 	isAvailable () {
@@ -44,15 +44,16 @@ class Holding {
 	}
 
 	isRequestIll () {
-    if (this.collection === "NYU Bobst Avery Fisher Center") { return false; }
-    return this.itemType != "Offsite Available" && this.itemType != "Available" && this.availability != "On Shelf" && this.availability != "Reshelving";
+		if (this.collection === "NYU Bobst Avery Fisher Center") { return false; }
+		return this.itemType != "Offsite Available" && this.itemType != "Available" && this.availability != "On Shelf" && this.availability != "Reshelving";
 	}
 
 	// helpers
 
 	hrefParamData (paramKey) {
-		if (!this.href)
+		if (!this.href) {
 			this.href = this.$element.attr('href');
+		}
 		var paramRegex = new RegExp('\\&' + paramKey + '=([^&]+)&')
 		var matchObj = paramRegex.exec(this.href);
 		if (!matchObj){ return; }
@@ -69,8 +70,9 @@ class Holding {
 	}
 
 	getItemColumnOrder () {
-		if (this.itemColumnOrder)
+		if (this.itemColumnOrder) {
 			return this.itemColumnOrder;
+		}
 		var itemColumnOrder = new Array();
 		$("#holdings table#items th").each(function(index, th) {
 			itemColumnOrder[index] = $.trim($(th).text());
