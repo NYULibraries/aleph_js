@@ -4,7 +4,16 @@
 
 Javascripts for manipulating display and request functionality of the Aleph search and holdings screens.
 
-## Run the tests
+### Run tests (the easy way)
+
+```
+docker build . -t aleph_js
+docker run aleph_js
+```
+
+We've [prepended `grunt`](testem.json) to these above tests so that they will always be running against a backwards compatible version and we don't have to manually worry about running `grunt`.
+
+## Run tests (the hard way)
 
 Install NPM dependencies:
 ```
@@ -26,15 +35,6 @@ See which launchers are available:
 ```
 npm run testem-launchers
 ```
-
-### Run tests in Docker
-
-```
-docker build . -t aleph_js
-docker run aleph_js
-```
-
-We've [prepended `grunt`](testem.json) to these above tests so that they will always be running against a backwards compatible version and we don't have to manually worry about running `grunt`.
 
 ## Compile the Javascript
 
@@ -65,7 +65,7 @@ For a new file, e.g. `example.js`, create a spec file in `spec/js/src/` director
 
 ### Creating test pages
 
-
+_[Put info here about how to create a custom .mustache fixtures for testing against]_
 
 ## Environment
 
