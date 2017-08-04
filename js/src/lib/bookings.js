@@ -92,8 +92,11 @@ function bs_process_booking() {
     jQuery("#book #start_date, #book #end_date").datepicker("option", "minDate", jQuery("#book #start_date").datepicker("getDate"));
 
     // Set default start and end hours
-    jQuery("#book #start_hour").val(jQuery("#book #start_date").data("hours")[jQuery("#book #start_date").datepicker("getDate").getDay()]);
-    //jQuery("#book #end_hour").val(jQuery("#book #end_date").data("hours")[jQuery("#book #end_date").datepicker("getDate").getDay()]);
+    try {
+      jQuery("#book #start_hour").val(jQuery("#book #start_date").data("hours")[jQuery("#book #start_date").datepicker("getDate").getDay()]);
+    } catch(err) {
+      // Do nothing, we need this because this is not tested by anything
+    }
     // Calculate initial end hour with some math
     var da = dueHour.split(" ");
     var dt = da[0];
