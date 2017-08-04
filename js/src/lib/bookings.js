@@ -1,4 +1,7 @@
 function bs_process_booking() {
+    var status = status || "0";
+    var loanDays = loanDays || "3";
+    var dueHour = dueHour || "1";
     // Enable datepicker
     var dates = jQuery("#book #start_date, #book #end_date").datepicker({
         dateFormat: 'yy/mm/dd',
@@ -11,7 +14,7 @@ function bs_process_booking() {
                 var hour1 = (this.id == "start_date") ? jQuery("#book #start_hour") : jQuery("#book #end_hour");
                 var hour2 = (this.id == "start_date") ? jQuery("#book #end_hour") : jQuery("#book #start_hour");
                 var instance = jQuery(this).data("datepicker");
-                var date1 = jQuery.datepicker.parseDate(instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat, selectedDate, instance.settings);
+                var date1 = jQuery.datepicker.parseDate(jQuery.datepicker._defaults.dateFormat, selectedDate);
                 hour1.val(jQuery(this).data("hours")[jQuery(this).datepicker("getDate").getDay()]);
                 if (this.id == "start_date") date1.setDate(date1.getDate() + loanDays);
                 if (this.id == "end_date") date1.setDate(date1.getDate() - loanDays);
@@ -32,7 +35,7 @@ function bs_process_booking() {
 
     // Initialize vars
     var instance = jQuery("#book #start_date").data("datepicker");
-    var format = instance.settings.dateFormat || jQuery.datepicker._defaults.dateFormat;
+    var format = jQuery.datepicker._defaults.dateFormat;
     var admLibrary = jQuery('input[name="adm_library"]').val();
 
     // Form validation
@@ -84,7 +87,7 @@ function bs_process_booking() {
     }
 
     // Set default start and end dates
-    jQuery("#book #start_date").datepicker("setDate", jQuery.datepicker.formatDate(format, new Date(), instance.settings));
+    jQuery("#book #start_date").datepicker("setDate", jQuery.datepicker.formatDate(format, new Date()));
     jQuery("#book #end_date").datepicker("setDate", "+" + loanDays + "d");
     jQuery("#book #start_date, #book #end_date").datepicker("option", "minDate", jQuery("#book #start_date").datepicker("getDate"));
 
