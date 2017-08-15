@@ -3,6 +3,7 @@
 // that don't login, but let's keep the functionality around
 // pdsLogin.passiveLogin();
 
+const AlephInit = {};
 // Call the init() functions for these objects on document ready
 const initObjects = [
   formatHoldings,
