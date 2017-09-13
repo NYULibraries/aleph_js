@@ -4,7 +4,7 @@
 
 Javascripts for manipulating display and request functionality of the Aleph search and holdings screens.
 
-### Run tests (the easy way)
+## Run tests (the easy way)
 
 ```
 docker build . -t aleph_js

@@ -12,8 +12,8 @@
  */
 const formatHoldings = {
   ezProxyPrefix: {
-    "BWEB": "https://ezproxy.library.nyu.edu/login?url=",
-    "NWEB": "https://ezproxy.library.nyu.edu/login?url=",
+    "BWEB": "http://proxy.library.nyu.edu/login?url=",
+    "NWEB": "http://proxy.library.nyu.edu/login?url=",
     "CU": "http://proxy.library.cooper.edu:2048/login?url=",
     "TWEB": "https://login.libproxy.newschool.edu/login?url=",
     "WEB": "",
@@ -21,8 +21,6 @@ const formatHoldings = {
   },
   restrictedSublibraries: ["BWEB", "CU", "TWEB", "NWEB", "NYSID"],
   mapAvailabilityStatus(element, mapTo) {
-    // const mapToText = "On Shelf";
-    // const $element = $("#holdings table#items td.due_date:first");
     const $element = $(element);
     const mappedStatus = $element.html().replace(new RegExp("^" + availabilityStatusesMap[mapTo].join("|") + "$", "gi"), mapTo);
     $element.html(mappedStatus);
