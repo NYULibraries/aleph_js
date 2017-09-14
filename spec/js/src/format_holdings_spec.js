@@ -2,7 +2,7 @@ describe('formatHoldings', () => {
 
   describe('restrictedSublibraries', () => {
     it('should contain array of restricted sublibraries', () => {
-      expect(formatHoldings.restrictedSublibraries).toEqual(["BWEB", "CU", "TWEB", "NWEB", "NYSID"]);
+      expect(formatHoldings.restrictedSublibraries).toEqual(["BWEB", "CU", "TWEB", "NWEB", "SWEB", "NYSID"]);
     });
   });
 

@@ -25,7 +25,7 @@ class HoldingsTableRow {
   }
 
   web856Matcher() {
-    return /(\sBWEB|\sCU|\sTWEB|\sNWEB|\sWEB|\sNYSID)\s*/;
+    return /(\sBWEB|\sCU|\sTWEB|\sNWEB|\sSWEB|\sWEB|\sNYSID)\s*/;
   }
 
   isLocationRow() {

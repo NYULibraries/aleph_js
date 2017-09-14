@@ -17,9 +17,10 @@ const formatHoldings = {
     "CU": "http://proxy.library.cooper.edu:2048/login?url=",
     "TWEB": "https://login.libproxy.newschool.edu/login?url=",
     "WEB": "",
+    "SWEB": "http://proxy.library.nyu.edu/login?url=",
     "NYSID": "http://plibrary.nysid.edu/login?url="
   },
-  restrictedSublibraries: ["BWEB", "CU", "TWEB", "NWEB", "NYSID"],
+  restrictedSublibraries: ["BWEB", "CU", "TWEB", "NWEB", "SWEB", "NYSID"],
   mapAvailabilityStatus(element, mapTo) {
     const $element = $(element);
     const mappedStatus = $element.html().replace(new RegExp("^" + availabilityStatusesMap[mapTo].join("|") + "$", "gi"), mapTo);
