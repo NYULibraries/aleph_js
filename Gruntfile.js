@@ -37,10 +37,10 @@ module.exports = function(grunt) {
       },
       global: {
         src: [
-          // "js/dist/es5/vendor/*.js",
-          // "js/dist/es5/config/*.js",
-          // "js/dist/es5/helpers/*.js",
-          // "js/dist/es5/lib/*.js",
+          "js/dist/es5/vendor/*.js",
+          "js/dist/es5/config/*.js",
+          "js/dist/es5/helpers/*.js",
+          "js/dist/es5/lib/*.js",
           "js/dist/es5/application.js"
         ],
         dest: 'js/dist/application.min.js'
