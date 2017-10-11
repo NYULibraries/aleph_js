@@ -24,4 +24,4 @@ jobs:
           name: Deploy
           command: |
             echo "Deploying to S3"
-            aws s3 sync js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
+            docker-compose run deploy_s3

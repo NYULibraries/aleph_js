@@ -5,11 +5,9 @@ services:
     volumes:
       - ./js/dist:/app/js/dist
     environment:
-      AWS_ACCESS_KEY_ID: 
+      AWS_ACCESS_KEY_ID:
       AWS_SECRET_ACCESS_KEY:
     command: aws s3 sync js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
-    depends_on:
-      - test
 
   test:
     build: .
