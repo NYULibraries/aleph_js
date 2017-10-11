@@ -15,7 +15,7 @@ describe('formatHoldings', () => {
 
     it('should hide location row for restricted sublibraries', () => {
       const $restrictedLocation = $(f99).find("td:contains('NYU Restricted')");
-      expect($restrictedLocation.is(":hidden")).toEqual(true);
+      expect($restrictedLocation.is(":hidden")).toEqual(false);
     });
 
     it('should hide summary holdings', () => {
