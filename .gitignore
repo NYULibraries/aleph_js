@@ -2,3 +2,5 @@ node_modules/
 js/dist
 spec/js/dist
 npm-debug.log
+.node-version
+wiki/
