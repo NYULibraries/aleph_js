@@ -4,6 +4,8 @@
 // pdsLogin.passiveLogin();
 
 const AlephInit = {};
+// Exclude sub-domains from same-origin policy
+document.domain = 'library.nyu.edu';
 // Call the init() functions for these objects on document ready
 const initObjects = [
   formatHoldings,
