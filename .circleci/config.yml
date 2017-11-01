@@ -25,8 +25,8 @@ jobs:
           command: |
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo "Deploying to production S3"
-              docker-compose run deploy_s3_production
+              AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY docker-compose run deploy_s3_production
             else
               echo "Deploying to development S3"
-              docker-compose run deploy_s3_dev
+              AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV docker-compose run deploy_s3_dev
             fi
