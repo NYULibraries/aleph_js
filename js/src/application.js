@@ -5,7 +5,9 @@
 
 const AlephInit = {};
 // Exclude sub-domains from same-origin policy
-document.domain = 'library.nyu.edu';
+if (window.location.hostname.match("library.nyu.edu$")) {
+  document.domain = 'library.nyu.edu';
+}
 // Call the init() functions for these objects on document ready
 const initObjects = [
   formatHoldings,
