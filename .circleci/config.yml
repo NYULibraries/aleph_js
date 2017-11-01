@@ -26,7 +26,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               echo "Deploying to production S3"
               docker-compose run deploy_s3_production
-            else; then
+            else
               echo "Deploying to development S3"
               docker-compose run deploy_s3_dev
             fi
