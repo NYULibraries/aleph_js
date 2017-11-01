@@ -1,13 +1,22 @@
 version: "3"
 services:
-  deploy_s3:
+  deploy_s3_production:
     build: .
     volumes:
       - ./js/dist:/app/js/dist
     environment:
       AWS_ACCESS_KEY_ID:
       AWS_SECRET_ACCESS_KEY:
-    command: aws s3 sync js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
+    command: AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY aws s3 sync js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
+
+  deploy_s3_dev:
+    build: .
+    volumes:
+      - ./js/dist:/app/js/dist
+    environment:
+      AWS_ACCESS_KEY_ID_DEV:
+      AWS_SECRET_ACCESS_KEY_DEV:
+    command: AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV aws s3 sync js/dist s3://dev.cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
 
   test:
     build: .

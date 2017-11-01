@@ -23,5 +23,10 @@ jobs:
       - deploy:
           name: Deploy
           command: |
-            echo "Deploying to S3"
-            docker-compose run deploy_s3
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              echo "Deploying to production S3"
+              docker-compose run deploy_s3_production
+            else; then
+              echo "Deploying to development S3"
+              docker-compose run deploy_s3_dev
+            fi
