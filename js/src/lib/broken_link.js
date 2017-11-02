@@ -19,24 +19,22 @@ const brokenLink = {
       attrs: { id: "broken_link" + index, class: 'broken_link' },
       value: "[" + html.render(anchor) + "]"
     };
-    const $brokenLinkSpan = $(html.render(span));
-    const $brokenLinkAnchor = $brokenLinkSpan.find('a');
-    // Store url and aleph id for processing later
-    $brokenLinkAnchor.data("aleph_id", querystring.get("doc_number"));
-    $brokenLinkAnchor.data("aleph_url", holdingsTableRow.href856());
-    $brokenLinkAnchor.on('click', (e, data) => {
-      this.send($brokenLinkSpan);
+    let $brokenLinkSpan = $(html.render(span));
+
+    holdingsTableRow.td856().append($brokenLinkSpan);
+
+    // Bind a click event
+    $(document).on('click', '#broken_link_anchor' + index, function(e) {
+      let span = $(this).closest('span');
+      e.preventDefault();
+      let sendingHtml = html.render({ tag: 'span', value: '[' + html.render({tag: 'em', value: 'Sending...'}) + ']' });
+      let submittedHtml = '[' + html.render({tag: 'em', value: 'Submitted'}) + ']';
+      let alephId = querystring.get("doc_number")
+      let alephUrl = encodeURIComponent(holdingsTableRow.href856());
+      let brokenLinkData = "aleph_id=" + alephId + "&aleph_url=" + alephUrl;
+      span.html(sendingHtml);
+      $.get(span.find('a').href, brokenLinkData).done(() => { span.html(submittedHtml)});
       return false;
     });
-    holdingsTableRow.td856().append($brokenLinkSpan);
-  },
-  send($brokenLinkSpan) {
-    const sendingHtml = html.render({ tag: 'span', value: '[' + html.render({tag: 'em', value: 'Sending...'}) + ']' });
-    const submittedHtml = '[' + html.render({tag: 'em', value: 'Submitted'}) + ']';
-    const alephId = $brokenLinkSpan.data("aleph_id")
-    const alephUrl = encodeURIComponent($brokenLinkSpan.data("aleph_url"));
-    const brokenLinkData = "aleph_id=" + alephId + "&aleph_url=" + alephUrl;
-    $brokenLinkSpan.html(sendingHtml);
-    $.get($brokenLinkSpan.find('a').href, brokenLinkData).done(() => { $brokenLinkSpan.html("["+submittedHtml+"]")});
   }
 };
