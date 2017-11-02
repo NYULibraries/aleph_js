@@ -23,11 +23,6 @@ const search = {
     $("#format").attr("id", id);
   },
   init() {
-    $("#limits-block").find("#showlimits a, #hidelimits a").on('click', (e) => {
-      e.preventDefault();
-      this.toggleLimits();
-      return false;
-    });
     this.setFullFormat();
   }
 };
