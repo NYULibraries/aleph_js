@@ -9,9 +9,11 @@ const html = {
   render(tag) {
     let html = "";
     html += "<" + tag.tag;
-    $.each(tag.attrs, (key, value) => {
-      html += " " + key + "=\"" + value + "\"";
-    });
+    if (typeof(tag.attrs) != 'undefined') {
+      $.each(tag.attrs, (key, value) => {
+        html += " " + key + "=\"" + value + "\"";
+      });
+    }
     html += ">";
     html += tag.value;
     html += "</" + tag.tag + ">";
