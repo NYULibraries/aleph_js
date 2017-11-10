@@ -23,8 +23,9 @@ const formatHoldings = {
   restrictedSublibraries: ["BWEB", "CU", "TWEB", "NWEB", "SWEB", "NYSID"],
   mapAvailabilityStatus(element, mapTo) {
     const $element = $(element);
-    const mappedStatus = $element.html().replace(new RegExp("^" + availabilityStatusesMap[mapTo].join("|") + "$", "gi"), mapTo);
-    $element.html(mappedStatus);
+    if (new RegExp("^( )*("+availabilityStatusesMap[mapTo].join("|")+")( )*$").test($element.html())) {
+      $element.html(mapTo);
+    }
   },
   formatHoldingsTable() {
     const f99s = "#holdings table#holdingsTable tr.f99";

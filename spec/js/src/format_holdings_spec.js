@@ -54,7 +54,7 @@ describe('formatHoldings', () => {
     it('should map availability statuses to On Shelf where appropriate', () => {
       const statuses = "#holdings table#items td.due_date";
       expect($(statuses).filter(".mapped_status").html()).toEqual("On Shelf");
-      expect($(statuses).filter(".unmapped_status").html()).toEqual("Unknown status");
+      expect($(statuses).filter(".unmapped_status").html()).toEqual("Request ILL");
     });
     it('should clean up whitespace in links text field', () => {
       expect($("#holdings table#items td.links a").html()).toEqual("Request");
