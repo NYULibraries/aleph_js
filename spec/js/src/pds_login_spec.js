@@ -81,4 +81,24 @@ describe('pdsLogin', () => {
     });
   });
 
+  describe('addLoginButton', () => {
+    beforeEach( () => {
+      spyOn(pdsLogin, 'hostname').and.returnValue('alephstage');
+    });
+    describe('when user IS NOT already logged in', () => {
+      it('should append pds login button to the header', () => {
+        expect($('#pds-login-button').html()).toEqual('Login');
+        expect($('#pds-login-button').attr('href')).toEqual('localhost');
+      });
+    });
+    describe('when user IS already logged in', () => {
+      beforeEach( () => {
+        spyOn(pdsLogin, 'isLoggedIn').and.returnValue(true);
+      });
+      xit('should append pds login button to the header', () => {
+        expect($('#pds-login-button').length).toEqual(0);
+      });
+    });
+  });
+
 });

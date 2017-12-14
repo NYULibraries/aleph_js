@@ -27,6 +27,30 @@ const pdsLogin = {
   redirectToPds() {
     location.replace(this.pdsUrl());
   },
+  addLoginButton() {
+    // Avoiding using stylesheets so have this ugly css attribute hash
+    // From https://library.nyu.edu/style-guide/basic/
+    let buttonStyles = {
+      'float': 'right',
+      'border': '0 none',
+      'box-shadow': 'none',
+      'background': '#57068c',
+      'color': '#fff',
+      'font-weight': '400',
+      'font-size': '18px',
+      'font-family': '"Gotham A","Gotham B",Helvetica,Arial,sans-serif',
+      'text-align': 'center',
+      'text-decoration': 'none',
+      'padding': '15px 30px',
+      'border-radius': '3px',
+      'display': 'inline-block',
+      'margin': '0 3px 10px 0'
+    };
+    let $wrapper = $('<div />').css({ width: '70%' });
+    let $button = $('<a />').css(buttonStyles).attr({ id: 'pds-login-button', href: this.pdsUrl() }).html('Login');
+    let $clear = $('<div />').css('clear', 'both');
+    return $wrapper.append($button).after($clear);
+  },
   passiveLogin() {
     if (this.isLoggedIn()) return;
     if (querystring.get('func') == 'item-global') this.redirectToPds();
