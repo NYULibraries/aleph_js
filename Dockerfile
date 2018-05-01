@@ -1,10 +1,15 @@
-FROM node:latest
+FROM node:9-slim
 
 ENV INSTALL_PATH /app
 
-RUN apt-get update && apt-get install -y python python-pip libpython-dev
-RUN pip install --upgrade pip
-RUN pip install awscli
+RUN apt-get update && apt-get install -y \
+  libfontconfig \
+  libpython-dev \
+  python \
+  python-pip
+
+RUN pip install --upgrade pip && pip install \
+  awscli
 
 ADD package.json /tmp/package.json
 RUN cd /tmp && npm install

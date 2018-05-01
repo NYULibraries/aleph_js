@@ -1,32 +1,55 @@
+docker-defaults: &docker-defaults
+  docker:
+    - image: docker:18.03.0-ce-git
+  working_directory: ~/app
+
+dc-setup: &dc-setup
+  run:
+    name: Setup docker-compose dependency
+    command: |
+      apk add --no-cache python3
+      pip3 install docker-compose==1.20.1
+
+test: &test
+  run:
+    name: Test
+    command: docker-compose run test
+
 version: 2
 jobs:
-  build:
-    docker:
-      - image: circleci/node:latest
-    working_directory: ~/aleph_js
+  deploy-dev:
+    <<: *docker-defaults
     steps:
       - checkout
       - setup_remote_docker
+      - <<: *dc-setup
+      - <<: *test
       - run:
-          name: Install Docker Compose
+          name: Deploying to development S3
           command: |
-            set -x
-            sudo curl -L https://github.com/docker/compose/releases/download/1.11.2/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
-            chmod +x ~/docker-compose
-            sudo mv ~/docker-compose /usr/local/bin/docker-compose
-
+            AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV docker-compose run deploy_s3_dev
+  deploy-prod:
+    <<: *docker-defaults
+    steps:
+      - checkout
+      - setup_remote_docker
+      - <<: *dc-setup
+      - <<: *test
       - run:
-          name: Start container and run tests
+          name: Deploying to production S3
           command: |
-            docker-compose run test
+            AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY docker-compose run deploy_s3_production
 
-      - deploy:
-          name: Deploy
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              echo "Deploying to production S3"
-              AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY docker-compose run deploy_s3_production
-            else
-              echo "Deploying to development S3"
-              AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID_DEV AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY_DEV docker-compose run deploy_s3_dev
-            fi
+workflows:
+  version: 2
+  build-test-and-deploy:
+    jobs:
+      - deploy-dev:
+          filters:
+            branches:
+              ignore:
+                - master
+      - deploy-prod:
+          filters:
+            branches:
+              only: master
