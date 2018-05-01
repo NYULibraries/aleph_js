@@ -4,11 +4,11 @@ docker-defaults: &docker-defaults
   working_directory: ~/app
 
 dc-setup: &dc-setup
-  - run:
-      name: Setup docker-compose dependency
-      command: |
-        apk add --no-cache python3
-        pip3 install docker-compose==1.20.1
+  run:
+    name: Setup docker-compose dependency
+    command: |
+      apk add --no-cache python3
+      pip3 install docker-compose==1.20.1
 
 version: 2
 jobs:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      <<: *dc-setup
+      - <<: *dc-setup
       - run:
           name: Build and cache containers
           command: |
@@ -37,7 +37,7 @@ jobs:
     <<: *docker-defaults
     steps:
       - setup_remote_docker
-      <<: *dc-setup
+      - <<: *dc-setup
       - restore_cache:
           key: docker_cache
       - run:
@@ -53,7 +53,7 @@ jobs:
     <<: *docker-defaults
     steps:
       - setup_remote_docker
-      <<: *dc-setup
+      - <<: *dc-setup
       - restore_cache:
           key: docker_cache
       - run:
