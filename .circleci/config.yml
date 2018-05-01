@@ -36,6 +36,7 @@ jobs:
   deploy-dev:
     <<: *docker-defaults
     steps:
+      - checkout
       - setup_remote_docker
       - <<: *dc-setup
       - restore_cache:
@@ -52,6 +53,7 @@ jobs:
   deploy-prod:
     <<: *docker-defaults
     steps:
+      - checkout
       - setup_remote_docker
       - <<: *dc-setup
       - restore_cache:
