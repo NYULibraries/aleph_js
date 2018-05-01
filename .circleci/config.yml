@@ -10,41 +10,24 @@ dc-setup: &dc-setup
       apk add --no-cache python3
       pip3 install docker-compose==1.20.1
 
+test: &test
+  run:
+    name: Test
+    command: docker-compose run test
+
+setup: &setup
+  - checkout
+  - setup_remote_docker
+  - <<: *dc-setup
+  - <<: *test
+
 version: 2
 jobs:
-  test:
-    <<: *docker-defaults
-    steps:
-      - checkout
-      - setup_remote_docker
-      - <<: *dc-setup
-      - run:
-          name: Build and cache containers
-          command: |
-            docker-compose build
-            mkdir -p docker-cache
-            docker save -o docker-cache/aleph_js_deploy_dev.tar nyulibraries/aleph_js_deploy_dev
-            docker save -o docker-cache/aleph_js_deploy_production.tar nyulibraries/aleph_js_deploy_production
-      - run:
-          name: Test
-          command: docker-compose run test
-      - save_cache:
-          key: docker_cache
-          paths:
-            - docker-cache
 
   deploy-dev:
     <<: *docker-defaults
     steps:
-      - checkout
-      - setup_remote_docker
-      - <<: *dc-setup
-      - restore_cache:
-          key: docker_cache
-      - run:
-          name: Get cached dev deploy image
-          command: |
-            docker load < docker-cache/aleph_js_deploy_dev.tar
+      <<: *setup
       - run:
           name: Deploying to development S3
           command: |
@@ -53,15 +36,7 @@ jobs:
   deploy-prod:
     <<: *docker-defaults
     steps:
-      - checkout
-      - setup_remote_docker
-      - <<: *dc-setup
-      - restore_cache:
-          key: docker_cache
-      - run:
-          name: Get cached dev deploy image
-          command: |
-            docker load < docker-cache/aleph_js_deploy_production.tar
+      <<: *setup
       - run:
           name: Deploying to production S3
           command: |
@@ -71,17 +46,12 @@ workflows:
   version: 2
   build-test-and-deploy:
     jobs:
-      - test
       - deploy-dev:
-          requires:
-              - test
           filters:
             branches:
               ignore:
                 - master
       - deploy-prod:
-          requires:
-              - test
           filters:
             branches:
               only: master
