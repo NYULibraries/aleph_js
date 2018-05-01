@@ -2,6 +2,7 @@ version: "3"
 services:
   deploy_s3_production:
     build: .
+    image: nyulibraries/aleph_js_deploy_production
     volumes:
       - ./js/dist:/app/js/dist
     environment:
@@ -11,6 +12,7 @@ services:
 
   deploy_s3_dev:
     build: .
+    image: nyulibraries/aleph_js_deploy_dev
     volumes:
       - ./js/dist:/app/js/dist
     environment:
