@@ -20,7 +20,7 @@ services:
 
   test:
     build: .
-    image: nyulibraries/alephjs
-    volumes:
-      - ./js/dist:/app/js/dist
+    # image: nyulibraries/alephjs
+    # volumes:
+      # - ./js/dist:/app/js/dist
     command: ["npm", "run", "test"]
