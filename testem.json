@@ -18,7 +18,7 @@
     "search.html",
     "ill.html"
   ],
-  "browser_start_timeout": 60,
+  "browser_start_timeout": 150,
   "routes": {
     "/holdings.html": "spec/js/fixtures/holdings.mustache",
     "/library_account.html": "spec/js/fixtures/library_account.mustache",
