@@ -29,5 +29,11 @@
     "/includes/confirm_request.html": "spec/js/fixtures/includes/confirm_request.mustache",
     "/includes/request_confirmation.html": "spec/js/fixtures/includes/request_confirmation.mustache",
     "/includes/pds_login.html": "spec/js/fixtures/includes/pds_login.mustache"
-  }
+  },
+  "phantomjs_args": [
+    "--ignore-ssl-errors=true",
+    "--load-images=no",
+    "--debug=no",
+    "--ssl-protocol=any"
+  ]
 }
