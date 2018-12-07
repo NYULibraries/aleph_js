@@ -1,14 +1,7 @@
 docker-defaults: &docker-defaults
   docker:
-    - image: docker:18.03.0-ce-git
-  working_directory: ~/app
-
-dc-setup: &dc-setup
-  run:
-    name: Setup docker-compose dependency
-    command: |
-      apk add --no-cache python3
-      pip3 install docker-compose==1.20.1
+    - image: nyulibraries/circleci_docker:18.06.1-dc-1.23.2-0
+    working_directory: ~/app
 
 test: &test
   run:
@@ -22,34 +15,38 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *dc-setup
       - <<: *test
       - run:
           name: Deploying to development S3
           command: |
-            AWS_ACCESS_KEY_ID=$WEB_CIRCLECI_ALEPHJS_ID_DEV AWS_SECRET_ACCESS_KEY=$WEB_CIRCLECI_ALEPHJS_KEY_DEV docker-compose run deploy_s3_dev
+            AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID 
+            AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY
+            docker-compose run deploy_s3_dev
   deploy-prod:
     <<: *docker-defaults
     steps:
       - checkout
       - setup_remote_docker
-      - <<: *dc-setup
       - <<: *test
       - run:
           name: Deploying to production S3
           command: |
-            AWS_ACCESS_KEY_ID=$WEB_CIRCLECI_ALEPHJS_ID AWS_SECRET_ACCESS_KEY=$WEB_CIRCLECI_ALEPHJS_KEY docker-compose run deploy_s3_production
+            AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID 
+            AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY
+            docker-compose run deploy_s3_production
 
 workflows:
   version: 2
   build-test-and-deploy:
     jobs:
       - deploy-dev:
+          context: web-cdn-aws-nyulitsdev
           filters:
             branches:
               ignore:
                 - master
       - deploy-prod:
+          context: web-cdn-aws-nyulits
           filters:
             branches:
               only: master
