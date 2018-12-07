@@ -12,12 +12,12 @@ RUN apk add --no-cache $BUILD_PACKAGES $RUN_PACKAGES \
 && apk del $BUILD_PACKAGES
 
 # Install node_modules with yarn
-ADD package.json yarn.lock /tmp/
-RUN cd /tmp && yarn install --frozen-lockfile
-RUN mkdir -p $INSTALL_PATH && cd $INSTALL_PATH && cp -R /tmp/node_modules $INSTALL_PATH
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm install
+RUN mkdir -p $INSTALL_PATH && cp -a /tmp/node_modules $INSTALL_PATH
 
 ADD . $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
-CMD ["yarn", "run", "test"]
+CMD ["npm", "run", "test"]
