@@ -80,9 +80,22 @@ const formatHoldings = {
     // Hide empty table data elements for prettier presentation
     $(bibRows).filter((i, td) => $(td).html().match(emptyBibRowRegEx) ).hide();
   },
+  hideRequestIllLink() {
+    let holding;
+    $("#holdings table#items td.links a").each(function() {
+      holding = new Holding(this, null);
+      holding.extractData();
+      if (!holding.isRequestIll()) {
+        if ($(this).text().match(/^Request ILL.+\(Eligible Patrons Only\)$/)) { 
+          $(this).hide();
+        }        
+      }  
+    });
+  },
   init() {
     this.formatBibTable();
     this.formatHoldingsTable();
     this.formatHoldingsItems();
+    this.hideRequestIllLink();
   }
 };
