@@ -24,3 +24,9 @@ Updated file now exists at https://cdn.library.nyu.edu/aleph/application.min.js
 
 - https://github.com/airbnb/javascript
 - https://github.com/getify/You-Dont-Know-JS
+
+## Road map
+
+- Webpack
+- Karma
+- Selenium/chrome-headless

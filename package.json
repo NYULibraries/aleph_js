@@ -12,7 +12,6 @@
     "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "^1.0.0",
     "jasmine-core": "^2.5.2",
-    "phantomjs-prebuilt": "^2.1.13",
     "testem": "^1.15.0"
   }
 }

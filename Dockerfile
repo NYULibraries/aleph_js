@@ -1,20 +1,23 @@
-FROM node:9-slim
+FROM node:9-alpine
 
 ENV INSTALL_PATH /app
 
-RUN apt-get update && apt-get install -y \
-  libfontconfig \
-  libpython-dev \
-  python \
-  python-pip
+ENV RUN_PACKAGES fontconfig
+ENV BUILD_PACKAGES wget
 
-RUN pip install --upgrade pip && pip install \
-  awscli
+RUN apk add --no-cache $BUILD_PACKAGES $RUN_PACKAGES \
+  && wget --no-check-certificate -q -O - https://github.com/dustinblackman/phantomized/releases/download/2.1.1a/dockerized-phantomjs.tar.gz | tar xz -C / \
+  && npm config set user 0 \
+  && npm install -g phantomjs-prebuilt \
+&& apk del $BUILD_PACKAGES
 
-ADD package.json /tmp/package.json
-RUN cd /tmp && npm install
-RUN mkdir -p $INSTALL_PATH && cp -a /tmp/node_modules $INSTALL_PATH
+# Install node_modules with yarn
+ADD package.json yarn.lock /tmp/
+RUN cd /tmp && yarn install --frozen-lockfile
+RUN mkdir -p $INSTALL_PATH && cd $INSTALL_PATH && cp -R /tmp/node_modules $INSTALL_PATH
 
 ADD . $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
+
+CMD ["yarn", "run", "test"]
