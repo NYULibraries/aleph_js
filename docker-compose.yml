@@ -21,7 +21,7 @@ services:
   test:
     build:
       context: .
-      shm_size: 4G
+      shm_size: 1G
     image: nyulibraries/alephjs
     volumes:
       - ./js/dist:/app/js/dist
