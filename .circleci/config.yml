@@ -21,10 +21,7 @@ jobs:
       - run:
           name: Deploying to development S3
           command: |
-            cat $WEB_CDN_AWS_ACCESS_KEY_ID
-            AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID 
-            AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY
-            docker-compose run deploy_s3_dev
+            docker-compose run -e AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY deploy_s3_dev
   deploy-prod:
     <<: *docker-defaults
     steps:
@@ -34,9 +31,7 @@ jobs:
       - run:
           name: Deploying to production S3
           command: |
-            AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID 
-            AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY
-            docker-compose run deploy_s3_production
+            docker-compose run -e AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY deploy_s3_production
 
 workflows:
   version: 2
