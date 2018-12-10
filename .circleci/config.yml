@@ -7,7 +7,6 @@ test: &test
   run:
     name: Test
     command: |
-      docker-compose build
       docker-compose run test
 
 version: 2
