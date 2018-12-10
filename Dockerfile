@@ -1,54 +1,24 @@
-FROM debian:stable-slim
+ARG NODE_VERSION=8
 
-# Install basic tools/utilities and google Chrome stable (which has cross platform support for headless mode). Combining theem together so that apt cache cleanup would need to be done just once.
-RUN apt-get update -y && \
-    apt-get install ca-certificates \
-      gconf-service \
-      libasound2 \
-      libatk1.0-0 \
-      libatk1.0-0 \
-      libdbus-1-3 \
-      libfontconfig1 \
-      libgconf-2-4 \
-      libgtk-3-0 \
-      libnspr4 \
-      libnss3 \
-      libx11-xcb1 \
-      libxss1 \
-      libxtst6 \
-      fontconfig \
-      fonts-liberation \
-      libappindicator1 \
-      libappindicator3-1 \
-      xdg-utils \
-      lsb-release \
-      wget \
-      curl \
-      xz-utils -y --no-install-recommends && \
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    dpkg -i google-chrome*.deb && \
-    apt-get install -f && \
-    apt-get clean autoclean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* google-chrome-stable_current_amd64.deb
+FROM node:${NODE_VERSION}
 
-# Install nodejs
-ENV NPM_CONFIG_LOGLEVEL=info NODE_VERSION=8.4.0
+# Install dependencies & Chrome
+ARG BUILD_PACKAGES="zlib1g-dev liblzma-dev unzip nodejs"
+ARG RUN_PACKAGES="gnupg xvfb libgconf2-4 libnss3 wget vim"
+ARG CHROME_VERSION=71.0.3578.80-1
+ARG CHROMIUM_DRIVER_VERSION=2.44
+RUN apt-get update && apt-get -y --no-install-recommends install $BUILD_PACKAGES $RUN_PACKAGES \
+  && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+  && apt-get update && apt-get -y --no-install-recommends install google-chrome-stable=$CHROME_VERSION \
+  && wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMIUM_DRIVER_VERSION/chromedriver_linux64.zip \
+  && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
+  && rm /tmp/chromedriver.zip \
+  && chmod ugo+rx /usr/bin/chromedriver \
+  && apt-get --purge -y autoremove $BUILD_PACKAGES \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && tar -xJf "node-v$NODE_VERSION-linux-x64.tar.xz" -C /usr/local --strip-components=1 \
-  && rm "node-v$NODE_VERSION-linux-x64.tar.xz" \
-  && ln -s /usr/local/bin/node /usr/local/bin/nodejs
-
-# Install yarn
-ENV YARN_VERSION 0.27.5
-
-RUN curl -fSLO --compressed "https://yarnpkg.com/downloads/$YARN_VERSION/yarn-v$YARN_VERSION.tar.gz" \
-  && mkdir -p /opt/yarn \
-  && tar -xzf yarn-v$YARN_VERSION.tar.gz -C /opt/yarn --strip-components=1 \
-  && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarn \
-  && ln -s /opt/yarn/bin/yarn /usr/local/bin/yarnpkg \
-  && rm yarn-v$YARN_VERSION.tar.gz
-
+COPY entrypoint.sh ./
 
 ENV INSTALL_PATH /app
 
@@ -61,4 +31,4 @@ ADD . $INSTALL_PATH
 
 WORKDIR $INSTALL_PATH
 
-
+ENTRYPOINT ["/entrypoint.sh"]

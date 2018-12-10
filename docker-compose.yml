@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   deploy_s3_production:
     image: mesosphere/aws-cli
@@ -19,8 +19,10 @@ services:
     command: s3 sync /tmp/js/dist s3://cdn-dev.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
 
   test:
-    build: .
+    build:
+      context: .
+      shm_size: 4G
     image: nyulibraries/alephjs
     volumes:
       - ./js/dist:/app/js/dist
-    command: ["npm", "run", "test"]
+    command: ["yarn", "run", "test"]
