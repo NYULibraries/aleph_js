@@ -79,7 +79,7 @@ const modalDialog = {
   launchDialogOrRedirect(targetUrl, currentUrl, inputData) {
     $.get(targetUrl, inputData).done((data) => {
       if (this.isPdsLogin(data)) {
-        location.replace(this.pdsLoginUrl(data, currentUrl));
+        redirect.windowReplace(this.pdsLoginUrl(data, currentUrl));
       } else {
         this.launchDialog(data);
       }
