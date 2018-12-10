@@ -1,7 +1,6 @@
 const availabilityStatusesMap = {
   "On Shelf": [
     "Offsite Available",
-    "Offsite",
     "Regular loan",
     "Video",
     "Library use only",
