@@ -1,7 +1,6 @@
 # Aleph.JS
 
 [![CircleCI](https://circleci.com/gh/NYULibraries/aleph_js.svg?style=svg)](https://circleci.com/gh/NYULibraries/aleph_js)
-[![Dependency Status](https://gemnasium.com/badges/github.com/NYULibraries/aleph_js.svg)](https://gemnasium.com/github.com/NYULibraries/aleph_js)
 
 JavaScript for manipulating display and request functionality of the Aleph search and holdings screens.
 
@@ -29,4 +28,4 @@ Updated file now exists at https://cdn.library.nyu.edu/aleph/application.min.js
 
 - Webpack
 - Karma
-- Selenium/chrome-headless
+- ~~Selenium/chrome-headless~~
