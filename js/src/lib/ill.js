@@ -6,7 +6,7 @@ const ill = {
     return "/F/?func=item-sfx&doc_library=" + docLibrary + "&doc_number=" + docNumber + "&local_base=PRIMOCOMMON";
   },
   redirectToIll(docLibrary, docNumber) {
-    location.replace(this.url(docLibrary, docNumber));
+    redirect.windowReplace(this.url(docLibrary, docNumber));
   }
 };
 // Alias old function name

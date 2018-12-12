@@ -9,7 +9,7 @@
     "js/dist/es5/application.js"
   ],
   "launch_in_ci": [
-    "PhantomJS"
+    "Chrome"
   ],
   "test_page": [
     "holdings.html",
@@ -28,5 +28,21 @@
     "/includes/confirm_request.html": "spec/js/fixtures/includes/confirm_request.mustache",
     "/includes/request_confirmation.html": "spec/js/fixtures/includes/request_confirmation.mustache",
     "/includes/pds_login.html": "spec/js/fixtures/includes/pds_login.mustache"
+  },
+  "browser_start_timeout": 60,
+  "browser_args": {
+    "Chrome": [
+      "--disable-gpu",
+      "--disable-web-security",
+      "--headless",
+      "--incognito",
+      "--no-sandbox", 
+      "--remote-debugging-address=0.0.0.0",
+      "--remote-debugging-port=9222",
+      "--disable-software-rasterizer",
+      "--no-gpu",
+      "--mute-audio",
+      "--hide-scrollbars"
+    ]
   }
 }

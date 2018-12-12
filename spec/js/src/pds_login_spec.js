@@ -43,12 +43,12 @@ describe('pdsLogin', () => {
 
   describe('redirectToPds', () => {
     beforeEach( () => {
-      spyOn(location, 'replace').and.returnValue(true);
+      spyOn(redirect, 'windowReplace').and.returnValue(true);
       pdsLogin.redirectToPds();
     });
 
     it('should redirect to the pds login url', () => {
-      expect(location.replace).toHaveBeenCalled();
+      expect(redirect.windowReplace).toHaveBeenCalled();
     });
   });
 

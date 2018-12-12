@@ -1,27 +1,28 @@
-version: "3"
+version: "3.7"
 services:
   deploy_s3_production:
-    build: .
-    image: nyulibraries/aleph_js_deploy_production
+    image: mesosphere/aws-cli
     volumes:
-      - ./js/dist:/app/js/dist
+      - ./js/dist:/tmp/js/dist
     environment:
       AWS_ACCESS_KEY_ID:
       AWS_SECRET_ACCESS_KEY:
-    command: aws s3 sync js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
+    command: s3 sync /tmp/js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
 
   deploy_s3_dev:
-    build: .
-    image: nyulibraries/aleph_js_deploy_dev
+    image: mesosphere/aws-cli
     volumes:
-      - ./js/dist:/app/js/dist
+      - ./js/dist:/tmp/js/dist
     environment:
       AWS_ACCESS_KEY_ID:
       AWS_SECRET_ACCESS_KEY:
-    command: aws s3 sync js/dist s3://cdn-dev.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
+    command: s3 sync /tmp/js/dist s3://cdn-dev.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
 
   test:
-    build: .
+    build:
+      context: .
+      shm_size: 1G
+    image: nyulibraries/alephjs
     volumes:
       - ./js/dist:/app/js/dist
-    command: npm run test
+    command: ["yarn", "run", "test"]

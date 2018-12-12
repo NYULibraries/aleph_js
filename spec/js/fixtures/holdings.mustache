@@ -9,7 +9,7 @@
     <script src="node_modules/jasmine-core/lib/jasmine-core/boot.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
     <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
-    <script src="/testem.js"></script>
+    <script src="/testem.js" integrity=""></script>
     {{#serve_files}}
         <script src="{{src}}"></script>
     {{/serve_files}}
@@ -210,7 +210,10 @@
 
       <!--filename: item-global-body-nyu01 -->
                   <tr>
-                    <td class="links"><A HREF=https://alephstage.library.nyu.edu:443/F/A2GCL78VGDCCCLGM2G7PJT72DIT45PTAYEFMAB477KRRNNXRFS-00765?func=item-hold-request&doc_library=NYU50&adm_doc_number=001816252&item_sequence=000570&year=&volume=&sub_library=BOBST&type=&no_loaned=N&start_rec_key=&end_rec_key=>Request</A><BR>&nbsp;</td>
+                    <td class="links">
+                    <A HREF=https://alephstage.library.nyu.edu:443/F/A2GCL78VGDCCCLGM2G7PJT72DIT45PTAYEFMAB477KRRNNXRFS-00765?func=item-hold-request&doc_library=NYU50&adm_doc_number=001816252&item_sequence=000570&year=&volume=&sub_library=BOBST&type=&no_loaned=N&start_rec_key=&end_rec_key=>Request</A><BR>&nbsp;
+                    
+                    </td>
                     <!--Due date-->
                     <td class="due_date mapped_status">  ILL</td>
                     <!--Due hour-->
@@ -280,6 +283,52 @@
                     <td class="due_hour"><br></td>
                     <!--Loan status-->
                     <td>Periodicals</td>
+                    <!--Sub-library-->
+                    <td class="nowrap sub_library">NYU Bobst</td>
+                    <!--Collection-->
+                    <td class="nowrap collection">Main Collection</td>
+                    <!--Call Number-->
+                    <td class="call_number">BP1&nbsp;.R39 année 1940</td>
+                    <!--No Requests-->
+                    <td class="requests"><br></td>
+                    <!--note-opac-->
+                    <td class="notes"><br></td>
+                  </tr>
+
+                  <!--filename: item-global-body-nyu01 -->
+                  <tr id="request_ill_show_link">
+                    <td class="links"><A class="redirect-request-to-click" HREF=/includes/pds_login.html>Request&nbsp;&nbsp;</A><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="ill_link" href="https://alephstage.library.nyu.edu:443/F/E3BXCXJBF5T6FB4C4X7JAVCDYVT85JHA2UQCTLISA5874NB6B1-00509?func=item-photo-request&amp;doc_library=NYU50&amp;adm_doc_number=000802014&amp;item_sequence=000010&amp;year=&amp;volume=&amp;sub_library=BOBST&amp;type=&amp;no_loaned=N&amp;start_rec_key=&amp;end_rec_key=&amp;bib_doc_num=000802014&amp;bib_library=NYU01">Request ILL<br> (Eligible Patrons Only)</a>
+                    </td>
+                    <!--Due date-->
+                    <td class="due_date unmapped_status">Request ILL</td>
+                    <!--Due hour-->
+                    <td class="due_hour"><br></td>
+                    <!--Loan status-->
+                    <td>Periodicals</td>
+                    <!--Sub-library-->
+                    <td class="nowrap sub_library">NYU Bobst</td>
+                    <!--Collection-->
+                    <td class="nowrap collection">Main Collection</td>
+                    <!--Call Number-->
+                    <td class="call_number">BP1&nbsp;.R39 année 1940</td>
+                    <!--No Requests-->
+                    <td class="requests"><br></td>
+                    <!--note-opac-->
+                    <td class="notes"><br></td>
+                  </tr>
+
+                  <!--filename: item-global-body-nyu01 -->
+                  <tr id="request_ill_hide_link">
+                    <td class="links" id="request_links_offsite"><A class="redirect-request-to-click" HREF=/includes/pds_login.html>Request&nbsp;&nbsp;</A><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="ill_link" href="https://alephstage.library.nyu.edu:443/F/E3BXCXJBF5T6FB4C4X7JAVCDYVT85JHA2UQCTLISA5874NB6B1-00509?func=item-photo-request&amp;doc_library=NYU50&amp;adm_doc_number=000802014&amp;item_sequence=000010&amp;year=&amp;volume=&amp;sub_library=BOBST&amp;type=&amp;no_loaned=N&amp;start_rec_key=&amp;end_rec_key=&amp;bib_doc_num=000802014&amp;bib_library=NYU01">Request ILL<br> (Eligible Patrons Only)</a>
+                    </td>
+                    <!--Due date-->
+                    <td class="due_date">On Shelf</td>
+                    <!--Due hour-->
+                    <td class="due_hour"><br></td>
+                    <!--Loan status-->
+                    <td>Offsite Available</td>
                     <!--Sub-library-->
                     <td class="nowrap sub_library">NYU Bobst</td>
                     <!--Collection-->

@@ -122,37 +122,34 @@ describe('Holding', function() {
 
   describe('isRequestIll', () => {
     it('should be truthy without data', () => {
+      expect(holding.isRequestIll()).toBeFalsy();
+    });
+
+    it('should be falsy with random itemType and availability', () => {
+      holding.itemType = 'Something';
+      holding.availability = 'Something';
+      expect(holding.isRequestIll()).toBeFalsy();
+    });
+
+    it('should be truthy with Billed as Lost availability', () => {
+      holding.availability = 'Billed as Lost';
       expect(holding.isRequestIll()).toBeTruthy();
     });
 
-    it('should be truthy with correct itemType and availability', () => {
-      holding.itemType = 'Something';
-      holding.availability = 'Something';
+    it('should be truthy with Date 01/02/99 availability', () => {
+      holding.availability = 'Due on or before 01/02/99';
       expect(holding.isRequestIll()).toBeTruthy();
     });
 
-    it('should be falsy with correct itemType and incorrect availability', () => {
-      holding.itemType = 'Something';
-      holding.availability = 'On Shelf';
+    it('should be truthy with Requested availability', () => {
+      holding.availability = 'Requested by another user';
+      expect(holding.isRequestIll()).toBeTruthy();
+    });
+
+    it('should be falsy with Offsite availability', () => {
+      holding.availability = 'Offsite';
       expect(holding.isRequestIll()).toBeFalsy();
     });
 
-    it('should be falsy with correct itemType and incorrect availability', () => {
-      holding.itemType = 'Something';
-      holding.availability = 'Reshelving';
-      expect(holding.isRequestIll()).toBeFalsy();
-    });
-
-    it('should be falsy with incorrect itemType and correct availability', () => {
-      holding.itemType = 'Available';
-      holding.availability = 'Something';
-      expect(holding.isRequestIll()).toBeFalsy();
-    });
-
-    it('should be falsy with incorrect itemType and correct availability', () => {
-      holding.itemType = 'Offsite Available';
-      holding.availability = 'Something';
-      expect(holding.isRequestIll()).toBeFalsy();
-    });
   });
 });

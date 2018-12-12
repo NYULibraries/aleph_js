@@ -25,7 +25,7 @@ const pdsLogin = {
     return cookies.get('PDS_HANDLE') && cookies.get('PDS_HANDLE') != 'GUEST';
   },
   redirectToPds() {
-    location.replace(this.pdsUrl());
+    redirect.windowReplace(this.pdsUrl());
   },
   addLoginButton() {
     // Avoiding using stylesheets so have this ugly css attribute hash

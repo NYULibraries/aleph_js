@@ -67,4 +67,19 @@ describe('formatHoldings', () => {
     });
   });
 
+  describe('hideRequestIllLink', () => {
+    describe('when item status ILL able', () => {
+      it('should hide Request ILL link', () => {
+        const ill_link = $('#request_ill_hide_link').find('.ill_link');
+        expect(ill_link.is(':hidden')).toBe(true);
+      });
+    });
+    describe('when item status is not ILLable', () => {
+      it('should show Request ILL link', () => {
+        const ill_link = $('#request_ill_show_link').find('.ill_link');
+        expect(ill_link.is(':hidden')).toBe(false);
+      });
+    });
+  });
+
 });

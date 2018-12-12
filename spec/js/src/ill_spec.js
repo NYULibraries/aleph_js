@@ -2,7 +2,7 @@ describe('ill', () => {
   let docLibrary, docNumber;
 
   beforeEach( () => {
-    spyOn(location, 'replace').and.stub();
+    spyOn(redirect, 'windowReplace').and.stub();
   });
 
   describe('url', () => {
@@ -14,7 +14,7 @@ describe('ill', () => {
   describe('redirectToIll', () => {
     it('should give the internal url to redirect to illiad', () => {
       ill.redirectToIll("BOBST", "1234");
-      expect(location.replace).toHaveBeenCalled();
+      expect(redirect.windowReplace).toHaveBeenCalled();
     });
   });
 

@@ -40,12 +40,15 @@ class Holding {
 	}
 
 	isOffsite () {
-		return this.itemType == "Offsite Available";
+		return this.itemType == "Offsite Available" || this.itemType == "Offsite";
 	}
 
 	isRequestIll () {
 		if (this.collection === "NYU Bobst Avery Fisher Center") { return false; }
-		return this.itemType != "Offsite Available" && this.itemType != "Available" && this.availability != "On Shelf" && this.availability != "Reshelving";
+		if (/[0-9]{2}\/[0-9]{2}\/[0-9]{2}/.exec(this.availability)){ return true; }
+		if (/Requested/.exec(this.availability)){ return true; }
+		return ["Billed as Lost", "Claimed Returned", "In Processing", "In Transit", "Requested", "On Hold", "Request ILL", "On Order"].includes(this.availability); 
+		// return this.itemType != "Offsite Available" && this.itemType != "Available" && this.availability != "On Shelf" && this.availability != "Reshelving";
 	}
 
 	// helpers
