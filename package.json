@@ -4,7 +4,8 @@
     "testem": "testem",
     "testem-launchers": "testem launchers"
   },
-  "dependencies": {},
+  "dependencies": {
+  },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
     "grunt": "^1.0.1",
@@ -12,6 +13,7 @@
     "grunt-contrib-uglify": "^2.2.0",
     "grunt-contrib-watch": "^1.0.0",
     "jasmine-core": "^3.3.0",
+    "lodash": "^4.17.15",
     "testem": "^2.14.0"
   }
 }
