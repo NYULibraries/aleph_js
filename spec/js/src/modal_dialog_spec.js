@@ -413,7 +413,7 @@ describe('modalDialog', () => {
       });
     });
 
-    describe('when no redirect required', () => {
+    xdescribe('when no redirect required', () => {
       beforeEach(() => {
         spyOn(modalDialog, 'isPdsLogin').and.returnValue(false);
       })
