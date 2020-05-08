@@ -2,7 +2,8 @@
   "scripts": {
     "test": "testem ci",
     "testem": "testem",
-    "testem-launchers": "testem launchers"
+    "testem-launchers": "testem launchers",
+    "build": "webpack"
   },
   "dependencies": {
     "webpack": "^4.43.0"
