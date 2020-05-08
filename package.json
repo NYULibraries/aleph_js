@@ -5,6 +5,7 @@
     "testem-launchers": "testem launchers"
   },
   "dependencies": {
+    "webpack": "^4.43.0"
   },
   "devDependencies": {
     "babel-preset-env": "^1.7.0",
