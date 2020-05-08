@@ -6,9 +6,9 @@
     "build": "webpack"
   },
   "dependencies": {
-    "webpack": "^4.43.0"
   },
   "devDependencies": {
+    "babel-loader": "^8.1.0",
     "babel-preset-env": "^1.7.0",
     "grunt": "^1.0.1",
     "grunt-babel": "^6.0.0",
@@ -16,6 +16,7 @@
     "grunt-contrib-watch": "^1.0.0",
     "jasmine-core": "^3.3.0",
     "lodash": "^4.17.15",
-    "testem": "^2.14.0"
+    "testem": "^2.14.0",
+    "webpack": "^4.43.0"
   }
 }
