@@ -1,4 +1,12 @@
 version: "3.7"
+x-volumes: &default-volumes
+  volumes:
+    - ./js:/app/js
+    - ./spec:/app/spec
+    - ./Gruntfile.js:/app/Gruntfile.js
+    - ./package.json:/app/package.json
+    - ./testem.json:/app/testem.json
+
 services:
   deploy_s3_production:
     image: mesosphere/aws-cli
@@ -23,6 +31,5 @@ services:
       context: .
       shm_size: 1G
     image: nyulibraries/alephjs
-    volumes:
-      - ./js/dist:/app/js/dist
     command: ["yarn", "run", "test"]
+    <<: *default-volumes
