@@ -4,7 +4,7 @@
  * Ex.
  *  search.init();
  */
-const search = {
+export const search = {
   toggleLimits() {
     $("#showlimits").toggle();
     $("#hidelimits").toggle();

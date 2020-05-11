@@ -11,7 +11,8 @@ module.exports = function(grunt) {
         retainLines: true
       },
       dist: {
-        files: [{
+        files: [
+          {
           "expand": true,
           "cwd": "js/src/",
           "src": ["**/*.js"],

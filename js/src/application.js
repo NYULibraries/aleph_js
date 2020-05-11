@@ -1,4 +1,10 @@
 const AlephInit = {};
+
+import { formatHoldings } from './lib/format_holdings'
+import { search } from './lib/search'
+import { libraryAccount } from './lib/library_account'
+import { modalDialog } from './lib/modal_dialog'
+
 // Exclude sub-domains from same-origin policy
 if (window.location.hostname.match("library.nyu.edu$")) {
   document.domain = 'library.nyu.edu';
