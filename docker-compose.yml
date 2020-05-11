@@ -3,9 +3,9 @@ x-volumes: &default-volumes
   volumes:
     - ./js:/app/js
     - ./spec:/app/spec
-    # - ./Gruntfile.js:/app/Gruntfile.js
-    # - ./package.json:/app/package.json
-    # - ./testem.json:/app/testem.json
+    - ./Gruntfile.js:/app/Gruntfile.js
+    - ./package.json:/app/package.json
+    - ./testem.json:/app/testem.json
 
 services:
   deploy_s3_production:
@@ -32,4 +32,6 @@ services:
       shm_size: 1G
     image: nyulibraries/alephjs
     command: ["yarn", "run", "test"]
-    <<: *default-volumes
+    volumes:
+      - ./js/dist:/app/js/dist
+    # <<: *default-volumes
