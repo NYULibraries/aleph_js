@@ -3,9 +3,9 @@ x-volumes: &default-volumes
   volumes:
     - ./js:/app/js
     - ./spec:/app/spec
-    - ./Gruntfile.js:/app/Gruntfile.js
-    - ./package.json:/app/package.json
-    - ./testem.json:/app/testem.json
+    # - ./Gruntfile.js:/app/Gruntfile.js
+    # - ./package.json:/app/package.json
+    # - ./testem.json:/app/testem.json
 
 services:
   deploy_s3_production:
