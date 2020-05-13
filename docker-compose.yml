@@ -1,11 +1,12 @@
 version: "3.7"
 x-volumes: &default-volumes
   volumes:
-    - ./js:/app/js
-    - ./spec:/app/spec
-    - ./Gruntfile.js:/app/Gruntfile.js
-    - ./package.json:/app/package.json
-    - ./testem.json:/app/testem.json
+    - ./dist:/app/dist
+    # - ./js:/app/js
+    # - ./spec:/app/spec
+    # - ./Gruntfile.js:/app/Gruntfile.js
+    # - ./package.json:/app/package.json
+    # - ./testem.json:/app/testem.json
 
 services:
   deploy_s3_production:
@@ -26,12 +27,30 @@ services:
       AWS_SECRET_ACCESS_KEY:
     command: s3 sync /tmp/js/dist s3://cdn-dev.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
 
+  webpack-build:
+    build: .
+    image: nyulibraries/alephjs
+    command: yarn run build:dev
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+    <<: *default-volumes
+  
+  webpack-watch:
+    build: .
+    image: nyulibraries/alephjs
+    command: yarn build:dev:watch
+    <<: *default-volumes
+
   test:
     build:
       context: .
       shm_size: 1G
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
     image: nyulibraries/alephjs
     command: ["yarn", "run", "test"]
-    volumes:
-      - ./js/dist:/app/js/dist
-    # <<: *default-volumes
+    # ports: 
+    #   - "1-65535:1-65535"
+    depends_on: 
+      - webpack-build
+    <<: *default-volumes

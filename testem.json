@@ -1,12 +1,7 @@
 {
-  "before_tests": "grunt",
   "framework": "jasmine-jquery",
   "serve_files": [
-    "js/dist/es5/vendor/*.js",
-    "js/dist/es5/config/*.js",
-    "js/dist/es5/helpers/*.js",
-    "js/dist/es5/lib/*.js",
-    "js/dist/es5/application.js"
+    "dist/application.min.js"
   ],
   "launch_in_ci": [
     "Chrome"

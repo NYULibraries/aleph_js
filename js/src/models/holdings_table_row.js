@@ -2,7 +2,7 @@
  * Representation of a row in the holdings informational table at the top of
  * the holdings page (func=item-global)
  */
-class HoldingsTableRow {
+export class HoldingsTableRow {
   constructor(row, previousRow) {
     this.row = row;
     this.previousRow = previousRow;
