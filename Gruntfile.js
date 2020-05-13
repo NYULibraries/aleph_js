@@ -18,13 +18,13 @@ module.exports = function(grunt) {
           "src": ["**/*.js"],
           "dest": "js/dist/es5/",
           "ext": ".js"
-        },
-        {
-          "expand": true,
-          "cwd": "spec/js/src/",
-          "src": ["**/*.js"],
-          "dest": "spec/js/dist/",
-          "ext": ".js"
+        // },
+        // {
+        //   "expand": true,
+        //   "cwd": "spec/js/src/",
+        //   "src": ["**/*.js"],
+        //   "dest": "spec/js/",
+        //   "ext": ".js"
         }]
       }
     },
