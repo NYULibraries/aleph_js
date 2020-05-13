@@ -2,11 +2,11 @@ version: "3.7"
 x-volumes: &default-volumes
   volumes:
     - ./dist:/app/dist
-    # - ./js:/app/js
-    # - ./spec:/app/spec
-    # - ./Gruntfile.js:/app/Gruntfile.js
-    # - ./package.json:/app/package.json
-    # - ./testem.json:/app/testem.json
+    - ./js:/app/js
+    - ./spec:/app/spec
+    - ./package.json:/app/package.json
+    - ./testem.json:/app/testem.json
+    - ./webpack.config.js:/app/webpack.config.js
 
 services:
   deploy_s3_production:

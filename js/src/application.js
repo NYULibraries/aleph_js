@@ -9,13 +9,13 @@ import { bs_request_ill } from './lib/utils'
 import { bs_booking_location_hours, bs_booking_submit, bs_process_booking } from './lib/bookings'
 import { redirect, cookies, querystring, ill } from './lib/utils'
 
-// window.formatHoldings = formatHoldings;
-// window.pdsLogin = pdsLogin;
-// window.redirect = redirect;
-// window.cookies = cookies;
-// window.querystring = querystring;
-// window.search = search;
-// window.ill = ill;
+window.formatHoldings = formatHoldings;
+window.pdsLogin = pdsLogin;
+window.redirect = redirect;
+window.cookies = cookies;
+window.querystring = querystring;
+window.search = search;
+window.ill = ill;
 // Set legacy global functions on the window
 window.bs_request_ill = bs_request_ill;
 window.bs_booking_location_hours = bs_booking_location_hours;

@@ -25,12 +25,20 @@ module.exports = {
 	},
 	resolve: {
     alias: {
-      'utils': path.resolve(__dirname, './js/src/lib/utils'),
+			'utils': path.resolve(__dirname, './js/src/lib/utils'),
+			'modalDialog': path.resolve(__dirname, './js/src/lib/modal_dialog'),
+			'pdsLogin': path.resolve(__dirname, './js/src/lib/pds_login'),
     }
   },
   plugins: [
     new webpack.ProvidePlugin({
-      'utils': 'utils'
+			'utils': 'utils',
+		}),
+		new webpack.ProvidePlugin({
+			'modalDialog': 'modalDialog'
+		}),
+		new webpack.ProvidePlugin({
+			'pdsLogin': 'pdsLogin'
     })
   ]  
 };
