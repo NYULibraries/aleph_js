@@ -1,5 +1,9 @@
 const AlephInit = {};
+// Global constant to check if this JS has already been initialized
+window.AlephInit = AlephInit;
 
+import $ from 'jquery';
+require('imports-loader?window.jQuery=jquery!./vendor/jquery.validate.js')
 import { formatHoldings } from './lib/format_holdings'
 import { search, bs_history_nav, bs_toggle_limits } from './lib/search'
 import { libraryAccount } from './lib/library_account'
@@ -8,7 +12,15 @@ import { pdsLogin } from './lib/pds_login'
 import { bs_request_ill } from './lib/utils'
 import { bs_booking_location_hours, bs_booking_submit, bs_process_booking } from './lib/bookings'
 import { redirect, cookies, querystring, ill } from './lib/utils'
+import { Holding } from './models/holding'
+import { HoldingsTableRow } from './models/holdings_table_row'
 
+// Setting all these on the window for tests to run
+// need to refactor this with babel/browserify includes for testing
+window.$ = window.jQuery = $;
+window.modalDialog = modalDialog;
+window.Holding = Holding;
+window.HoldingsTableRow = HoldingsTableRow;
 window.formatHoldings = formatHoldings;
 window.pdsLogin = pdsLogin;
 window.redirect = redirect;
@@ -23,9 +35,6 @@ window.bs_booking_submit = bs_booking_submit;
 window.bs_process_booking = bs_process_booking;
 window.bs_history_nav = bs_history_nav;
 window.bs_toggle_limits = bs_toggle_limits;
-
-// Global constant to check if this JS has already been initialized
-window.AlephInit = AlephInit;
 
 // Exclude sub-domains from same-origin policy
 if (window.location.hostname.match("library.nyu.edu$")) {
