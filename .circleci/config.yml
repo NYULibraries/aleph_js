@@ -3,11 +3,16 @@ docker-defaults: &docker-defaults
     - image: nyulibraries/circleci_docker:18.06.1-dc-1.23.2-0
   working_directory: ~/app
 
-test: &test
+build_docker: &build_docker
   run:
-    name: Build and Test
+    name: Build docker images
     command: |
       docker-compose build webpack-build test
+
+test: &test
+  run:
+    name: Build assets and test
+    command: |
       docker-compose run webpack-build
       docker-compose run test
 
@@ -39,6 +44,7 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
+      - <<: *build_docker
       - <<: *test
       - <<: *get_assets
       - <<: *s3_deploy
