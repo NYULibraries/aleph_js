@@ -13,7 +13,7 @@ import { modalDialog } from './lib/modal_dialog'
 import { pdsLogin } from './lib/pds_login'
 import { bs_request_ill } from './lib/utils'
 import { bs_booking_location_hours, bs_booking_submit, bs_process_booking } from './lib/bookings'
-import { redirect, cookies, querystring, ill } from './lib/utils'
+import { redirect, cookies, querystring, ill, html, brokenLink } from './lib/utils'
 import { Holding } from './models/holding'
 import { HoldingsTableRow } from './models/holdings_table_row'
 
@@ -25,11 +25,13 @@ window.Holding = Holding;
 window.HoldingsTableRow = HoldingsTableRow;
 window.formatHoldings = formatHoldings;
 window.pdsLogin = pdsLogin;
+window.search = search;
 window.redirect = redirect;
 window.cookies = cookies;
 window.querystring = querystring;
-window.search = search;
 window.ill = ill;
+window.html = html;
+window.brokenLink = brokenLink;
 // Set legacy global functions on the window
 window.bs_request_ill = bs_request_ill;
 window.bs_booking_location_hours = bs_booking_location_hours;

@@ -4,8 +4,6 @@
  * Ex.
  *  pdsLogin.passiveLogin();
  */
-import { cookies, querystring, redirect } from '../lib/utils';
-
 export const pdsLogin = {
   location() {
     return window.location;

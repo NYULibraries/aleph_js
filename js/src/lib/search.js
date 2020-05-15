@@ -4,8 +4,6 @@
  * Ex.
  *  search.init();
  */
-import { querystring } from '../lib/utils';
-
 export const search = {
   toggleLimits() {
     $("#showlimits").toggle();

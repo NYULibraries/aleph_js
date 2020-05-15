@@ -12,9 +12,6 @@
  */
 
 import { availabilityStatusesMap } from '../config/availability_statuses_map';
-import { html, brokenLink } from '../lib/utils';
-import { HoldingsTableRow } from '../models/holdings_table_row';
-import { Holding } from '../models/holding';
 
 export const formatHoldings = {
   ezProxyPrefix: {

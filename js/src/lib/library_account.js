@@ -4,8 +4,6 @@
  * Ex.
  *  libraryAccount.init();
  */
-import { html } from '../lib/utils';
-
 export const libraryAccount = {
   nyRegex: /^NYU50$/i,
   adRegex: /^NYU51$/i,
