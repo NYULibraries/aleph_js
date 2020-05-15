@@ -17,6 +17,8 @@ services:
       - 'nyulibraries.app=aleph_js_assets'
     environment:
       NODE_ENV: ${NODE_ENV:-production}
+    volumes:
+      - dist-volume:/app/dist
     # <<: *default-volumes
   
   webpack-watch:
@@ -35,6 +37,9 @@ services:
     command: ["yarn", "run", "test"]
     ports: 
       - 7357:7357
-    depends_on: 
-      - webpack-build
+    volumes:
+      - dist-volume:/app/dist
     # <<: *default-volumes
+
+volumes:
+  dist-volume:
