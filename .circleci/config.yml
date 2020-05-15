@@ -52,19 +52,14 @@ workflows:
   version: 2.1
   build-test-and-deploy:
     jobs:
-      - test-and-build
-      - deploy-dev:
+      - test-and-build:
           context: web-cdn-aws-nyulitsdev
-          requires:
-            - test-and-build
           filters:
             branches:
               ignore:
                 - master
-      - deploy-prod:
+      - test-and-build:
           context: web-cdn-aws-nyulits
-          requires:
-            - test-and-build
           filters:
             branches:
               only: master
