@@ -30,7 +30,7 @@ services:
   webpack-build:
     build: .
     image: nyulibraries/alephjs
-    command: yarn run build:dev
+    command: yarn run build:prod
     environment:
       NODE_ENV: ${NODE_ENV:-production}
     <<: *default-volumes
