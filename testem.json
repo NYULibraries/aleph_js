@@ -24,6 +24,8 @@
     "/includes/request_confirmation.html": "spec/js/fixtures/includes/request_confirmation.mustache",
     "/includes/pds_login.html": "spec/js/fixtures/includes/pds_login.mustache"
   },
+  "reporter": "xunit",
+  "report_file": "./dist/output.xml",
   "browser_start_timeout": 60,
   "browser_args": {
     "Chrome": [

@@ -9,37 +9,21 @@ x-volumes: &default-volumes
     - ./webpack.config.js:/app/webpack.config.js
 
 services:
-  deploy_s3_production:
-    image: mesosphere/aws-cli
-    volumes:
-      - ./js/dist:/tmp/js/dist
-    environment:
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
-    command: s3 sync /tmp/js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
-
-  deploy_s3_dev:
-    image: mesosphere/aws-cli
-    volumes:
-      - ./js/dist:/tmp/js/dist
-    environment:
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
-    command: s3 sync /tmp/js/dist s3://cdn-dev.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
-
   webpack-build:
     build: .
     image: nyulibraries/alephjs
     command: yarn run build:prod
+    labels:
+      - 'nyulibraries.app=aleph_js_assets'
     environment:
       NODE_ENV: ${NODE_ENV:-production}
-    <<: *default-volumes
+    # <<: *default-volumes
   
   webpack-watch:
     build: .
     image: nyulibraries/alephjs
     command: yarn build:dev:watch
-    <<: *default-volumes
+    # <<: *default-volumes
 
   test:
     build:
@@ -53,4 +37,4 @@ services:
       - 7357:7357
     depends_on: 
       - webpack-build
-    <<: *default-volumes
+    # <<: *default-volumes
