@@ -3,7 +3,9 @@ const AlephInit = {};
 window.AlephInit = AlephInit;
 
 import $ from 'jquery';
+require('imports-loader?jquery-ui')
 require('imports-loader?window.jQuery=jquery!./vendor/jquery.validate.js')
+
 import { formatHoldings } from './lib/format_holdings'
 import { search, bs_history_nav, bs_toggle_limits } from './lib/search'
 import { libraryAccount } from './lib/library_account'

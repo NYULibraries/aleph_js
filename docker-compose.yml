@@ -49,8 +49,8 @@ services:
       NODE_ENV: ${NODE_ENV:-production}
     image: nyulibraries/alephjs
     command: ["yarn", "run", "test"]
-    # ports: 
-    #   - "1-65535:1-65535"
+    ports: 
+      - 7357:7357
     depends_on: 
       - webpack-build
     <<: *default-volumes
