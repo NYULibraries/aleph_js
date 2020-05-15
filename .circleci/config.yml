@@ -41,9 +41,8 @@ jobs:
       - setup_remote_docker
       - <<: *test
       - <<: *get_assets
+      - <<: *s3_deploy
       - store_test_results:
-          path: ~/app/dist/output.xml
-      - store_artifacts:
           path: ~/app/dist/output.xml
       - store_artifacts:
           path: dist
