@@ -27,6 +27,6 @@ export const search = {
   }
 };
 // Alias for old bs_history_nav function
-const bs_history_nav = (action) => { search.submitSearchHistoryAction(action); };
+export const bs_history_nav = (action) => { search.submitSearchHistoryAction(action); };
 // Alias for old bs_toggle_limits function
-const bs_toggle_limits = () => { search.toggleLimits(); };
+export const bs_toggle_limits = () => { search.toggleLimits(); };

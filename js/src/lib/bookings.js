@@ -1,4 +1,6 @@
-function bs_process_booking() {
+// This has just been copied, never refactored
+// may be for garbage
+export const bs_process_booking = function bs_process_booking() {
     var status = status || "0";
     var loanDays = loanDays || "3";
     var dueHour = dueHour || "1";
@@ -133,7 +135,7 @@ function bs_process_booking() {
     jQuery("#item_booking_header").after(loanPeriod);
 }
 
-function bs_booking_submit(form) {
+export const bs_booking_submit = function bs_booking_submit(form) {
     jQuery("#book #start_date").val(jQuery("#book #start_date").val().replace(/\//gi, ''));
     jQuery("#book #start_hour").val(jQuery("#book #start_hour").val().replace(/\:/gi, ''));
     jQuery("#book #end_date").val(jQuery("#book #end_date").val().replace(/\//gi, ''));
@@ -141,7 +143,7 @@ function bs_booking_submit(form) {
     form.submit();
 }
 
-function bs_booking_location_hours() {
+export const bs_booking_location_hours = function bs_booking_location_hours() {
     jQuery("select#pickup_location option").each(
         function(index, option) {
             if (option.value && option.selected) {

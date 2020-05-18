@@ -8,7 +8,18 @@ JavaScript for manipulating display and request functionality of the Aleph searc
 
 ```
 docker-compose build
+docker-compose run webpack-build
 docker-compose run test
+```
+
+Or to actively develop while testing you can watch the build:
+
+```
+docker-compose run webpack-watch
+docker-compose run test
+# OR
+docker-compose run test yarn run testem
+# visit http://localhost:7357
 ```
 
 ## Deploy to S3
@@ -26,6 +37,6 @@ Updated file now exists at https://cdn.library.nyu.edu/aleph/application.min.js
 
 ## Road map
 
-- Webpack
+- ~~Webpack~~
 - Karma
 - ~~Selenium/chrome-headless~~

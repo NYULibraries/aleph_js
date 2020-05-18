@@ -4,7 +4,7 @@
  * Ex.
  *  pdsLogin.passiveLogin();
  */
-const pdsLogin = {
+export const pdsLogin = {
   location() {
     return window.location;
   },

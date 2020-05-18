@@ -1,37 +1,45 @@
 version: "3.7"
 x-volumes: &default-volumes
   volumes:
+    - ./dist:/app/dist
     - ./js:/app/js
     - ./spec:/app/spec
-    - ./Gruntfile.js:/app/Gruntfile.js
     - ./package.json:/app/package.json
     - ./testem.json:/app/testem.json
+    - ./webpack.config.js:/app/webpack.config.js
 
 services:
-  deploy_s3_production:
-    image: mesosphere/aws-cli
-    volumes:
-      - ./js/dist:/tmp/js/dist
+  webpack-build:
+    build: .
+    image: nyulibraries/alephjs
+    command: yarn run build:prod
+    labels:
+      - 'nyulibraries.app=aleph_js_assets'
     environment:
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
-    command: s3 sync /tmp/js/dist s3://cdn.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
-
-  deploy_s3_dev:
-    image: mesosphere/aws-cli
+      NODE_ENV: ${NODE_ENV:-production}
     volumes:
-      - ./js/dist:/tmp/js/dist
-    environment:
-      AWS_ACCESS_KEY_ID:
-      AWS_SECRET_ACCESS_KEY:
-    command: s3 sync /tmp/js/dist s3://cdn-dev.library.nyu.edu/aleph --exclude "*" --include "application.min.js" --delete
+      - dist-volume:/app/dist
+    # <<: *default-volumes
+  
+  webpack-watch:
+    build: .
+    image: nyulibraries/alephjs
+    command: yarn build:dev:watch
+    # <<: *default-volumes
 
   test:
     build:
       context: .
       shm_size: 1G
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
     image: nyulibraries/alephjs
     command: ["yarn", "run", "test"]
+    ports: 
+      - 7357:7357
     volumes:
-      - ./js/dist:/app/js/dist
+      - dist-volume:/app/dist
     # <<: *default-volumes
+
+volumes:
+  dist-volume:
