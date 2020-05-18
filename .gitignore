@@ -3,3 +3,6 @@ js/dist
 spec/js/dist
 npm-debug.log
 wiki/
+
+#webpack bundle
+dist/

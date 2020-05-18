@@ -4,7 +4,7 @@
  * Ex.
  *  libraryAccount.init();
  */
-const libraryAccount = {
+export const libraryAccount = {
   nyRegex: /^NYU50$/i,
   adRegex: /^NYU51$/i,
   nyLabel: {

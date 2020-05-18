@@ -3,46 +3,67 @@ docker-defaults: &docker-defaults
     - image: nyulibraries/circleci_docker:18.06.1-dc-1.23.2-0
   working_directory: ~/app
 
+build_docker: &build_docker
+  run:
+    name: Build docker images
+    command: |
+      docker-compose build webpack-build test
+
 test: &test
   run:
-    name: Test
+    name: Build assets and test
     command: |
+      docker-compose run webpack-build
       docker-compose run test
 
-version: 2
+get_assets: &get_assets
+  run:
+    name: Retrieve compiled assets from container
+    command: |
+      docker cp $(docker ps -aq --filter 'label=nyulibraries.app=aleph_js_assets'):/app/dist .
+
+s3_deploy: &s3_deploy
+  aws-s3/sync:
+    from: dist
+    to: '${S3_URI}/aleph'
+    aws-access-key-id: WEB_CDN_AWS_ACCESS_KEY_ID
+    aws-secret-access-key: WEB_CDN_AWS_SECRET_ACCESS_KEY
+    arguments: |
+      --exclude "*" \
+      --include "application.min.js" \
+      --include "application.min.js.map" \
+      --delete
+    overwrite: true
+
+version: 2.1
+orbs:
+  aws-s3: circleci/aws-s3@1.0.11
 jobs:
-  deploy-dev:
+  test-and-build:
     <<: *docker-defaults
     steps:
       - checkout
       - setup_remote_docker
+      - <<: *build_docker
       - <<: *test
-      - run:
-          name: Deploying to development S3
-          command: |
-            docker-compose run -e AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY deploy_s3_dev
-  deploy-prod:
-    <<: *docker-defaults
-    steps:
-      - checkout
-      - setup_remote_docker
-      - <<: *test
-      - run:
-          name: Deploying to production S3
-          command: |
-            docker-compose run -e AWS_ACCESS_KEY_ID=$WEB_CDN_AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$WEB_CDN_AWS_SECRET_ACCESS_KEY deploy_s3_production
+      - <<: *get_assets
+      - <<: *s3_deploy
+      - store_test_results:
+          path: ~/app/dist/output.xml
+      - store_artifacts:
+          path: dist
 
 workflows:
-  version: 2
+  version: 2.1
   build-test-and-deploy:
     jobs:
-      - deploy-dev:
+      - test-and-build:
           context: web-cdn-aws-nyulitsdev
           filters:
             branches:
               ignore:
                 - master
-      - deploy-prod:
+      - test-and-build:
           context: web-cdn-aws-nyulits
           filters:
             branches:

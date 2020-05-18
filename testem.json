@@ -1,12 +1,7 @@
 {
-  "before_tests": "grunt",
   "framework": "jasmine-jquery",
   "serve_files": [
-    "js/dist/es5/vendor/*.js",
-    "js/dist/es5/config/*.js",
-    "js/dist/es5/helpers/*.js",
-    "js/dist/es5/lib/*.js",
-    "js/dist/es5/application.js"
+    "dist/application.min.js"
   ],
   "launch_in_ci": [
     "Chrome"
@@ -29,6 +24,8 @@
     "/includes/request_confirmation.html": "spec/js/fixtures/includes/request_confirmation.mustache",
     "/includes/pds_login.html": "spec/js/fixtures/includes/pds_login.mustache"
   },
+  "reporter": "xunit",
+  "report_file": "./dist/output.xml",
   "browser_start_timeout": 60,
   "browser_args": {
     "Chrome": [

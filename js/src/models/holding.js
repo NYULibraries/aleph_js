@@ -1,4 +1,4 @@
-class Holding {
+export class Holding {
 	constructor (element, sharedModalDialog) {
 		this.element = element;
 		this.sharedModalDialog = sharedModalDialog;

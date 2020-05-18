@@ -1,4 +1,4 @@
-const modalDialog = {
+export const modalDialog = {
   pdsLoginRegex: /LoginPds/,
   pdsUrlRegex: /var url = '([^\?]*\?func=load-login\&calling_system=aleph\&institute=[^\&]*\&url=)/,
   isPdsLogin(data) {

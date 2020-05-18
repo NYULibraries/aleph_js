@@ -10,7 +10,10 @@
  * Ex.
  *  formatHoldings.init();
  */
-const formatHoldings = {
+
+import { availabilityStatusesMap } from '../config/availability_statuses_map';
+
+export const formatHoldings = {
   ezProxyPrefix: {
     "BWEB": "http://proxy.library.nyu.edu/login?url=",
     "NWEB": "http://proxy.library.nyu.edu/login?url=",

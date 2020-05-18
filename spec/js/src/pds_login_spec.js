@@ -66,7 +66,7 @@ describe('pdsLogin', () => {
       expect(pdsLogin.passiveLogin()).toBeUndefined();
     });
 
-    it('should redturn to login if user is not logged in but the current page is not the holdings page', () => {
+    it('should return to login if user is not logged in but the current page is not the holdings page', () => {
       isLoggedIn = false;
       querystringFunc = 'another-page';
       pdsLogin.passiveLogin();
