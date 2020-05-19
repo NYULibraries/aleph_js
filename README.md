@@ -22,13 +22,11 @@ docker-compose run test yarn run testem
 # visit http://localhost:7357
 ```
 
-## Deploy to S3
+## Deployed to S3
 
-```
-docker-compose run [deploy_s3_dev|deploy_s3_production]
-```
+Via CircleCI
 
-Updated file now exists at https://cdn.library.nyu.edu/aleph/application.min.js
+Updated file now exists at `https://cdn(-dev)?.library.nyu.edu/aleph/application.min.js`
 
 ## Writing better JavaScript
 
