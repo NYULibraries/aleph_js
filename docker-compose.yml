@@ -42,5 +42,12 @@ services:
       - dist-volume:/app/dist
     # <<: *default-volumes
 
+  yarn:
+    image: node:14
+    working_dir: /app
+    entrypoint: ["yarn"]
+    volumes:
+      - ./:/app
+
 volumes:
   dist-volume:
