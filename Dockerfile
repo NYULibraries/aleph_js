@@ -1,4 +1,26 @@
-FROM nyulibraries/selenium_chrome_headless_node:8-slim-chrome_71
+ARG NODE_VERSION=14
+
+FROM node:${NODE_VERSION}-slim
+
+# Install dependencies & Chrome
+ARG BUILD_PACKAGES="zlib1g-dev liblzma-dev unzip ca-certificates"
+ARG RUN_PACKAGES="gnupg xvfb libgconf2-4 libnss3 wget"
+ARG CHROME_VERSION=87.0.4280.88-1
+ARG CHROMIUM_DRIVER_VERSION=87.0.4280.88
+RUN apt-get update && apt-get -y --no-install-recommends install $BUILD_PACKAGES $RUN_PACKAGES \
+  && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -  \
+  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+  && apt-get update && apt-get -y --no-install-recommends install google-chrome-stable \
+  && wget -O /tmp/chromedriver.zip http://chromedriver.storage.googleapis.com/$CHROMIUM_DRIVER_VERSION/chromedriver_linux64.zip \
+  && unzip /tmp/chromedriver.zip chromedriver -d /usr/bin/ \
+  && rm /tmp/chromedriver.zip \
+  && chmod ugo+rx /usr/bin/chromedriver \
+  && apt-get --purge -y autoremove $BUILD_PACKAGES \
+  && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY docker-entrypoint.sh ./
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 ENV INSTALL_PATH /app
 
