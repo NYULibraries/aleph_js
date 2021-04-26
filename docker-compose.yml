@@ -43,7 +43,7 @@ services:
     # <<: *default-volumes
 
   yarn:
-    image: node:14
+    image: node:8
     working_dir: /app
     entrypoint: ["yarn"]
     volumes:
